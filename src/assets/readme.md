@@ -1,0 +1,1 @@
+Keep all the images/videos/pdf/files/etc here and use it.
