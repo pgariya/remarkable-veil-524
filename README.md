@@ -36,7 +36,7 @@ Step-1- Navigate to proeject directory using `$cd remarkable-veil-524`
 
 Step-2- install node_modules using `$cd npm install`
 
-- It will install some common dependencies:- <br />
+- It will install some common dependencies like :- <br />
     - `$npm install react-router-dom redux react-redux redux-thunk axios`<br />
     - `$npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion`
 
