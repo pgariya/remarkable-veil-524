@@ -68,5 +68,5 @@ Step-2- install node_modules using `$cd npm install`
     - Chakra-Templets - https://chakra-templates.dev/#<br />
     - String Builder - https://codebeautify.org/string-builder<br />
     - Chat-gpt - https://chat.openai.com/chat<br />
-    - Your-Team-members- https://chat.whatsapp.com/KR80RM0zbWi6agJVFL66Z9<br />
+    - Your-Team-members- You can use Slack to communicate<br />
 
