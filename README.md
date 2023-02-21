@@ -73,117 +73,117 @@ Step-2- install node_modules using `$cd npm install`
 # DATABASE SCHEMAS
 
  # endpoints:-
-GET/POST/PATCH/DELETE
+GET/POST/PATCH/DELETE<br>
 
-`/user`--->|POST
-         |---> `/user/register`
-         |---> `/user/login`
+`/user`--->|POST<br>
+         |---> `/user/register`<br>
+         |---> `/user/login`<br>
 
 
 
-|GET/POST
-`/products`--->|GET/PATCH/DELETE
-             |---> `/products/:id`
+|GET/POST<br>
+`/products`--->|GET/PATCH/DELETE<br>
+             |---> `/products/:id`<br>
 
              
-|GET/POST             
-`/cart`--->|GET/PATCH/DELETE 
-         |---> `/cart/:id`
+|GET/POST  <br>           
+`/cart`--->|GET/PATCH/DELETE <br>
+         |---> `/cart/:id`<br>
 
 
-|GET/POST
-`/orders`--->|GET/PATCH/DELETE
-           |---> `/orders/:id`
-|GET
-`/search`
+|GET/POST<br>
+`/orders`--->|GET/PATCH/DELETE<br>
+           |---> `/orders/:id`<br>
+|GET<br>
+`/search`<br>
 
  # Middlewares
 Authencator--> verify user
 
  # Querys:-
-`/search?q=`
-`/products?`<size, price, category, style, color, material, fir, occasion, sleeves, neck, brand, gender> =
+`/search?q=`<br>
+`/products?`<size, price, category, style, color, material, fir, occasion, sleeves, neck, brand, gender> =<br>
 
  # Product keys
-image
-title
-description
-price
-sizes
-category
-style
-color
-material
-fit
-occasion
-sleeves
-neck
-brand
-gender
+image<br>
+title<br>
+description<br>
+price<br>
+sizes<br>
+category<br>
+style<br>
+color<br>
+material<br>
+fit<br>
+occasion<br>
+sleeves<br>
+neck<br>
+brand<br>
+gender<br>
 
 
 
- # Product Schema
-_id:{type:String,required:true},
-image:{type:String,required:true},
-title:{type:String,required:true},
-description:{type:String,required:true},
-price:{type:Number,required:true},
-sizes:{type:String,required:true},
-category:{type:String,required:true},
-style:{type:String,required:true},
-color:{type:String,required:true},
-material:{type:String,required:true},
-fit:{type:String,required:true},
-occasion:{type:String,required:true},
-sleeves:{type:String,required:true},
-neck:{type:String,required:true},
-brand:{type:String,required:true},
-gender:{type:String,required:true}
+ # Product Schema<br>
+_id:{type:String,required:true},<br>
+image:{type:String,required:true},<br>
+title:{type:String,required:true},<br>
+description:{type:String,required:true},<br>
+price:{type:Number,required:true},<br>
+sizes:{type:String,required:true},<br>
+category:{type:String,required:true},<br>
+style:{type:String,required:true},<br>
+color:{type:String,required:true},<br>
+material:{type:String,required:true},<br>
+fit:{type:String,required:true},<br>
+occasion:{type:String,required:true},<br>
+sleeves:{type:String,required:true},<br>
+neck:{type:String,required:true},<br>
+brand:{type:String,required:true},<br>
+gender:{type:String,required:true}<br>
 
  # Cart Schema
-_id:{type:String,required:true},
-image:{type:String,required:true},
-title:{type:String,required:true},
-description:{type:String,required:true},
-price:{type:Number,required:true},
-sizes:{type:String,required:true},
-category:{type:String,required:true},
-style:{type:String,required:true},
-color:{type:String,required:true},
-material:{type:String,required:true},
-fit:{type:String,required:true},
-occasion:{type:String,required:true},
-sleeves:{type:String,required:true},
-neck:{type:String,required:true},
-brand:{type:String,required:true},
-gender:{type:String,required:true},
-quantity:{type:Number,required:true},
-user:{type:String,required:true},
-pid:{type:String,required:true},
+_id:{type:String,required:true},<br>
+image:{type:String,required:true},<br>
+title:{type:String,required:true},<br>
+description:{type:String,required:true},<br>
+price:{type:Number,required:true},<br>
+sizes:{type:String,required:true},<br>
+category:{type:String,required:true},<br>
+style:{type:String,required:true},<br>
+color:{type:String,required:true},<br>
+material:{type:String,required:true},<br>
+fit:{type:String,required:true},<br>
+occasion:{type:String,required:true},<br>
+sleeves:{type:String,required:true},<br>
+neck:{type:String,required:true},<br>
+brand:{type:String,required:true},<br>
+gender:{type:String,required:true},<br>
+quantity:{type:Number,required:true},<br>
+user:{type:String,required:true},<br>
+pid:{type:String,required:true},<br>
 
 
  # Order Schema
-image:{type:String,required:true},
-title:{type:String,required:true},
-description:{type:String,required:true},
-price:{type:Number,required:true},
-sizes:{type:String,required:true},
-category:{type:String,required:true},
-style:{type:String,required:true},
-color:{type:String,required:true},
-material:{type:String,required:true},
-fit:{type:String,required:true},
-occasion:{type:String,required:true},
-sleeves:{type:String,required:true},
-neck:{type:String,required:true},
-brand:{type:String,required:true},
-gender:{type:String,required:true},
-quantity:{type:Number,required:true},
-user:{type:String,required:true},
-status:{type:String,required:true},
-address:{type:String,required:true},
-pid:{type:String,required:true},
+image:{type:String,required:true},<br>
+title:{type:String,required:true},<br>
+description:{type:String,required:true},<br>
+price:{type:Number,required:true},<br>
+sizes:{type:String,required:true},<br>
+category:{type:String,required:true},<br>
+style:{type:String,required:true},<br>
+color:{type:String,required:true},<br>
+material:{type:String,required:true},<br>
+fit:{type:String,required:true},<br>
+occasion:{type:String,required:true},<br>
+sleeves:{type:String,required:true},<br>
+neck:{type:String,required:true},<br>
+brand:{type:String,required:true},<br>
+gender:{type:String,required:true},<br>
+quantity:{type:Number,required:true},<br>
+user:{type:String,required:true},<br>
+status:{type:String,required:true},<br>
+address:{type:String,required:true},<br>
+pid:{type:String,required:true},<br>
 
 
 
