@@ -95,7 +95,7 @@ GET/POST/PATCH/DELETE<br>
 `/orders`--->|GET/PATCH/DELETE<br>
            |---> `/orders/:id`<br>
 
-           
+
 |GET<br>
 `/search`<br>
 
@@ -105,6 +105,13 @@ Authencator--> verify user
  # Querys:-
 `/search?q=`<br>
 `/products?`<size, price, category, style, color, material, fir, occasion, sleeves, neck, brand, gender> =<br>
+
+ # user keys
+name <br>
+email<br>
+password<br>
+role<br>
+phone<br>
 
  # Product keys
 image<br>
@@ -122,6 +129,13 @@ sleeves<br>
 neck<br>
 brand<br>
 gender<br>
+
+ # user schema
+name:{type:String,required:true},<br>
+email:{type:String,required:true},<br>
+password:{type:String,required:true},<br>
+role:{type:String,required:true},<br>
+phone:title:{type:String,required:true},<br>
 
 
 
