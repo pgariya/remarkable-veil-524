@@ -70,3 +70,122 @@ Step-2- install node_modules using `$cd npm install`
     - Chat-gpt - https://chat.openai.com/chat<br />
     - Your-Team-members- You can use Slack to communicate<br />
 
+# DATABASE SCHEMAS
+
+ # endpoints:-
+GET/POST/PATCH/DELETE
+
+`/user`--->|POST
+         |---> `/user/register`
+         |---> `/user/login`
+
+
+
+|GET/POST
+`/products`--->|GET/PATCH/DELETE
+             |---> `/products/:id`
+
+             
+|GET/POST             
+`/cart`--->|GET/PATCH/DELETE 
+         |---> `/cart/:id`
+
+
+|GET/POST
+`/orders`--->|GET/PATCH/DELETE
+           |---> `/orders/:id`
+|GET
+`/search`
+
+ # Middlewares
+Authencator--> verify user
+
+ # Querys:-
+`/search?q=`
+`/products?`<size, price, category, style, color, material, fir, occasion, sleeves, neck, brand, gender> =
+
+ # Product keys
+image
+title
+description
+price
+sizes
+category
+style
+color
+material
+fit
+occasion
+sleeves
+neck
+brand
+gender
+
+
+
+ # Product Schema
+_id:{type:String,required:true},
+image:{type:String,required:true},
+title:{type:String,required:true},
+description:{type:String,required:true},
+price:{type:Number,required:true},
+sizes:{type:String,required:true},
+category:{type:String,required:true},
+style:{type:String,required:true},
+color:{type:String,required:true},
+material:{type:String,required:true},
+fit:{type:String,required:true},
+occasion:{type:String,required:true},
+sleeves:{type:String,required:true},
+neck:{type:String,required:true},
+brand:{type:String,required:true},
+gender:{type:String,required:true}
+
+ # Cart Schema
+_id:{type:String,required:true},
+image:{type:String,required:true},
+title:{type:String,required:true},
+description:{type:String,required:true},
+price:{type:Number,required:true},
+sizes:{type:String,required:true},
+category:{type:String,required:true},
+style:{type:String,required:true},
+color:{type:String,required:true},
+material:{type:String,required:true},
+fit:{type:String,required:true},
+occasion:{type:String,required:true},
+sleeves:{type:String,required:true},
+neck:{type:String,required:true},
+brand:{type:String,required:true},
+gender:{type:String,required:true},
+quantity:{type:Number,required:true},
+user:{type:String,required:true},
+pid:{type:String,required:true},
+
+
+ # Order Schema
+image:{type:String,required:true},
+title:{type:String,required:true},
+description:{type:String,required:true},
+price:{type:Number,required:true},
+sizes:{type:String,required:true},
+category:{type:String,required:true},
+style:{type:String,required:true},
+color:{type:String,required:true},
+material:{type:String,required:true},
+fit:{type:String,required:true},
+occasion:{type:String,required:true},
+sleeves:{type:String,required:true},
+neck:{type:String,required:true},
+brand:{type:String,required:true},
+gender:{type:String,required:true},
+quantity:{type:Number,required:true},
+user:{type:String,required:true},
+status:{type:String,required:true},
+address:{type:String,required:true},
+pid:{type:String,required:true},
+
+
+
+
+
