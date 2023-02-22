@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { BASE_URL } from '../../constants/config';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +28,7 @@ export default function Signup() {
     const [password, setPassword] = useState("")
     // const [role, setRole] = useState("")
     const [phone, setPhone] = useState("")
-
+    const navigate = useNavigate()
     const handleSubmit = () => {
         let payload = {
             name,
@@ -35,7 +37,7 @@ export default function Signup() {
             phone
         }
         console.log(payload);
-        fetch(`/users/register`, {
+        fetch(`${BASE_URL}/user/register`, {
             method: "POST",
             body: JSON.stringify(payload),
             headers: {
@@ -50,7 +52,8 @@ export default function Signup() {
                     status: 'success',
                     duration: 9000,
                     isClosable: true,
-                  })
+                })
+                navigate("/login")
             })
             .catch(err => {
                 console.log(err)
@@ -60,7 +63,7 @@ export default function Signup() {
                     status: 'error',
                     duration: 9000,
                     isClosable: true,
-                  })
+                })
             })
     }
 
@@ -96,13 +99,13 @@ export default function Signup() {
                         </FormControl>
 
                         {/* <HStack> */}
-                            <Box>
-                                <FormControl id="firstName" isRequired>
-                                    <FormLabel>Contact No.</FormLabel>
-                                    <Input type="text" placeholder='Phone' value={phone} onChange={(e) => setPhone(e.target.value)} />
-                                </FormControl>
-                            </Box>
-                            {/* <Box>
+                        <Box>
+                            <FormControl id="firstName" isRequired>
+                                <FormLabel>Contact No.</FormLabel>
+                                <Input type="text" placeholder='Phone' value={phone} onChange={(e) => setPhone(e.target.value)} />
+                            </FormControl>
+                        </Box>
+                        {/* <Box>
                                 <FormControl id="firstName" isRequired>
                                     <FormLabel> Role</FormLabel>
                                     <select name="" placeholder='Role' onChange={(e) => setRole(e.target.value)}>

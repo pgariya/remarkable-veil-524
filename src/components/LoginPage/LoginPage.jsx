@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../../Redux/auth/auth.actions';
@@ -30,8 +30,9 @@ export default function Login() {
   const navigate = useNavigate()
 
   const isAuth = useSelector((store) => store.authReducer.isAuth)
+  console.log(isAuth)
   const location = useLocation()
-  console.log("login- location:", location)
+  // console.log("login- location:", location)
 
   const handleSubmit = () => {
     let userData = {
@@ -39,14 +40,13 @@ export default function Login() {
       password
     }
     console.log(userData);
-   
-    dispatch(login(userData)).then(res => {
-      console.log(res);
-      console.log(isAuth);
+
+    dispatch(login(userData)).then(({ status, msg }) => {
+
       {
-        isAuth ? toast({
+        status == 1 ? toast({
           title: 'Login Successfull.',
-          description: "Redirected to Home page",
+          description: msg,
           status: 'success',
           duration: 9000,
           isClosable: true,
@@ -54,14 +54,16 @@ export default function Login() {
           :
           toast({
             title: 'Error.',
-            description: "Please try again.",
+            description: msg,
             status: 'error',
             duration: 9000,
             isClosable: true,
           })
       }
       location.state ? navigate(location.state) : navigate("/")
+
     })
+
   }
   return (
     <Flex
