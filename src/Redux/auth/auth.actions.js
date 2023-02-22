@@ -15,16 +15,16 @@ const loginFailureAction = () => {
 };
 
 
-export const login = (userData) => (dispatch) => {
+export const login = (userData) => async (dispatch) => {
   dispatch(loginRequestAction())
 
-  return axios.post(`${BASE_URL}/user/login`, userData)
-    .then((res) => {
-      console.log(res);
-      dispatch(loginSuccessAction(res.data.token))
-      return {"status":res.data.status, "msg": res.data.message}
-    }).catch((err) => {
-      console.log(err);
-      dispatch(loginFailureAction())
-    })
+  try {
+    const res = await axios.post(`${BASE_URL}/user/login`, userData);
+    console.log(res);
+    dispatch(loginSuccessAction(res.data.token));
+    return { "status": res.data.status, "msg": res.data.message };
+  } catch (err) {
+    console.log(err);
+    dispatch(loginFailureAction());
+  }
 } 
