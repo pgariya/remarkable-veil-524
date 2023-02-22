@@ -45,7 +45,7 @@ export default function Login() {
 
       {
         status == 1 ? toast({
-          title: 'Login Successfull.',
+          title: 'Login Successful.',
           description: msg,
           status: 'success',
           duration: 9000,
@@ -60,7 +60,11 @@ export default function Login() {
             isClosable: true,
           })
       }
-      location.state ? navigate(location.state) : navigate("/")
+
+      if(status==1){
+        location.state ? navigate(location.state) : navigate("/")
+
+      }
 
     })
 
