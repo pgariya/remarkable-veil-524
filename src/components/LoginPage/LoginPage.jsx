@@ -72,15 +72,17 @@ export default function Login() {
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
 
-        </Stack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
+          <Stack>
+            <Text fontSize='3xl' align={'center'}>
+              Sign in
+            </Text>
+          </Stack>
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
@@ -99,15 +101,19 @@ export default function Login() {
                 <a href="/login/otp">Forgot password?</a>
               </Stack>
               <Button
-                bg={'teal'}
-                color={'white'}
+                // size="lg"
+                bg={'yellow.300'}
+                color={'black'}
                 _hover={{
-                  bg: 'tomato',
+                  bg: 'yellow.400',
                 }}
                 onClick={handleSubmit}>
-                Sign in
+                Continue
               </Button>
-            </Stack>
+              <Stack>
+                <Text align={'left'} fontSize='sm'>
+                  By continuing, you agree to Yepme's Conditions of Use and Privacy Notice. </Text>
+              </Stack></Stack>
           </Stack>
         </Box>
       </Stack>
