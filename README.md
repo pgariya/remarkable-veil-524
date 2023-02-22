@@ -144,7 +144,7 @@ Step-2- install node_modules using `$cd npm install`
 
             |POST --> /product
 
-                {
+                [{
 
                     image: { type: String, required: true },
                     title: { type: String, required: true },
@@ -163,9 +163,11 @@ Step-2- install node_modules using `$cd npm install`
                     brand: { type: String, required: true },
                     gender: { type: String, required: true },
                     delivery:{ type: Number, required: true },
-                    tags:{type: String}
+                    tags:{type: String},
+                    stock:{type: Number, required: true},
 
-                }
+
+                }]
 
                  headers:{
 
@@ -216,7 +218,7 @@ Step-2- install node_modules using `$cd npm install`
 
             |POST --> /cart
 
-                {
+                [{
 
                         image:{type:String,required:true},
                         title:{type:String,required:true}, 
@@ -239,9 +241,11 @@ Step-2- install node_modules using `$cd npm install`
                         quantity:{type:Number,required:true},(Add manually)
                         user:{type:String,required:true},
                         pid:{type:String,required:true},
-                        tags:{type: String}
+                        tags:{type: String},
+                        stock:{type: Number, required: true},
 
-                }
+
+                }]
 
                  headers:{
 
@@ -294,7 +298,7 @@ Step-2- install node_modules using `$cd npm install`
 
             |POST --> /order
 
-                {
+               [{
 
                             image:{type:String,required:true},
                             title:{type:String,required:true},
@@ -320,9 +324,11 @@ Step-2- install node_modules using `$cd npm install`
                             pid:{type:String,required:true},
                             delivery:{ type: Number, required: true },
                             adminId:{type: String, required: true},
-                            tags:{type: String}
+                            tags:{type: String},
+                            stock:{type: Number, required: true},
 
-                }
+
+                }]
 
                  headers:{
 
@@ -419,7 +425,9 @@ brand: { type: String, required: true },<br>
 gender: { type: String, required: true },<br>
 delivery:{ type: Number, required: true },<br>
 adminId:{type: String, required: true},<br> (Automatic)
-tags:{type: String}<br>
+tags:{type: String},<br>
+stock:{type: Number, required: true},<br>
+
 
 
  # Cart Schema
@@ -446,6 +454,8 @@ quantity:{type:Number,required:true},<br> (Add manually)
 user:{type:String,required:true},<br>
 pid:{type:String,required:true},<br>
 tags:{type: String}<br>
+stock:{type: Number, required: true},
+
 
 
 
@@ -474,4 +484,6 @@ orderDate:{type:String,required:true},<br> (Automatic)
 pid:{type:String,required:true},<br>
 delivery:{ type: Number, required: true },<br>
 adminId:{type: String, required: true},<br>
-tags:{type: String}<br>
+tags:{type: String},<br>
+stock:{type: Number, required: true}<br>
+
