@@ -1,4 +1,5 @@
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import SlideShow from "../components/Homepage/SlideShow";
 import { BOLD, R1, R2, R3, R4 } from "../constants/typography";
 import "../styles/styles.css";
@@ -49,17 +50,21 @@ export default function Homepage() {
         gap={3}
       >
         <Box>
+          <Link to={"/products?category=shirt"}>
           <Image
             src="http://staticawsy.yepme.com/images/square_shirts_09022018.jpg"
             alt="shirt"
-          />
+            />
+            </Link>
         </Box>
 
         <Box>
+          <Link to={"/products?category=top"}>
           <Image
             src="http://staticawsy.yepme.com/images/square-tops_09022018.jpg"
             alt="top"
-          />
+            />
+            </Link>
         </Box>
 
         <Box>
