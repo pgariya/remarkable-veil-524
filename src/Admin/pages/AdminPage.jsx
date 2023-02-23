@@ -110,10 +110,7 @@ export default function AdminPage(){
                             return user.role==SUPER_ADMIN?<ManageAdmins />:<AdminRestrict />
                         }
 
-                        case 6:{
-                            
-                            return
-                        }
+            
 
                         default:{
                             return <Dashboard />

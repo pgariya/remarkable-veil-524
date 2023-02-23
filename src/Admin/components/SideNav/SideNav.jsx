@@ -34,9 +34,7 @@ export default function SideNav({setTab ,tab,name,role}){
     <Button variant={"outline"} borderColor={bg} bg={tab==5&&bg}  color={tab==5?WHITE:ORANGE} w={FILL_90PARENT} onClick={()=>{
         setTab(5)
     }}>Manage Admins</Button>
-    <Button variant={"outline"} borderColor={bg} bg={tab==6&&bg}  color={tab==6?WHITE:ORANGE}w={FILL_90PARENT} onClick={()=>{
-        setTab(6)
-    }}>Logout</Button>
+    
    
     </VStack>
 
