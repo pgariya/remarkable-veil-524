@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CONTAINER } from '../../constants/constants';
+import { ORANGE, POINTER, UNDERLINE } from '../../constants/typography';
 import { login } from '../../Redux/auth/auth.actions';
 import { store } from '../../Redux/store';
 import { Loading } from '../Loading';
@@ -129,6 +130,9 @@ export default function Login() {
                 Continue
               </Button>
               <Stack>
+                <Text>New here ? <span style={{color:ORANGE ,textDecoration:UNDERLINE,cursor:POINTER}} onClick={()=>{
+                  navigate("/signup")
+                }}>Sign up</span></Text>
                 <Text align={'left'} fontSize='sm'>
                   By continuing, you agree to Yepme's Conditions of Use and Privacy Notice. </Text>
               </Stack></Stack>

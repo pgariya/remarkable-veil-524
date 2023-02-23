@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcInfo } from 'react-icons/fc'
 import { CONTAINER } from '../../constants/constants';
 import { Loading } from '../Loading';
+import { ORANGE, POINTER, UNDERLINE } from '../../constants/typography';
 
 export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
@@ -168,7 +169,7 @@ export default function Signup() {
                         </Stack>
                         <Stack >
                             <Text align={'center'}>
-                                Already have an account? <Link href={'#'} color={'blue.400'}>Login</Link>
+                                Already have an account? <Link href='/login'  style={{color:ORANGE ,textDecoration:UNDERLINE,cursor:POINTER}}>Login</Link>
                             </Text>
                         </Stack>
                         <Stack>
