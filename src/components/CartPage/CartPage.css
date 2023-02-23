@@ -1,0 +1,43 @@
+.cart-container{
+    max-width: 100%;
+    margin: 0 1rem 0 1rem;
+
+}
+.fancy{
+color: rgb(0, 17, 255);
+}
+.cart-items{
+width: 60%;
+height: auto;
+border: 1px solid black;
+margin: auto;
+}
+.items{
+    display: flex;
+    width: 90%;
+    height: auto;
+    border: 1px solid red;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 2rem;
+    
+}
+.prod-img{
+    border-radius: 20px;
+    height: 16.7rem;
+    margin-left: 2px;
+}
+.prod-data{
+width: 70%;
+border: 1px solid green;
+margin: auto;
+height: 15rem;
+text-align: left;
+
+}
+.bold{
+    text-align: left;
+    font-weight:bold; 
+    font-size:20px;
+    margin-left: 5px;
+}
