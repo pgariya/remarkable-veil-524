@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "../Admin/pages/AdminPage";
+import Payment from "../components/CheckoutPage/Payment";
 import Login from "../components/LoginPage/LoginPage";
 import OTP from "../components/LoginPage/OTP";
 import Signup from "../components/SignupPage/signup";
@@ -17,6 +18,7 @@ export default function AllRoutes(){
         <Route path="/login" element={<Login />}></Route>
         <Route path="/login/otp" element={<OTP />}></Route>
         <Route path="/admin" element={<AdminPage />}></Route>
+        <Route path="/payment" element={<Payment />}></Route>
 
     </Routes>
 }
