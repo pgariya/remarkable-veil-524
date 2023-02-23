@@ -1,68 +1,183 @@
-import { Box, Heading, HStack, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { BASE_URL } from '../constants/config'
-
-
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Image,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text
+} from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import DrawerPro from "../components/ProductsPage/Drawer";
+import SideBar from "../components/ProductsPage/SideBar";
+import { BASE_URL } from "../constants/config";
+import { CONTAINER } from "../constants/constants";
 
 const ProductPage = () => {
-    let [productlist,setproductlist]= useState([])
-    let [isError,setisError]= useState(false);
+  let [productlist, setproductlist] = useState([]);
+  let [isError, setisError] = useState(false);
+  let [isloading, setisloading] = useState(false);
+  let [griddata,setgriddata]= useState("");
 
-    const search = useLocation().search;
-    const catg = new URLSearchParams(search).get('category');
+  const search = useLocation().search;
+  const catg = new URLSearchParams(search).get("category");
 
+  console.log(catg);
 
-    console.log(catg);
-
-    let getdata=async() =>{
-
-        try{
-            let res= await axios.get(`${BASE_URL}/product?category=${catg}`)
-            //?gender=female ya kuch bhi filter krna ha too
-            
-            setproductlist(res.data.data)
-        }catch(err){
-            setisError(true)
-        }
+  let getdata = async () => {
+    try {
+      setisloading(true);
+      let res = await axios.get(`${BASE_URL}/product?category=${catg}`);
+      //?gender=female ya kuch bhi filter krna ha too
+      setproductlist(res.data.data);
+      setisloading(false);
+    } catch (err) {
+      setisError(true);
     }
+  };
 
-useEffect(()=>{
-   getdata()
-},[])
+  useEffect(() => {
+    getdata();
+  }, []);
 
+  useEffect(() =>{
 
-console.log(productlist)
+  }, [griddata])
 
+  console.log(productlist);
 
+  if (isloading) {
+    return (
+      <SimpleGrid
+        m="auto"
+        w="95%"
+        pt={10}
+        columns={{ base: 1, md: 2, lg: 3 }}
+        gap={15}
+      >
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+        <Skeleton height="500px"  />
+
+      </SimpleGrid>
+    );
+  }
+
+console.log(griddata)
   return (
-    <Box>
+    <Box mt={CONTAINER}>
+      {isError !== "" && <h1>{isError}</h1>}
 
-{isError !== ""  && <h1>{isError}</h1>}
 
 
-<SimpleGrid columns={{base:1, md:2 , lg:3}} gap={10} w="90%" m={"auto"}>
+<Stack direction={{base:"column" , md:"row"}} >
+    {/* //filter part is here  */}
+    <Box display={{base:"none",lg:"block"}} w={"30%"} boxShadow= "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px" >
+        <SideBar/>
+    </Box>
 
-    {
-        productlist.map((el) => <Stack key={el._id} p={6} textAlign="left" borderRadius={"10px"} boxShadow= "rgba(0, 0, 0, 0.24) 0px 3px 8px">
+    <Box display={{base:"block",lg:"none"}} pt={5}  >
+      <DrawerPro/>
+    </Box>
 
-            <Image src={ el.image.split(",")[0]} borderRadius={"10px"}/>
-            <Heading>{el.title.charAt(0).toUpperCase()+ el.title.slice(1)} </Heading>
-            <Text fontSize={"20px"} fontWeight="bold"> Price:  ₹ {el.price}</Text>
-            <HStack display={"flex"}  justifyContent="center" gap={5} m="auto">
-                {el.sizes.split(",").map((e) => <Box borderRadius={"5px"} border={"2px solid"}  px={2} bg={"grey"} color="white"> {e}</Box>)}
+  {/* //data is shown in SimpleGrid  */}
+  <Box>
+
+<Stack gap={5} direction={{base:"column", md:"row"}} px={12} mb={5} justifyContent={"space-between"}>
+
+  <Box>
+    <Heading textAlign={"left"}>{catg.toUpperCase()}</Heading>
+  </Box>
+
+<HStack gap={5}>
+  <Button>High To Low</Button>
+  <Button>Low To High</Button>
+</HStack>
+
+
+<HStack gap={4}>
+  <Text fontWeight={"bold"} > Shows </Text>
+  <Button onClick={() => setgriddata(2)}> 2 </Button>
+  <Button onClick={() => setgriddata(3)}> 3 </Button>
+  <Button onClick={() => setgriddata(4)}> 4 </Button>
+</HStack>
+
+</Stack>
+
+       <SimpleGrid
+        columns= { griddata !== ""  ? {base:1, md:2, lg:griddata}   : { base: 1, md: 2, lg: 3 } }
+        gap={10}
+        w="90%"
+        m={"auto"}
+      >
+        {productlist.map((el) => (
+          <Stack
+            key={el._id}
+            
+            textAlign="left"
+            _hover={{border : "2px dotted black" }}
+            
+            boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+          >
+            <Image src={el.image.split(",")[0]}  />
+
+<Stack p={5}>
+
+            <Heading>
+              {el.title.charAt(0).toUpperCase() + el.title.slice(1)}{" "}
+            </Heading>
+            <Text fontSize={"20px"} fontWeight="bold">
+              {" "}
+              Price: ₹ {el.price}
+            </Text>
+            <HStack display={"flex"} justifyContent="center" gap={3} m="auto">
+              {el.sizes.split(",").map((e) => (
+                <Box
+                  borderRadius={"5px"}
+                  border={"2px solid"}
+                  px={2}
+                  bg={"grey"}
+                  color="white"
+                >
+                  {" "}
+                  {e}
+                </Box>
+              ))}
             </HStack>
 
-        </Stack>)
-    }
-</SimpleGrid>
+            </Stack>
+
+          </Stack>
+        ))}
+       </SimpleGrid>
+  </Box>
+
+
+</Stack>
+
 
 
 
 
     </Box>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;
