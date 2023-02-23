@@ -81,13 +81,15 @@ export default function Signup() {
             align={'center'}
             mt={CONTAINER}
             justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
+            bg={useColorModeValue('gray.50', 'gray.800')}
+            >
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Box
-                    rounded={'lg'}
+                border={'1px solid black'}
+                    // rounded={'lg'}
                     bg={useColorModeValue('white', 'gray.700')}
-                    boxShadow={'lg'}
-                    p={8}>
+                    // boxShadow={'lg'}
+                    p={5}>
                     <Stack pt={1}>
                         <Text fontSize='3xl' align={'center'}>
                             Create Account
