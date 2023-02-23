@@ -13,7 +13,7 @@ export default function StatsBox({name,count,bcolor,image,size,color,classname,b
                 </HStack>
                 <Heading>{count}</Heading>
             </VStack>
-            <Image w={100} src={image}></Image>
+            <Image w={50} src={image}></Image>
 
         </Flex>
 

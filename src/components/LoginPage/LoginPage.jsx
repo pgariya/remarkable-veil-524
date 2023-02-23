@@ -19,6 +19,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CONTAINER } from '../../constants/constants';
 import { login } from '../../Redux/auth/auth.actions';
 import { store } from '../../Redux/store';
+import { Loading } from '../Loading';
 
 export default function Login() {
 
@@ -30,7 +31,7 @@ export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const isAuth = useSelector((store) => store.authReducer.isAuth)
+  const {isAuth,isLoading,isError} = useSelector((store) => store.authReducer)
   console.log(isAuth)
   const location = useLocation()
   // console.log("login- location:", location)
@@ -70,17 +71,21 @@ export default function Login() {
     })
 
   }
+
+  if(isLoading) return <Loading />
+  if(isError) return <Heading mt={CONTAINER}>Error...</Heading>
+
   return (
     <Flex
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      mt={CONTAINER}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      mt={"80px"}
+     >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box
           // rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
+        
           border={'1px solid black'}
           // boxShadow={'lg'}
           p={5}>
