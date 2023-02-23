@@ -19,6 +19,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { BASE_URL } from '../../constants/config';
 import { useNavigate } from 'react-router-dom';
 import { FcInfo } from 'react-icons/fc'
+import { CONTAINER } from '../../constants/constants';
 
 export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
@@ -78,6 +79,7 @@ export default function Signup() {
         <Flex
             minH={'100vh'}
             align={'center'}
+            mt={CONTAINER}
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>

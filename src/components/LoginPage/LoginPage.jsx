@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { CONTAINER } from '../../constants/constants';
 import { login } from '../../Redux/auth/auth.actions';
 import { store } from '../../Redux/store';
 
@@ -74,6 +75,7 @@ export default function Login() {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
+      mt={CONTAINER}
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
 
