@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard";
 import EditProduct from "./EditProduct";
 import ManageAdmins from "./ManageAdmins";
 import ManageOrders from "./ManageOrder";
+import logo from "../../assets/logo.png"
 import "./style.css"
 
 export default function AdminPage(){
@@ -22,12 +23,12 @@ export default function AdminPage(){
     }
 
 
-    return <Box  mt={CONTAINER}>
+    return <Box   mt={"160px"}>
 
         <Flex gap={4}  w={FILL_PARENT}>
             <SideNav setTab={setTabNumber} tab={tab}/>
 
-            <Box padding={8} border={"2px dotted pink"} borderRadius={20} w={FILL_75PARENT}>
+            <Box className="fifty"  padding={"2px 16px"} border={"2px dotted pink"} borderRadius={20} w={FILL_75PARENT}>
 
 
                 {tab==1&&<Dashboard />}
