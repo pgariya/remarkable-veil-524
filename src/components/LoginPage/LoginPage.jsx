@@ -31,8 +31,15 @@ export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  useEffect(()=>{
+    if(isAuth){
+      navigate("/")
+    }
+  },[])
+
   const {isAuth,isLoading,isError} = useSelector((store) => store.authReducer)
-  console.log(isAuth)
+  console.log("check",isAuth)
+ 
   const location = useLocation()
   // console.log("login- location:", location)
 
@@ -73,7 +80,7 @@ export default function Login() {
   }
 
   if(isLoading) return <Loading />
-  if(isError) return <Heading mt={CONTAINER}>Error...</Heading>
+  // if(isError) return <Heading mt={CONTAINER}>Error...</Heading>
 
   return (
     <Flex
