@@ -72,6 +72,9 @@ export default function AdminPage(){
 
     },[isAuth])
 
+
+   
+
     if(!user.status) return <Loading />
 
    if(user.status) return <Box   mt={"160px"}>
