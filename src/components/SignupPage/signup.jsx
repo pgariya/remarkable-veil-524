@@ -20,10 +20,13 @@ import { BASE_URL } from '../../constants/config';
 import { useNavigate } from 'react-router-dom';
 import { FcInfo } from 'react-icons/fc'
 import { CONTAINER } from '../../constants/constants';
+import { Loading } from '../Loading';
+import { ORANGE, POINTER, UNDERLINE } from '../../constants/typography';
 
 export default function Signup() {
     const [showPassword, setShowPassword] = useState(false);
     const toast = useToast()
+    const [loading,setLoading] = useState(false)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -31,13 +34,16 @@ export default function Signup() {
     const [phone, setPhone] = useState("")
     const navigate = useNavigate()
     const handleSubmit = () => {
-        if (password.length < 8)
+        if (password.length < 8){
             alert("Please Provide minimum digit password")
-        if (!email.includes('@'))
+
+        }else if(!email.includes('@')){
             alert(" @ missing, Please fill correct emailID")
-        if (phone.length !== 10)
+
+        }else if (phone.length !== 10){
             alert("Phone no. should be 10 digit")
-        else {
+
+        }else {
             let payload = {
                 name,
                 email,
@@ -45,6 +51,7 @@ export default function Signup() {
                 phone
             }
             console.log(payload);
+            setLoading(true)
             fetch(`${BASE_URL}/user/register`, {
                 method: "POST",
                 body: JSON.stringify(payload),
@@ -54,6 +61,7 @@ export default function Signup() {
             }).then(res => res.json())
                 .then(res => {
                     console.log(res)
+                    setLoading(false)
                     toast({
                         title: 'Account created.',
                         description: "We've created your account for you.",
@@ -65,6 +73,7 @@ export default function Signup() {
                 })
                 .catch(err => {
                     console.log(err)
+                    setLoading(false)
                     toast({
                         title: 'Error.',
                         description: "Please try again.",
@@ -75,19 +84,20 @@ export default function Signup() {
                 })
         }
     }
+
+    if(loading) return <Loading />
+
     return (
         <Flex
             minH={'100vh'}
             align={'center'}
-            mt={CONTAINER}
+            mt={"140px"}
             justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}
             >
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Box
                 border={'1px solid black'}
                     // rounded={'lg'}
-                    bg={useColorModeValue('white', 'gray.700')}
                     // boxShadow={'lg'}
                     p={5}>
                     <Stack pt={1}>
@@ -159,7 +169,7 @@ export default function Signup() {
                         </Stack>
                         <Stack >
                             <Text align={'center'}>
-                                Already have an account? <Link href={'#'} color={'blue.400'}>Login</Link>
+                                Already have an account? <Link href='/login'  style={{color:ORANGE ,textDecoration:UNDERLINE,cursor:POINTER}}>Login</Link>
                             </Text>
                         </Stack>
                         <Stack>

@@ -17,8 +17,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CONTAINER } from '../../constants/constants';
+import { ORANGE, POINTER, UNDERLINE } from '../../constants/typography';
 import { login } from '../../Redux/auth/auth.actions';
 import { store } from '../../Redux/store';
+import { Loading } from '../Loading';
 
 export default function Login() {
 
@@ -30,8 +32,15 @@ export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const isAuth = useSelector((store) => store.authReducer.isAuth)
-  console.log(isAuth)
+  useEffect(()=>{
+    if(isAuth){
+      navigate("/")
+    }
+  },[])
+
+  const {isAuth,isLoading,isError} = useSelector((store) => store.authReducer)
+  console.log("check",isAuth)
+ 
   const location = useLocation()
   // console.log("login- location:", location)
 
@@ -70,17 +79,21 @@ export default function Login() {
     })
 
   }
+
+  if(isLoading) return <Loading />
+  // if(isError) return <Heading mt={CONTAINER}>Error...</Heading>
+
   return (
     <Flex
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      mt={CONTAINER}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+      mt={"80px"}
+     >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box
           // rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
+        
           border={'1px solid black'}
           // boxShadow={'lg'}
           p={5}>
@@ -117,6 +130,9 @@ export default function Login() {
                 Continue
               </Button>
               <Stack>
+                <Text>New here ? <span style={{color:ORANGE ,textDecoration:UNDERLINE,cursor:POINTER}} onClick={()=>{
+                  navigate("/signup")
+                }}>Sign up</span></Text>
                 <Text align={'left'} fontSize='sm'>
                   By continuing, you agree to Yepme's Conditions of Use and Privacy Notice. </Text>
               </Stack></Stack>

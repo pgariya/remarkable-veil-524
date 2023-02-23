@@ -21,8 +21,15 @@ export const login = (userData) => async (dispatch) => {
   try {
     const res = await axios.post(`${BASE_URL}/user/login`, userData);
     console.log(res);
-    dispatch(loginSuccessAction(res.data.token));
-    return { "status": res.data.status, "msg": res.data.message };
+    if(res.data.status==1){
+      dispatch(loginSuccessAction(res.data.token));
+      return { "status": res.data.status, "msg": res.data.message };
+    }else{
+      dispatch(loginFailureAction());
+      return { "status": res.data.status, "msg": res.data.message };
+
+    }
+  
   } catch (err) {
     console.log(err);
     dispatch(loginFailureAction());
