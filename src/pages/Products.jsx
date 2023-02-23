@@ -1,27 +1,18 @@
 import { Box, Heading, HStack, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-
-import { BASE_URL } from '../constants/config'
 
 
 
-const Products = () => {
+const ProductPage = () => {
     let [productlist,setproductlist]= useState([])
     let [isError,setisError]= useState(false);
 
 
-    // uselocation helps us to take the value from query 
-    const search = useLocation().search;
-    const catg = new URLSearchParams(search).get('category');
-     
-  console.log(catg,"catg")
-
     let getdata=async() =>{
 
         try{
-            let res= await axios.get(BASE_URL+`/product?category=${catg}`)
+            let res= await axios.get("https://dark-teal-colt-shoe.cyclic.app/product")
             //?gender=female ya kuch bhi filter krna ha too
             
             setproductlist(res.data.data)
@@ -42,10 +33,6 @@ console.log(productlist)
     <Box>
 
 {isError !== ""  && <h1>{isError}</h1>}
-
-
-
-
 
 
 <SimpleGrid columns={{base:1, md:2 , lg:3}} gap={10} w="90%" m={"auto"}>
@@ -71,4 +58,4 @@ console.log(productlist)
   )
 }
 
-export default Products
+export default ProductPage
