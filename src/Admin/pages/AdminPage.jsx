@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardBody, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { CONTAINER } from "../../constants/constants";
+import { CONTAINER, SUPER_ADMIN } from "../../constants/constants";
 import { AUTO, CENTER, FILL_25PARENT, FILL_75PARENT, FILL_90PARENT, FILL_PARENT, LARGE, MEDIUM, RIGHT, WHITE } from "../../constants/typography";
 import "../../styles/styles.css"
 import { CardAvatar } from "../components/Avatar";
@@ -17,6 +17,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/config";
 import { useSelector } from "react-redux";
 import { Loading } from "../../components/Loading";
+import AdminRestrict from "../../pages/AdminRestrict";
 
 export default function AdminPage(){
     useEffect(() => {
@@ -72,6 +73,9 @@ export default function AdminPage(){
 
     },[isAuth])
 
+
+   
+
     if(!user.status) return <Loading />
 
    if(user.status) return <Box   mt={"160px"}>
@@ -79,15 +83,46 @@ export default function AdminPage(){
         <Flex gap={4}  w={FILL_PARENT}>
             <SideNav name={user?.name} role={user?.role} setTab={setTabNumber} tab={tab}/>
 
-            <Box className="fifty"  padding={"2px 16px"} border={"2px dotted pink"} borderRadius={20} w={FILL_75PARENT}>
+            <Box className="fifty" overflowY={"scroll"}  padding={"2px 16px"} border={"2px dotted pink"} borderRadius={20} w={FILL_75PARENT}>
 
+                {(()=>{
 
-                {tab==1&&<Dashboard />}
-                {tab==2&&<AddProduct />}
-                {tab==3&&<EditProduct />}
-                {tab==4&&<ManageOrders />}
-                {tab==5&&<ManageAdmins />}
-                {tab==6&&<AddProduct />}
+                    switch(tab){
+                        case 1:{
+                            return  <Dashboard />
+                            
+                        }
+
+                        case 2:{
+                            return <AddProduct />
+                        }
+
+                        case 3:{
+
+                            return <EditProduct />
+                        }
+
+                        case 4:{
+                            return <ManageOrders />
+                        }
+
+                        case 5:{
+                            return user.role==SUPER_ADMIN?<ManageAdmins />:<AdminRestrict />
+                        }
+
+                        case 6:{
+                            
+                            return
+                        }
+
+                        default:{
+                            return <Dashboard />
+                        }
+                    }
+
+                })()}
+                
+                
 
 
 

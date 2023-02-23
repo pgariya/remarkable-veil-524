@@ -1,3 +1,6 @@
 export const CONTAINER = "200px"
 export const ADMIN = "admin"
 export const SUPER_ADMIN = "superadmin"
+export const USER = "user"
+export const DEACTIVATE = "deactivate"
+export const DELETE = "delete"
