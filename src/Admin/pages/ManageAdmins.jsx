@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Loading } from "../../components/Loading";
 import { BASE_URL } from "../../constants/config";
 import { ADMIN, DEACTIVATE, DELETE, SUPER_ADMIN, USER } from "../../constants/constants";
-import { CENTER, FILL_PARENT, LARGE, LEFT, MEDIUM, SB, X2LARGE } from "../../constants/typography";
+import { CENTER, FILL_PARENT, LARGE, LEFT, MEDIUM, SB, X2LARGE, YELLOW } from "../../constants/typography";
 import { AdminCard } from "../components/AdminCard";
 import { CardAvatar } from "../components/Avatar";
 import {FaAngleDown} from "react-icons/fa"
@@ -21,7 +21,7 @@ import {
     MenuDivider,
   } from "@chakra-ui/react";
 
-export default function ManageAdmins(){
+export default function ManageAdmins({userRole}){
     const {token} = useSelector((state)=>state.authReducer)
     const [role,setRole] = useState()
     const [loading,setLoading]  = useState(false)
@@ -137,11 +137,12 @@ export default function ManageAdmins(){
 
     if(sloading) return <Loading />
 
-    return<Box w={FILL_PARENT}>
-
+   return <Box w={FILL_PARENT}>
+   
         <Card>
 
             <CardBody>
+
                 <Badge m={"8px"} fontSize={X2LARGE} colorScheme={"orange"}>PROMOTE USER</Badge>
                 <HStack  gap={2}>
                     <Input placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)}></Input>

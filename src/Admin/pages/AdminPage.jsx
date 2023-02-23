@@ -85,13 +85,44 @@ export default function AdminPage(){
 
             <Box className="fifty" overflowY={"scroll"}  padding={"2px 16px"} border={"2px dotted pink"} borderRadius={20} w={FILL_75PARENT}>
 
+                {(()=>{
 
-                {tab==1&&<Dashboard />}
-                {tab==2&&<AddProduct />}
-                {tab==3&&<EditProduct />}
-                {tab==4&&<ManageOrders />}
-                {tab==5&&user.role==SUPER_ADMIN?<ManageAdmins />:<AdminRestrict />}
-                {tab==6&&<AddProduct />}
+                    switch(tab){
+                        case 1:{
+                            return  <Dashboard />
+                            
+                        }
+
+                        case 2:{
+                            return <AddProduct />
+                        }
+
+                        case 3:{
+
+                            return <EditProduct />
+                        }
+
+                        case 4:{
+                            return <ManageOrders />
+                        }
+
+                        case 5:{
+                            return user.role==SUPER_ADMIN?<ManageAdmins />:<AdminRestrict />
+                        }
+
+                        case 6:{
+                            
+                            return
+                        }
+
+                        default:{
+                            return <Dashboard />
+                        }
+                    }
+
+                })()}
+                
+                
 
 
 
