@@ -1,6 +1,7 @@
 import { Box, Heading, HStack, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { CONTAINER } from '../constants/constants'
 
 
 
@@ -30,7 +31,7 @@ console.log(productlist)
 
 
   return (
-    <Box>
+    <Box mt={CONTAINER}>
 
 {isError !== ""  && <h1>{isError}</h1>}
 
