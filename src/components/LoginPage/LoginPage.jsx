@@ -76,12 +76,12 @@ export default function Login() {
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-
         <Box
-          rounded={'lg'}
+          // rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
+          border={'1px solid black'}
+          // boxShadow={'lg'}
+          p={5}>
           <Stack>
             <Text fontSize='3xl' align={'center'}>
               Sign in

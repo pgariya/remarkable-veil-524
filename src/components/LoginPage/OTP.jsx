@@ -40,7 +40,6 @@ const OTP = () => {
     console.log("clicked here");
   }
 
-
   return (
     <Flex
       minH={'100vh'}
@@ -49,10 +48,11 @@ const OTP = () => {
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box
-          rounded={'lg'}
+          // rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
+          // boxShadow={'lg'}
+          border={'1px solid black'}
+          p={5}>
           <Stack >
             <Text fontSize='2xl' align={'center'}>
               OTP will be send to your Registered Mobile No.
