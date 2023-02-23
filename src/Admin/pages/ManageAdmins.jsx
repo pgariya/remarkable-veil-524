@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../components/Loading";
 import { BASE_URL } from "../../constants/config";
-import { ADMIN, DEACTIVATE, SUPER_ADMIN, USER } from "../../constants/constants";
+import { ADMIN, DEACTIVATE, DELETE, SUPER_ADMIN, USER } from "../../constants/constants";
 import { CENTER, FILL_PARENT, LARGE, LEFT, MEDIUM, SB, X2LARGE } from "../../constants/typography";
 import { AdminCard } from "../components/AdminCard";
 import { CardAvatar } from "../components/Avatar";
@@ -46,6 +46,25 @@ export default function ManageAdmins(){
         })
         console.log(res)
         if(res.data.status==1){
+
+            if(newRole==DELETE){
+
+                toast({
+                    title: `User deleted`,
+                    description: res.data.message,
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                  })
+
+              setLoading(false)
+              setRoleData(USER)
+             return
+
+            }
+
+
+
             toast({
                 title: `Promoted to ${newRole}`,
                 description: res.data.message,
@@ -57,6 +76,23 @@ export default function ManageAdmins(){
               setRoleData(newRole)
 
         }else{
+
+
+            if(newRole==DELETE){
+
+                toast({
+                    title: `User deletion failed`,
+                    description: res.data.message,
+                    status: 'error',
+                    duration: 2000,
+                    isClosable: true,
+                  })
+
+              setLoading(false)
+                  return
+
+            }
+
             toast({
                 title: `Error`,
                 description: res.data.message,
@@ -115,6 +151,7 @@ export default function ManageAdmins(){
                         <option value={ADMIN}>Admin</option>
                         <option value={DEACTIVATE}>Deactivate</option>
                         <option value={SUPER_ADMIN}>Super Admin</option>
+                        <option value={DELETE}>Delete User</option>
                     </Select>
                     <Button isLoading={loading} w={200} colorScheme={"orange"}  onClick={async()=>{
                         if(role==""||email==""){
@@ -153,6 +190,9 @@ export default function ManageAdmins(){
               <MenuItem onClick={()=>{
                 setRoleData(SUPER_ADMIN)
               }}>Super Admin</MenuItem>
+              <MenuItem onClick={()=>{
+                setRoleData(DEACTIVATE)
+              }}>Deactivate</MenuItem>
             </MenuList>
           </Menu>
 

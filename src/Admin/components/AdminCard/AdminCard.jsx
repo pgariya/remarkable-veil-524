@@ -9,7 +9,7 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
-import { ADMIN, SUPER_ADMIN, USER } from "../../../constants/constants";
+import { ADMIN, DEACTIVATE, SUPER_ADMIN, USER } from "../../../constants/constants";
 import { FILL_PARENT, GREEN, LARGE, SB, SMALL, YELLOW } from "../../../constants/typography";
 import {FaAngleDown} from "react-icons/fa"
 export default function AdminCard({ name, email,setRole,role }) {
@@ -36,6 +36,9 @@ export default function AdminCard({ name, email,setRole,role }) {
               <MenuItem disabled={role==SUPER_ADMIN}  onClick={()=>{
                 setRole(SUPER_ADMIN,email)
               }}>Super Admin</MenuItem>
+              <MenuItem disabled={role==DEACTIVATE}  onClick={()=>{
+                setRole(DEACTIVATE,email)
+              }}>Deactivate</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
