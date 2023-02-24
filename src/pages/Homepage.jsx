@@ -15,7 +15,7 @@ export default function Homepage() {
         gap={5}
         m="auto"
       >
-        <SlideShow />
+        <SlideShow  />
 
         <Stack
           // w={{ base: "95%", md: "40%" }}
@@ -27,12 +27,16 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/men_shoes_rhs1_16march.jpg"
               alt="shoes"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
           <Box>
             <Image
               src="http://staticawsy.yepme.com/images/men1_tees_rhs1_feb18.jpg"
               alt="t-Shirt"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
         </Stack>
@@ -55,6 +59,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/square_shirts_09022018.jpg"
               alt="shirt"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Link>
         </Box>
@@ -64,6 +70,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/square-tops_09022018.jpg"
               alt="top"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Link>
         </Box>
@@ -73,6 +81,8 @@ export default function Homepage() {
           <Image
             src="http://staticawsy.yepme.com/images/square_kurtis_09022018.jpg"
             alt="kurties"
+            transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
           />
           </Link>
         </Box>
@@ -83,6 +93,8 @@ export default function Homepage() {
           <Image
             src="http://staticawsy.yepme.com/images/square_partywear_09022018.jpg"
             alt="mens-partywear"
+            transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
             </Link>
         </Box>
@@ -104,6 +116,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/men_bottomwear_10oct17.jpg"
               alt="men-bottomwear"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
 
@@ -111,6 +125,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/men_watches_10oct17.jpg"
               alt="men-watches"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
         </Stack>
@@ -120,6 +136,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/center3-4-17.jpg"
               alt="yepme-logotype"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
 
@@ -133,6 +151,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/center_images_winterwear_10oct17.gif"
               alt="winter-wear"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
         </Stack>
@@ -142,6 +162,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/women_bottomwear_10oct17.jpg"
               alt="women-bottomwear"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
 
@@ -149,6 +171,8 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/women_watches_10oct17.jpg"
               alt="women-watches"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
         </Stack>
@@ -174,8 +198,9 @@ export default function Homepage() {
         w={"95%"}
         gap={5}
       >
-        <Box>
-          <Image src="http://staticawsy.yepme.com/images/summer_fashion_14june.jpg" />
+        <Box overflow={"hidden"}>
+          <Image src="http://staticawsy.yepme.com/images/summer_fashion_14june.jpg"  transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
         </Box>
 
         <Stack direction={"row"} m="auto" gap={5}>
@@ -183,12 +208,16 @@ export default function Homepage() {
             <Image
               src="http://staticawsy.yepme.com/images/women_dresses_jumpsuits_10oct17.gif"
               alt="women-dresses"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
           <Box>
             <Image
               src="http://staticawsy.yepme.com/images/activewear_10oct17.gif"
               alt="activewear"
+              transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}
             />
           </Box>
         </Stack>
@@ -221,6 +250,7 @@ export default function Homepage() {
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
+            
           ></iframe>
         </Box>
         <Box>

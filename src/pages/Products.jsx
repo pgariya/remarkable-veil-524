@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Paginantion from "../Admin/components/Paginantion/Paginantion";
 import DrawerPro from "../components/ProductsPage/Drawer";
 import SideBar from "../components/ProductsPage/SideBar";
 import { BASE_URL } from "../constants/config";
@@ -25,6 +26,9 @@ const ProductPage = () => {
   let [isError, setisError] = useState(false);
   let [isloading, setisloading] = useState(false);
   let [griddata, setgriddata] = useState("");
+  let [count, setcount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   let [filterdata, setfilterdata] = useState({
     brand: "",
@@ -38,38 +42,60 @@ const ProductPage = () => {
   const search = useLocation().search;
   const catg = new URLSearchParams(search).get("category");
 
-  console.log(filterdata,"dta object haaaa");
+  console.log(filterdata, "dta object haaaa");
 
-  for(let x in filterdata){
-    if(filterdata[x] == ""){
-      delete filterdata[x]
+  for (let x in filterdata) {
+    if (filterdata[x] == "") {
+      delete filterdata[x];
     }
   }
-  let myQuery = ConvertToQuery(filterdata)
-  console.log(filterdata,"dta object modified");
-  console.log(myQuery)
+  let myQuery = ConvertToQuery(filterdata);
+  console.log(filterdata, "dta object modified");
+  console.log(myQuery);
 
   console.log(catg);
 
-  let getdata = async () => {
+  let getdata = async (page) => {
     try {
       setisloading(true);
-      let res = await axios.get(`${BASE_URL}/product?category=${catg}${myQuery}`);
+      let res = await axios.get(
+        `${BASE_URL}/product?category=${catg}&page=${page}${myQuery}`
+      );
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
+      setTotalPage(res.data.count);
       setisloading(false);
     } catch (err) {
       setisError(true);
     }
   };
 
+  console.log(page, "pages ha yaa");
+  console.log(totalPage, "total page");
+
   useEffect(() => {
-    getdata();
-  }, [filterdata]);
+    getdata(page);
+  }, [page]);
 
   useEffect(() => {}, [griddata]);
 
-  
+  let handleHigh = () => {
+    setcount(count + 1);
+    let highdata = productlist.sort((a, b) => {
+      return +b.price - +a.price;
+    });
+
+    setproductlist(highdata);
+  };
+
+  let handleLow = () => {
+    setcount(count + 1);
+    let lowdata = productlist.sort((a, b) => {
+      return +a.price - +b.price;
+    });
+
+    setproductlist(lowdata);
+  };
 
   console.log(productlist);
 
@@ -111,7 +137,7 @@ const ProductPage = () => {
         {/* //filter part is here  */}
         <Box
           display={{ base: "none", lg: "block" }}
-          w={`${catg}` == "top" ? "80%" : "40%"}
+          w={"40%"}
           // border="5px solid"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         >
@@ -137,8 +163,8 @@ const ProductPage = () => {
             </Box>
 
             <HStack gap={5}>
-              <Button>High To Low</Button>
-              <Button>Low To High</Button>
+              <Button onClick={handleHigh}> High to Low </Button>
+              <Button onClick={handleLow}> Low to High </Button>
             </HStack>
 
             <HStack gap={4} display={{ base: NONE, lg: "block" }}>
@@ -163,11 +189,12 @@ const ProductPage = () => {
               <Stack
                 key={el._id}
                 textAlign="left"
-                _hover={{ border: "2px dotted black" }}
                 boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                transition={"transform 2s"}
+                _hover={{ transform: "scale(1.1)", border: "2px dotted black" }}
               >
                 <Link to={`/products/${el._id}`}>
-                <Image src={el.image.split(",")[0]} />
+                  <Image src={el.image.split(",")[0]} />
                 </Link>
 
                 <Stack p={5}>
@@ -203,6 +230,15 @@ const ProductPage = () => {
           </SimpleGrid>
         </Box>
       </Stack>
+
+      {/* pagination   */}
+
+      <Paginantion
+        page={page}
+        setPage={setPage}
+        divide={10}
+        totalPage={totalPage}
+      />
     </Box>
   );
 };

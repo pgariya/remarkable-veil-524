@@ -1,17 +1,22 @@
 import { Box, Checkbox, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-
-
+import React, { useEffect, useState } from "react";
 
 const SideBar = ({ filterdata, setfilterdata }) => {
-  
+
+  let [brandState, setbrandState] = useState({
+    "van-heusen": false,
+    "levis": false,
+    "yepme": false,
+    "mufti": false,
+    "zara": false,
+  });
+
   let handleBrand = (e) => {
-    console.log(e.target.checked);
-    console.log(e.target.name + " " + e.target.value);
-    // e.target.checked ? setbranddata({brand:  branddata.brand ?  `${branddata.brand} ${e.target.value}` : e.target.value }) : setbranddata({brand: `${branddata.brand}`.replace(e.target.value,"") })
     e.target.checked
-      ? setfilterdata({ ...filterdata, brand: `${e.target.value}` })
+      ? setfilterdata({ ...filterdata, brand: `${e.target.name}` })
       : setfilterdata({ ...filterdata, brand: "" });
+
+    //  e.target.checked ?  setbrandState({  ...`${brandState}`, `${e.target.name}` : true }) : 
   };
 
   let handleOccassion = (e) => {
@@ -20,35 +25,33 @@ const SideBar = ({ filterdata, setfilterdata }) => {
       : setfilterdata({ ...filterdata, occassion: "" });
   };
 
-  let handleColor=(e)=>{
+  let handleColor = (e) => {
     e.target.checked
-    ? setfilterdata({ ...filterdata, color: `${e.target.value}` })
-    : setfilterdata({ ...filterdata, color: "" });
-  }
+      ? setfilterdata({ ...filterdata, color: `${e.target.value}` })
+      : setfilterdata({ ...filterdata, color: "" });
+  };
 
-  let handleMaterial=(e) =>{
+  let handleMaterial = (e) => {
     e.target.checked
-    ? setfilterdata({ ...filterdata, material: `${e.target.value}` })
-    : setfilterdata({ ...filterdata, material: "" });
+      ? setfilterdata({ ...filterdata, material: `${e.target.value}` })
+      : setfilterdata({ ...filterdata, material: "" });
+  };
 
-  }
+  let handleSize = (e) => {
+    e.target.checked
+      ? setfilterdata({ ...filterdata, size: `${e.target.value}` })
+      : setfilterdata({ ...filterdata, size: "" });
+  };
 
-let handleSize=(e) =>{
-  e.target.checked
-  ? setfilterdata({ ...filterdata, size: `${e.target.value}` })
-  : setfilterdata({ ...filterdata, size: "" });
-}
+  let handlePrice = (e) => {
+    e.target.checked
+      ? setfilterdata({ ...filterdata, price: `${e.target.value}` })
+      : setfilterdata({ ...filterdata, price: "" });
+  };
 
-let handlePrice=(e) =>{
-  e.target.checked
-  ? setfilterdata({ ...filterdata, price: `${e.target.value}` })
-  : setfilterdata({ ...filterdata, price: "" });
-}
-
-
+  useEffect(() => {}, [filterdata]);
 
   console.log(filterdata, "branddddd");
-
 
   return (
     <Stack>
@@ -72,46 +75,46 @@ let handlePrice=(e) =>{
         <Box display={"flex"} justifyContent="space-around">
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox mr={3} name="sizes" value="36" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="36" onChange={handleSize} />
               <label for="36">36</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="38" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="38" onChange={handleSize} />
               <label for="38">38</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="40" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="40" onChange={handleSize} />
               <label for="40">40</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="42" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="42" onChange={handleSize} />
               <label for="42">42</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="44" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="44" onChange={handleSize} />
               <label for="44">44</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="46" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="46" onChange={handleSize} />
               <label for="46">46</label>
             </Box>
           </Box>
 
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox mr={3} name="sizes" value="XS" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="XS" onChange={handleSize} />
               <label for="XS">XS</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="S" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="S" onChange={handleSize} />
               <label for="S">S</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="M" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="M" onChange={handleSize} />
               <label for="M">M</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="sizes" value="L" onChange={handleSize}/>
+              <Checkbox mr={3} name="sizes" value="L" onChange={handleSize} />
               <label for="L">L</label>
             </Box>
             <Box>
@@ -142,23 +145,48 @@ let handlePrice=(e) =>{
         <Box>
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox mr={3} name="price" value="Below Rs 500"  onChange={handlePrice}/>
+              <Checkbox
+                mr={3}
+                name="price"
+                value="Below Rs 500"
+                onChange={handlePrice}
+              />
               <label for="Below Rs 500">Below Rs 500</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="price" value="Rs 500-Rs 1000" onChange={handlePrice}/>
+              <Checkbox
+                mr={3}
+                name="price"
+                value="Rs 500-Rs 1000"
+                onChange={handlePrice}
+              />
               <label for="Rs 500-Rs 1000">Rs 500-Rs 1000</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="price" value="Rs 1000-Rs 1500" onChange={handlePrice}/>
+              <Checkbox
+                mr={3}
+                name="price"
+                value="Rs 1000-Rs 1500"
+                onChange={handlePrice}
+              />
               <label for="Rs 1000-Rs 1500">Rs 1000-Rs 1500</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="price" value="Rs 1500-Rs 2000" onChange={handlePrice}/>
+              <Checkbox
+                mr={3}
+                name="price"
+                value="Rs 1500-Rs 2000"
+                onChange={handlePrice}
+              />
               <label for="Rs 1500-Rs 2000">Rs 1500-Rs 2000</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="price" value="Above Rs 2000" onChange={handlePrice}/>
+              <Checkbox
+                mr={3}
+                name="price"
+                value="Above Rs 2000"
+                onChange={handlePrice}
+              />
               <label for="Above Rs 2000">Above Rs 2000</label>
             </Box>
           </Box>
@@ -185,37 +213,50 @@ let handlePrice=(e) =>{
                 mr={3}
                 name="colours"
                 colorScheme={"blackAlpha"}
-                value="Black"
+                value="black"
                 onChange={handleColor}
               />
-              <label for="Black">Black</label>
+              <label for="black">Black</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="colours"
                 colorScheme={"gray"}
-                value="Gray"
+                value="gray"
                 onChange={handleColor}
               />
-              <label for="Gray">Gray</label>
+              <label for="gray">Gray</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="colours" colorScheme="red" value="Red"  onChange={handleColor}/>
-              <label for="Red">Red</label>
+              <Checkbox
+                mr={3}
+                name="colours"
+                colorScheme="red"
+                value="red"
+                onChange={handleColor}
+              />
+              <label for="red">Red</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="colours"
                 colorScheme="yellow"
-                value="Yellow" onChange={handleColor}
+                value="yellow"
+                onChange={handleColor}
               />
-              <label for="Yellow">Yellow</label>
+              <label for="yellow">Yellow</label>
             </Box>
             <Box>
-              <Checkbox mr={3} name="colours" colorScheme="blue" value="Blue"  onChange={handleColor}/>
-              <label for="Blue">Blue</label>
+              <Checkbox
+                mr={3}
+                name="colours"
+                colorScheme="blue"
+                value="blue"
+                onChange={handleColor}
+              />
+              <label for="blue">Blue</label>
             </Box>
           </Box>
 
@@ -225,7 +266,8 @@ let handlePrice=(e) =>{
                 mr={3}
                 name="colours"
                 colorScheme={"green"}
-                value="green" onChange={handleColor}
+                value="green"
+                onChange={handleColor}
               />
               <label for="green">green</label>
             </Box>
@@ -233,27 +275,41 @@ let handlePrice=(e) =>{
               <Checkbox
                 mr={3}
                 name="colours"
-                colorScheme={"orange"} onChange={handleColor}
-                value="Orange"
+                colorScheme={"orange"}
+                onChange={handleColor}
+                value="orange"
               />
-              <label for="Orange">Orange</label>
-            </Box>
-            <Box>
-              <Checkbox mr={3} name="colours" colorScheme="teal" value="Teal"  onChange={handleColor}/>
-              <label for="Teal">Teal</label>
-            </Box>
-            <Box>
-              <Checkbox mr={3} name="colours" colorScheme="pink" value="Pink" onChange={handleColor} />
-              <label for="Pink">Pink</label>
+              <label for="orange">Orange</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="colours"
-                colorScheme="purple" onChange={handleColor}
-                value="Purple"
+                colorScheme="teal"
+                value="teal"
+                onChange={handleColor}
               />
-              <label for="Purple">Purple</label>
+              <label for="teal">Teal</label>
+            </Box>
+            <Box>
+              <Checkbox
+                mr={3}
+                name="colours"
+                colorScheme="pink"
+                value="pink"
+                onChange={handleColor}
+              />
+              <label for="pink">Pink</label>
+            </Box>
+            <Box>
+              <Checkbox
+                mr={3}
+                name="colours"
+                colorScheme="purple"
+                onChange={handleColor}
+                value="purple"
+              />
+              <label for="purple">Purple</label>
             </Box>
           </Box>
         </Box>
@@ -278,37 +334,37 @@ let handlePrice=(e) =>{
               <Checkbox
                 mr={3}
                 name="material"
-                value="Cotton"
+                value="cotton"
                 onChange={handleMaterial}
               />
-              <label for="Cotton">Cotton</label>
+              <label for="cotton">Cotton</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="material"
-                value="Rayon"
+                value="rayon"
                 onChange={handleMaterial}
               />
-              <label for="Rayon">Rayon</label>
+              <label for="rayon">Rayon</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="material"
-                value="Polyester"
+                value="polyester"
                 onChange={handleMaterial}
               />
-              <label for="Polyester">Polyester</label>
+              <label for="polyester">Polyester</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="material"
-                value="Naylon"
+                value="naylon"
                 onChange={handleMaterial}
               />
-              <label for="Naylon">Naylon</label>
+              <label for="naylon">Naylon</label>
             </Box>
           </Box>
         </Box>
@@ -333,37 +389,37 @@ let handlePrice=(e) =>{
               <Checkbox
                 mr={3}
                 name="occassion"
-                value="Casual"
+                value="casual"
                 onChange={handleOccassion}
               />
-              <label for="Casual">Casual</label>
+              <label for="casual">Casual</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="occassion"
-                value="Party"
+                value="party"
                 onChange={handleOccassion}
               />
-              <label for="Party">Party</label>
+              <label for="party">Party</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="occassion"
-                value="Formal"
+                value="formal"
                 onChange={handleOccassion}
               />
-              <label for="Formal">Formal</label>
+              <label for="formal">Formal</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
                 name="occassion"
-                value="Semi Formal"
+                value="semi-formal"
                 onChange={handleOccassion}
               />
-              <label for="Semi Formal">Semi Formal</label>
+              <label for="semi-formal">Semi Formal</label>
             </Box>
           </Box>
         </Box>
@@ -388,8 +444,9 @@ let handlePrice=(e) =>{
             <Box>
               <Checkbox
                 mr={3}
-                name="brand"
-                value="van-heusen"
+                // name="brand"
+                checked={brandState["van-heusen"] }
+                name="van-heusen"
                 onChange={handleBrand}
               />
               <label for="van-heusen">van-heusen</label>
@@ -397,8 +454,9 @@ let handlePrice=(e) =>{
             <Box>
               <Checkbox
                 mr={3}
-                name="brand"
-                value="levis"
+                // name="brand"
+                checked={brandState.levis}
+                name="levis"
                 onChange={handleBrand}
               />
               <label for="levis">levis</label>
@@ -406,8 +464,9 @@ let handlePrice=(e) =>{
             <Box>
               <Checkbox
                 mr={3}
-                name="brand"
-                value="yepme"
+                // name="brand"
+                checked={brandState.yepme}
+                name="yepme"
                 onChange={handleBrand}
               />
               <label for="yepme">yepme</label>
@@ -415,8 +474,9 @@ let handlePrice=(e) =>{
             <Box>
               <Checkbox
                 mr={3}
-                name="brand"
-                value="mufti"
+                // name="brand"
+                checked={brandState.mufti}
+                name="mufti"
                 onChange={handleBrand}
               />
               <label for="mufti">mufti</label>
@@ -424,8 +484,9 @@ let handlePrice=(e) =>{
             <Box>
               <Checkbox
                 mr={3}
-                name="brand"
-                value="zara"
+                // name="brand"
+                checked={brandState.zara}
+                name="zara"
                 onChange={handleBrand}
               />
               <label for="zara">zara</label>
