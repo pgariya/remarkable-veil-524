@@ -4,7 +4,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { CENTER, FILL_PARENT, ORANGE, SB, X2LARGE, YELLOW } from "../../../constants/typography";
 
-function ExcelToJson({ getProductData }) {
+function ExcelToJson({ getProductData ,loading}) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -52,7 +52,7 @@ function ExcelToJson({ getProductData }) {
               onChange={handleFileChange}
               mb={4}
             />
-            <Button colorScheme={ORANGE} onClick={handleConvertToJSON}>Upload Data</Button>
+            <Button  isLoading={loading} colorScheme={ORANGE} onClick={handleConvertToJSON}>Upload Data</Button>
           </Flex>
         </Box>
       </CardBody>

@@ -24,19 +24,19 @@ export default function AdminCard({ name, email,setRole,role }) {
           </HStack>
           <Menu>
             <MenuButton as={Button} rightIcon={<FaAngleDown />}>
-              Actions
+              Change Role
             </MenuButton>
             <MenuList>
               <MenuItem display={role==USER?"none":"block"} onClick={()=>{
                 setRole(USER,email)
               }}>User</MenuItem>
-              <MenuItem disabled={role==ADMIN}  onClick={()=>{
+              <MenuItem display={role==ADMIN?"none":"block"}  onClick={()=>{
                 setRole(ADMIN,email)
               }}>Admin</MenuItem>
-              <MenuItem disabled={role==SUPER_ADMIN}  onClick={()=>{
+              <MenuItem display={role==SUPER_ADMIN?"none":"block"}  onClick={()=>{
                 setRole(SUPER_ADMIN,email)
               }}>Super Admin</MenuItem>
-              <MenuItem disabled={role==DEACTIVATE}  onClick={()=>{
+              <MenuItem display={role==DEACTIVATE?"none":"block"}  onClick={()=>{
                 setRole(DEACTIVATE,email)
               }}>Deactivate</MenuItem>
             </MenuList>
