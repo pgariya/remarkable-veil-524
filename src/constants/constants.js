@@ -7,3 +7,5 @@ export const DELETE = "delete"
 //Add more categories
 export const SHIRT = "shirt"
 export const TOP = "top"
+export const KURTIS = "Kurtis"
+export const PARTY_WEAR = "party-wear"
