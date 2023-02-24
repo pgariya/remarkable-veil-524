@@ -1,5 +1,5 @@
 import { Grid } from "@chakra-ui/react";
-import { CENTER, FILL_PARENT, FIXED, WHITE } from "../../constants/typography";
+import { ABSOLUTE, CENTER, FILL_PARENT, FIXED, WHITE } from "../../constants/typography";
 import Lottie from "react-lottie";
 
 export default function Loading() {
@@ -17,7 +17,6 @@ export default function Loading() {
   return (
     <Grid
       placeItems={CENTER}
-      position={FIXED}
       bg={WHITE}
       w={FILL_PARENT}
       h={"100vh"}
