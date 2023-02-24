@@ -47,7 +47,7 @@ export default function ManageAdmins({userRole}){
                 Authorization:token
             }
         })
-        console.log(res)
+        // console.log(res)
         if(res.data.status==1){
 
             if(newRole==DELETE){
@@ -121,7 +121,7 @@ export default function ManageAdmins({userRole}){
                     }
                 })
 
-                console.log(res)
+                // console.log(res)
 
                 if(res.data.status==1){
                 setAdmins(res.data.data)
@@ -207,7 +207,7 @@ export default function ManageAdmins({userRole}){
 
         </Flex>
         <VStack>
-            {admins?.map(({name,email,role})=><AdminCard email={email} name={name} role={role} setRole={ChangeRole} />)}
+            {admins?.map(({name,email,role,_id})=><AdminCard key={_id} email={email} name={name} role={role} setRole={ChangeRole} />)}
         </VStack>
 
         <Paginantion setPage={setPage} totalPage={totalPage} divide={5} page={page}></Paginantion>
