@@ -28,6 +28,7 @@ export default function EditProduct(){
     const [loading,setLoading] = useState(false)
     const [page,setPage] = useState(0)
     const [totalPage,setTotalPage] = useState(0)
+    const [refresh,setRefresh] =useState(false)
 
 
     useEffect(()=>{
@@ -60,7 +61,7 @@ export default function EditProduct(){
 
 
 
-    },[cat,page])
+    },[cat,page,refresh])
 
     useEffect(()=>{
         setPage(0)
@@ -96,7 +97,7 @@ export default function EditProduct(){
     </Thead>
     <Tbody>
       
-      {product?.map((el)=><ProductItem {...el} />)}
+      {product?.map((el)=><ProductItem setRefresh={setRefresh} {...el} />)}
       
     </Tbody>
     
