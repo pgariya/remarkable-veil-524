@@ -210,7 +210,7 @@ export default function ManageAdmins({userRole}){
             {admins?.map(({name,email,role})=><AdminCard email={email} name={name} role={role} setRole={ChangeRole} />)}
         </VStack>
 
-        <Paginantion setPage={setPage} totalPage={totalPage} page={page}></Paginantion>
+        <Paginantion setPage={setPage} totalPage={totalPage} divide={5} page={page}></Paginantion>
 
         
     </Box>
