@@ -1,4 +1,5 @@
 import { Avatar, Box, Flex, keyframes } from '@chakra-ui/react';
+import { AUTO } from '../../../constants/typography';
 
 export default function CardAvatar() {
   const size = '96px';

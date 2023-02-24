@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Badge, Box, Button, Card, CardBody, Flex, HStack, Input } from "@chakra-ui/react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import { CENTER, FILL_PARENT, ORANGE, SB, X2LARGE, YELLOW } from "../../../constants/typography";
+import { CENTER, FILL_PARENT, LARGE, MEDIUM, ORANGE, SB, X2LARGE, YELLOW } from "../../../constants/typography";
 
 function ExcelToJson({ getProductData ,loading}) {
   const [file, setFile] = useState(null);
@@ -44,15 +44,15 @@ function ExcelToJson({ getProductData ,loading}) {
     <Card w={FILL_PARENT}>
       <CardBody>
         <Box w={FILL_PARENT}>
-            <Badge fontSize={X2LARGE} colorScheme={YELLOW}>Bulk Upload using excel file</Badge>
-          <Flex alignItems={CENTER} justifyContent={SB}>
+            <Badge fontSize={{base:MEDIUM,sm:LARGE,lg:X2LARGE}} colorScheme={YELLOW}>Bulk Upload using excel file</Badge>
+          <Flex mt={2} gap={2} alignItems={CENTER} justifyContent={SB}>
             <input
               type="file"
               accept=".xlsx, .xls"
               onChange={handleFileChange}
               mb={4}
             />
-            <Button  isLoading={loading} colorScheme={ORANGE} onClick={handleConvertToJSON}>Upload Data</Button>
+            <Button fontSize={{base:"10px"}} isLoading={loading} colorScheme={ORANGE} onClick={handleConvertToJSON}>Upload Data</Button>
           </Flex>
         </Box>
       </CardBody>
