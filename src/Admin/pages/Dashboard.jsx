@@ -1,4 +1,9 @@
 import { Badge, Box, Grid, Heading } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants/config";
+import qs from "qs"
 import {
   BLACK,
   CYAN,
@@ -19,7 +24,118 @@ import {
 import { StatsBox } from "../components/StatsBox.jsx";
 import "./style.css";
 
-export default function Dashboard() {
+async function getData(query,endpoint,token){
+
+  let res = await axios({
+    url:BASE_URL+`/stat/${endpoint}?${qs.stringify(query)}`,
+    method:"get",
+    headers:{
+      Authorization:token
+    }
+  })
+  return res.data
+
+
+}
+
+export default function Dashboard({user}) {
+
+  let {token} = useSelector((state)=>state.authReducer)
+  const [totalOrder,setTotalOrder] = useState(0)
+  const [pendingOrders,setPendingOrders] = useState(0)
+  const [totalEarning,seTotalEarnings] = useState(0)
+  const [totalProduct,setTotalProduct] = useState(0)
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:"admin"+user.userId,request:"totalorder"},"order",token)
+      console.log(data)
+      if(data.status==1){
+
+        setTotalOrder(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({order:"admin"+user.userId,status1:"ordered",status2:"dispatched",request:"pendingorder"},"order",token)
+      console.log(data)
+      if(data.status==1){
+
+        setPendingOrders(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({order:"admin"+user.userId,request:"totalearning"},"order",token)
+      console.log(data)
+      if(data.status==1){
+
+        seTotalEarnings(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({order:"admin"+user.userId,request:"totalproduct"},"product",token)
+      console.log(data)
+      if(data.status==1){
+
+        setTotalProduct(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  
+  
+
+
   return (
     <Box w={FILL_PARENT}>
       <Badge colorScheme={YELLOW} fontSize={X2LARGE} m={8}>
@@ -38,7 +154,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/374750/orders.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={totalOrder}
         />
 
         <StatsBox
@@ -49,7 +165,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/374750/orders.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={pendingOrders}
         />
 
         <StatsBox
@@ -60,7 +176,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/500409/money.svg"}
           classname={"lush"}
           bcolor={GREEN}
-          count={37}
+          count={totalEarning}
         />
       </Grid>
 
@@ -76,7 +192,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/498969/menu2.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={totalProduct}
         />
 
         <StatsBox

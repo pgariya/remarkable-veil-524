@@ -89,7 +89,7 @@ export default function AdminPage(){
 
                     switch(tab){
                         case 1:{
-                            return  <Dashboard />
+                            return  <Dashboard user={user} />
                             
                         }
 
