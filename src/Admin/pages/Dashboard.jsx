@@ -43,6 +43,8 @@ export default function Dashboard({user}) {
   let {token} = useSelector((state)=>state.authReducer)
   const [totalOrder,setTotalOrder] = useState(0)
   const [pendingOrders,setPendingOrders] = useState(0)
+  const [totalEarning,seTotalEarnings] = useState(0)
+  const [totalProduct,setTotalProduct] = useState(0)
 
   useEffect(()=>{
 
@@ -74,6 +76,51 @@ export default function Dashboard({user}) {
       if(data.status==1){
 
         setPendingOrders(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({order:"admin"+user.userId,request:"totalearning"},"order",token)
+      console.log(data)
+      if(data.status==1){
+
+        seTotalEarnings(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({order:"admin"+user.userId,request:"totalproduct"},"product",token)
+      console.log(data)
+      if(data.status==1){
+
+        setTotalProduct(data.count)
 
       }else{
         return
@@ -129,7 +176,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/500409/money.svg"}
           classname={"lush"}
           bcolor={GREEN}
-          count={37}
+          count={totalEarning}
         />
       </Grid>
 
@@ -145,7 +192,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/498969/menu2.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={totalProduct}
         />
 
         <StatsBox
