@@ -103,7 +103,7 @@ export default function EditProduct(){
   </Table>
 </TableContainer>
 
-<Paginantion page={page} setPage={setPage} totalPage={totalPage} />
+<Paginantion page={page} setPage={setPage} divide={5} totalPage={totalPage} />
         
        
     </Box>
