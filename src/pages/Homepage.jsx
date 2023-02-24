@@ -7,7 +7,7 @@ import "../styles/styles.css";
 
 export default function Homepage() {
   return (
-    <Box  m={"auto"} mt={CONTAINER}>
+    <Box m={"auto"} mt={CONTAINER}>
       {/* 1st box  */}
       <Stack
         direction={{ base: "column", md: "row" }}
@@ -52,34 +52,39 @@ export default function Homepage() {
       >
         <Box>
           <Link to={"/products?category=shirt"}>
-          <Image
-            src="http://staticawsy.yepme.com/images/square_shirts_09022018.jpg"
-            alt="shirt"
+            <Image
+              src="http://staticawsy.yepme.com/images/square_shirts_09022018.jpg"
+              alt="shirt"
             />
-            </Link>
+          </Link>
         </Box>
 
         <Box>
           <Link to={"/products?category=top"}>
-          <Image
-            src="http://staticawsy.yepme.com/images/square-tops_09022018.jpg"
-            alt="top"
+            <Image
+              src="http://staticawsy.yepme.com/images/square-tops_09022018.jpg"
+              alt="top"
             />
-            </Link>
+          </Link>
         </Box>
 
         <Box>
+        <Link to={"/products?category=Kurtis"}>
           <Image
             src="http://staticawsy.yepme.com/images/square_kurtis_09022018.jpg"
             alt="kurties"
           />
+          </Link>
         </Box>
 
         <Box>
+        <Link to={"/products?category=party-wear"}>
+
           <Image
             src="http://staticawsy.yepme.com/images/square_partywear_09022018.jpg"
             alt="mens-partywear"
-          />
+            />
+            </Link>
         </Box>
       </Box>
 
@@ -201,8 +206,13 @@ export default function Homepage() {
         </Text>
       </Box>
 
-      <Stack direction={{base:"column" , md:"row"}} w="95%" margin="auto" justifyContent={"center"}>
-        <Box w={{base:"90%", md:"50%"}} m="auto">
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        w="95%"
+        margin="auto"
+        justifyContent={"center"}
+      >
+        <Box w={{ base: "90%", md: "50%" }} m="auto">
           <iframe
             width="100%"
             height="400px"
