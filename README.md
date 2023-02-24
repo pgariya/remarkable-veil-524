@@ -327,6 +327,7 @@ Step-2- install node_modules using `$cd npm install`
                             adminId:{type: String, required: true},
                             tags:{type: String},
                             stock:{type: Number, required: true},
+                            totalDiscountInPercent:{type:Number,required:true}
 
 
                 }]
@@ -487,4 +488,6 @@ delivery:{ type: Number, required: true },<br>
 adminId:{type: String, required: true},<br>
 tags:{type: String},<br>
 stock:{type: Number, required: true}<br>
+totalDiscountInPercent:{type:Number,required:true}
+
 
