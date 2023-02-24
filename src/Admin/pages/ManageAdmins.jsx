@@ -153,9 +153,9 @@ export default function ManageAdmins({userRole}){
 
                 <Badge m={"8px"} fontSize={X2LARGE} colorScheme={"orange"}>PROMOTE USER</Badge>
                 <HStack  gap={2}>
-                    <Input placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)}></Input>
+                    <Input placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}></Input>
                     <Select value={role} onChange={(e)=>setRole(e.target.value)}>
-                        <option value={""}>Select Role</option>
+                        <option value={""}>Role</option>
                         <option value={USER}>User</option>
                         <option value={ADMIN}>Admin</option>
                         <option value={DEACTIVATE}>Deactivate</option>
