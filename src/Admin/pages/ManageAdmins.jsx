@@ -20,6 +20,7 @@ import {
     MenuOptionGroup,
     MenuDivider,
   } from "@chakra-ui/react";
+import Paginantion from "../components/Paginantion/Paginantion";
 
 export default function ManageAdmins({userRole}){
     const {token} = useSelector((state)=>state.authReducer)
@@ -30,6 +31,8 @@ export default function ManageAdmins({userRole}){
     const [admins,setAdmins]= useState([])
     const [roleData,setRoleData] = useState(ADMIN)
     const toast = useToast()
+    const [page,setPage]=useState(0)
+    const [totalPage,setTotalPage]=useState(0) //work on this
 
 
     const ChangeRole = async(newRole,email)=>{
@@ -111,7 +114,7 @@ export default function ManageAdmins({userRole}){
             const getAdmins = async()=>{
                 let res = await axios({
                     method:"get",
-                    url:BASE_URL+"/user/admin",
+                    url:BASE_URL+`/user/admin?page=${page}`,
                     headers:{
                         Authorization:token,
                         role:roleData
@@ -122,6 +125,7 @@ export default function ManageAdmins({userRole}){
 
                 if(res.data.status==1){
                 setAdmins(res.data.data)
+                setTotalPage(res.data.count)
                 setSLoading(false)
                 }else{
                       setSLoading(false)
@@ -133,11 +137,15 @@ export default function ManageAdmins({userRole}){
 
             getAdmins()
         
+    },[roleData,page])
+
+    useEffect(()=>{
+      setPage(0)
     },[roleData])
 
     if(sloading) return <Loading />
 
-   return <Box w={FILL_PARENT}>
+   return <Box padding={"8px 0px"}  w={FILL_PARENT}>
    
         <Card>
 
@@ -179,7 +187,7 @@ export default function ManageAdmins({userRole}){
         <Heading textAlign={LEFT} margin={4} size={LARGE}>{roleData.toUpperCase()} LIST</Heading>
         <Menu>
             <MenuButton as={Button} rightIcon={<FaAngleDown />}>
-              Actions
+              Filter Users
             </MenuButton>
             <MenuList>
               <MenuItem onClick={()=>{
@@ -201,6 +209,8 @@ export default function ManageAdmins({userRole}){
         <VStack>
             {admins?.map(({name,email,role})=><AdminCard email={email} name={name} role={role} setRole={ChangeRole} />)}
         </VStack>
+
+        <Paginantion setPage={setPage} totalPage={totalPage} page={page}></Paginantion>
 
         
     </Box>

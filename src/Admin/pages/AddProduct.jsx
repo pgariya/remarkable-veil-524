@@ -1,9 +1,9 @@
-import { Box, Button, Grid, Input, useToast } from "@chakra-ui/react";
+import { Badge, Box, Button, Grid, Input, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../constants/config";
-import { CENTER, FILL_PARENT, ORANGE, R1, R2, R3 } from "../../constants/typography";
+import { CENTER, FILL_PARENT, ORANGE, R1, R2, R3, X2LARGE } from "../../constants/typography";
 import ExcelToJson from "../components/ExcelToJson/ExcelToJson";
 
 let schema = {
@@ -90,9 +90,9 @@ export default function AddProduct(){
 
         
     }
-    return<Box w={FILL_PARENT}>
-        <ExcelToJson getProductData={getProductData} />
-
+    return<Box padding={"8px 0px"} w={FILL_PARENT}>
+        <ExcelToJson loading={loading} getProductData={getProductData} />
+        <Badge m={"8px"} fontSize={X2LARGE} colorScheme={"orange"}>Add Single Product</Badge>
         <Grid p={4} gap={2} gridTemplateColumns={{lg:R3,sm:R2,base:R1}}>
             <Input placeholder="Image Links separated by comma (,) required" name="image" onChange={handleInput} border={"1px solid orange"} color="orange"></Input>
             <Input placeholder="Product Title required" name="title" onChange={handleInput} border={"1px solid orange"} color="orange"></Input>
