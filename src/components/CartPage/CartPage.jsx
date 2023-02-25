@@ -1,77 +1,29 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { AiFillDelete } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 import "./CartPage.css"
 const CartPage = () => {
   return (
-    <div className='cart-container'>
-      <Text fontSize={'4xl'} fontWeight={'bold'} className="fancy">
-        Here is your Shopping cart
-      </Text>
-    <Flex className='cart'>
-    <Box className='cart-items'>
-        {
-            Cartdata.map((ele)=>{
-                return (
-                    <div className="items">
-                        <div className="prod-img">
-                            <img src={ele.img} alt={ele.name} />
-                        </div>
-                        <div className="prod-data">
-                            <p className='bold'>{ele.name}</p>
-                            <p>Product  description</p>
-                            <p className='bold'>Size:{ele.size}</p>
-                            <p className='bold'>Qantity:{ele.quantity}</p>
-                            <p className='bold'>Price:{ele.price}</p>
-                            <p className='bold'>Items Left:{ele.itemLeft}</p>
-
-                        </div>
-                    </div>
-                )
-            })
-        }
-    </Box>
-    <Box className='total-cart'>
-
-    </Box>
-    </Flex>
+    <div className='cart-item'>
+      <div className="cartitem-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUtm-mcwqSUdHNQHgCM9RszAeX3t77A7OhqYSCPJemtw&usqp=CAU&ec=48600113" alt="" />
+      </div>
+      <Link to={'/product/:id'} className="cartitem-name">
+        <p>product 1</p>
+      </Link>
+      <p className='cartitem-price'>
+$499.50
+      </p>
+      <select name="" className='cartitem-select'>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <button className='cartitem-deletebtn'>
+      <AiFillDelete/>
+      </button>
     </div>
   )
 }
 
 export default CartPage
-
-
-const Cartdata = [
-    {
-        img:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQoq0tC6TwHhz1iatGxD9HBiU4dVYRStmGNf9A1RMn3UTdbdnuq47y71Wp1mFozGy6b5XarNysIqQYXjthhKTOx-tx0TMoMffCaTQagp4OUrNVNZ7yP06GJTw&usqp=CAc",
-        price:250,
-        name:"denim shirt",
-        size:"xl",
-        quantity:1,
-        itemLeft:4
-    },
-    {
-        img:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQoq0tC6TwHhz1iatGxD9HBiU4dVYRStmGNf9A1RMn3UTdbdnuq47y71Wp1mFozGy6b5XarNysIqQYXjthhKTOx-tx0TMoMffCaTQagp4OUrNVNZ7yP06GJTw&usqp=CAc",
-        price:250,
-        name:"denim shirt",
-        size:"xl",
-        quantity:1,
-        itemLeft:4
-    },
-    {
-        img:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQoq0tC6TwHhz1iatGxD9HBiU4dVYRStmGNf9A1RMn3UTdbdnuq47y71Wp1mFozGy6b5XarNysIqQYXjthhKTOx-tx0TMoMffCaTQagp4OUrNVNZ7yP06GJTw&usqp=CAc",
-        price:250,
-        name:"denim shirt",
-        size:"xl",
-        quantity:1,
-        itemLeft:4
-    },
-    {
-        img:"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQoq0tC6TwHhz1iatGxD9HBiU4dVYRStmGNf9A1RMn3UTdbdnuq47y71Wp1mFozGy6b5XarNysIqQYXjthhKTOx-tx0TMoMffCaTQagp4OUrNVNZ7yP06GJTw&usqp=CAc",
-        price:250,
-        name:"denim shirt",
-        size:"xl",
-        quantity:1,
-        itemLeft:4
-    },
-]
