@@ -1,57 +1,24 @@
 import { Box, Checkbox, Stack, Text } from "@chakra-ui/react";
+import QueryString from "qs";
 import React, { useEffect, useState } from "react";
 
-const SideBar = ({ filterdata, setfilterdata }) => {
-
-  let [brandState, setbrandState] = useState({
-    "van-heusen": false,
-    "levis": false,
-    "yepme": false,
-    "mufti": false,
-    "zara": false,
-  });
-
-  let handleBrand = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, brand: `${e.target.name}` })
-      : setfilterdata({ ...filterdata, brand: "" });
-
-    //  e.target.checked ?  setbrandState({  ...`${brandState}`, `${e.target.name}` : true }) : 
+const SideBar = ({ filter, setFilter }) => {
+  
+  const handleCheckboxChange = (event) => {
+    const { name, value, checked } = event.target;
+    setFilter(prevFilter => ({
+      ...prevFilter,
+      [name]: {
+        ...prevFilter[name],
+        [value]: checked,
+      },
+    }));
   };
+  
+console.log(filter, "filterrrr objecttttt")
 
-  let handleOccassion = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, occassion: `${e.target.value}` })
-      : setfilterdata({ ...filterdata, occassion: "" });
-  };
 
-  let handleColor = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, color: `${e.target.value}` })
-      : setfilterdata({ ...filterdata, color: "" });
-  };
 
-  let handleMaterial = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, material: `${e.target.value}` })
-      : setfilterdata({ ...filterdata, material: "" });
-  };
-
-  let handleSize = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, size: `${e.target.value}` })
-      : setfilterdata({ ...filterdata, size: "" });
-  };
-
-  let handlePrice = (e) => {
-    e.target.checked
-      ? setfilterdata({ ...filterdata, price: `${e.target.value}` })
-      : setfilterdata({ ...filterdata, price: "" });
-  };
-
-  useEffect(() => {}, [filterdata]);
-
-  console.log(filterdata, "branddddd");
 
   return (
     <Stack>
@@ -61,7 +28,7 @@ const SideBar = ({ filterdata, setfilterdata }) => {
       </Text>
 
       {/* //size checkboxes  */}
-      <Box
+      {/* <Box
         boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         w={"90%"}
         m="auto"
@@ -127,11 +94,11 @@ const SideBar = ({ filterdata, setfilterdata }) => {
             </Box>
           </Box>
         </Box>
-      </Box>
+      </Box> */}
 
       {/* price checkbox  */}
 
-      <Box
+      {/* <Box
         boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         w={"90%"}
         m="auto"
@@ -191,7 +158,7 @@ const SideBar = ({ filterdata, setfilterdata }) => {
             </Box>
           </Box>
         </Box>
-      </Box>
+      </Box> */}
 
       {/* colour checkbox  */}
 
@@ -211,50 +178,55 @@ const SideBar = ({ filterdata, setfilterdata }) => {
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme={"blackAlpha"}
                 value="black"
-                onChange={handleColor}
+                checked={filter.color.black}
+                onChange={handleCheckboxChange}
               />
               <label for="black">Black</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
-                colorScheme={"gray"}
-                value="gray"
-                onChange={handleColor}
+                name="color"
+                colorScheme={"blackAlpha"}
+                value="grey"
+                checked={filter.color.grey}
+                onChange={handleCheckboxChange}
               />
-              <label for="gray">Gray</label>
+              <label for="grey">Grey</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="red"
                 value="red"
-                onChange={handleColor}
+                checked={filter.color.red}
+                onChange={handleCheckboxChange}
               />
               <label for="red">Red</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="yellow"
                 value="yellow"
-                onChange={handleColor}
+                checked={filter.color.yellow}
+                onChange={handleCheckboxChange}
               />
               <label for="yellow">Yellow</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="blue"
                 value="blue"
-                onChange={handleColor}
+                checked={filter.color.blue}
+                onChange={handleCheckboxChange}
               />
               <label for="blue">Blue</label>
             </Box>
@@ -264,19 +236,21 @@ const SideBar = ({ filterdata, setfilterdata }) => {
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme={"green"}
                 value="green"
-                onChange={handleColor}
+                checked={filter.color.green}
+                onChange={handleCheckboxChange}
               />
               <label for="green">green</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme={"orange"}
-                onChange={handleColor}
+                checked={filter.color.orange}
+                onChange={handleCheckboxChange}
                 value="orange"
               />
               <label for="orange">Orange</label>
@@ -284,29 +258,32 @@ const SideBar = ({ filterdata, setfilterdata }) => {
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="teal"
                 value="teal"
-                onChange={handleColor}
+                checked={filter.color.teal}
+                onChange={handleCheckboxChange}
               />
               <label for="teal">Teal</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="pink"
                 value="pink"
-                onChange={handleColor}
+                checked={filter.color.pink}
+                onChange={handleCheckboxChange}
               />
               <label for="pink">Pink</label>
             </Box>
             <Box>
               <Checkbox
                 mr={3}
-                name="colours"
+                name="color"
                 colorScheme="purple"
-                onChange={handleColor}
+                checked={filter.color.purple}
+                onChange={handleCheckboxChange}
                 value="purple"
               />
               <label for="purple">Purple</label>
@@ -335,7 +312,8 @@ const SideBar = ({ filterdata, setfilterdata }) => {
                 mr={3}
                 name="material"
                 value="cotton"
-                onChange={handleMaterial}
+                checked={filter.material.cotton}
+                onChange={handleCheckboxChange}
               />
               <label for="cotton">Cotton</label>
             </Box>
@@ -344,7 +322,8 @@ const SideBar = ({ filterdata, setfilterdata }) => {
                 mr={3}
                 name="material"
                 value="rayon"
-                onChange={handleMaterial}
+                checked={filter.material.rayon}
+                onChange={handleCheckboxChange}
               />
               <label for="rayon">Rayon</label>
             </Box>
@@ -353,7 +332,8 @@ const SideBar = ({ filterdata, setfilterdata }) => {
                 mr={3}
                 name="material"
                 value="polyester"
-                onChange={handleMaterial}
+                checked={filter.material.polyester}
+                onChange={handleCheckboxChange}
               />
               <label for="polyester">Polyester</label>
             </Box>
@@ -362,7 +342,8 @@ const SideBar = ({ filterdata, setfilterdata }) => {
                 mr={3}
                 name="material"
                 value="naylon"
-                onChange={handleMaterial}
+                checked={filter.material.naylon}
+                onChange={handleCheckboxChange}
               />
               <label for="naylon">Naylon</label>
             </Box>
@@ -380,46 +361,50 @@ const SideBar = ({ filterdata, setfilterdata }) => {
         pb={5}
       >
         <Text textAlign={"left"} fontWeight="bold" fontSize={"22px"} my={3}>
-          Occassion{" "}
+          Occasion{" "}
         </Text>
 
         <Box>
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox
-                mr={3}
-                name="occassion"
-                value="casual"
-                onChange={handleOccassion}
-              />
+            <input
+            type="checkbox"
+            name="occasion"
+            value="casual"
+            checked={filter.occasion.casual}
+            onChange={handleCheckboxChange}
+          />
               <label for="casual">Casual</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="occassion"
-                value="party"
-                onChange={handleOccassion}
-              />
+            <input
+            type="checkbox"
+            name="occasion"
+            value="party"
+            checked={filter.occasion.party}
+            onChange={handleCheckboxChange}
+          />
               <label for="party">Party</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="occassion"
-                value="formal"
-                onChange={handleOccassion}
-              />
+            <input
+            type="checkbox"
+            name="occasion"
+            value="formal"
+            checked={filter.occasion.formal}
+            onChange={handleCheckboxChange}
+          />
               <label for="formal">Formal</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="occassion"
-                value="semi-formal"
-                onChange={handleOccassion}
-              />
-              <label for="semi-formal">Semi Formal</label>
+            <input
+            type="checkbox"
+            name="occasion"
+            value="semiformal"
+            checked={filter.occasion.semiformal}
+            onChange={handleCheckboxChange}
+          />
+              <label for="semiformal">Semi Formal</label>
             </Box>
           </Box>
         </Box>
@@ -442,52 +427,52 @@ const SideBar = ({ filterdata, setfilterdata }) => {
         <Box>
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox
-                mr={3}
-                // name="brand"
-                checked={brandState["van-heusen"] }
-                name="van-heusen"
-                onChange={handleBrand}
+              <input
+                type="checkbox"
+                name="brand"
+                value="vanheusen"
+                checked={filter.brand.vanheusen}
+                onChange={handleCheckboxChange}
               />
               <label for="van-heusen">van-heusen</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                // name="brand"
-                checked={brandState.levis}
-                name="levis"
-                onChange={handleBrand}
+              <input
+                type="checkbox"
+                name="brand"
+                value="levis"
+                checked={filter.brand.levis}
+                onChange={handleCheckboxChange}
               />
               <label for="levis">levis</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                // name="brand"
-                checked={brandState.yepme}
-                name="yepme"
-                onChange={handleBrand}
+              <input
+                type="checkbox"
+                name="brand"
+                value="yepme"
+                checked={filter.brand.yepme}
+                onChange={handleCheckboxChange}
               />
               <label for="yepme">yepme</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                // name="brand"
-                checked={brandState.mufti}
-                name="mufti"
-                onChange={handleBrand}
+              <input
+                type="checkbox"
+                name="brand"
+                value="mufti"
+                checked={filter.brand.mufti}
+                onChange={handleCheckboxChange}
               />
               <label for="mufti">mufti</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                // name="brand"
-                checked={brandState.zara}
-                name="zara"
-                onChange={handleBrand}
+              <input
+                type="checkbox"
+                name="brand"
+                value="zara"
+                checked={filter.brand.zara}
+                onChange={handleCheckboxChange}
               />
               <label for="zara">zara</label>
             </Box>
