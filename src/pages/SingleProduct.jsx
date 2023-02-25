@@ -101,6 +101,7 @@ const SingleProduct = () => {
         description: res.status.message,
         status: 'success',
         duration: 2000,
+        position: "top",
         isClosable: true,
       })
 
@@ -109,6 +110,7 @@ const SingleProduct = () => {
         title: 'Failed to add in Cart',
         description: res.status.message,
         status: 'error',
+        position:"top",
         duration: 2000,
         isClosable: true,
       })
