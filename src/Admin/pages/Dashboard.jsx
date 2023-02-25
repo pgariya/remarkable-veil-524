@@ -1,4 +1,9 @@
 import { Badge, Box, Grid, Heading } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { BASE_URL } from "../../constants/config";
+import qs from "qs"
 import {
   BLACK,
   CYAN,
@@ -11,6 +16,7 @@ import {
   R2,
   R3,
   R4,
+  TOP,
   WHITE,
   X2LARGE,
   YELLOW,
@@ -18,8 +24,231 @@ import {
 } from "../../constants/typography";
 import { StatsBox } from "../components/StatsBox.jsx";
 import "./style.css";
+import { KURTIS, PARTY_WEAR, SHIRT } from "../../constants/constants";
 
-export default function Dashboard() {
+async function getData(query,endpoint,token){
+
+  let res = await axios({
+    url:BASE_URL+`/stat/${endpoint}?${qs.stringify(query)}`,
+    method:"get",
+    headers:{
+      Authorization:token
+    }
+  })
+  return res.data
+
+
+}
+
+export default function Dashboard({user}) {
+
+  let {token} = useSelector((state)=>state.authReducer)
+  const [totalOrder,setTotalOrder] = useState(0)
+  const [pendingOrders,setPendingOrders] = useState(0)
+  const [totalEarning,seTotalEarnings] = useState(0)
+  const [totalProduct,setTotalProduct] = useState(0)
+  const [outofstcok,setOutOfStock] = useState(0)
+  const [top,setTop] = useState(0)
+  const [shirt,setShrit] = useState(0)
+  const [kurtis,setKurtis] = useState(0)
+  const [pw,setPw] = useState(0)
+  // console.log(user)
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"totalorder"},"order",token)
+      
+      if(data.status==1){
+
+        setTotalOrder(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,status1:"ordered",status2:"dispatched",request:"pendingorder"},"order",token)
+      
+      if(data.status==1){
+
+        setPendingOrders(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"totalearning"},"order",token)
+      
+      if(data.status==1){
+
+        seTotalEarnings(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"totalproduct"},"product",token)
+      
+      if(data.status==1){
+
+        setTotalProduct(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"outofstock"},"product",token)
+      
+      if(data.status==1){
+
+        setOutOfStock(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:SHIRT},"product",token)
+      
+      if(data.status==1){
+
+        setShrit(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:TOP},"product",token)
+      
+      if(data.status==1){
+
+        setTop(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:KURTIS},"product",token)
+      
+      if(data.status==1){
+
+        setKurtis(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:PARTY_WEAR},"product",token)
+      
+      if(data.status==1){
+
+        setPw(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  
+  
+
+
   return (
     <Box w={FILL_PARENT}>
       <Badge colorScheme={YELLOW} fontSize={X2LARGE} m={8}>
@@ -38,7 +267,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/374750/orders.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={totalOrder}
         />
 
         <StatsBox
@@ -49,7 +278,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/374750/orders.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={pendingOrders}
         />
 
         <StatsBox
@@ -60,7 +289,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/500409/money.svg"}
           classname={"lush"}
           bcolor={GREEN}
-          count={37}
+          count={totalEarning}
         />
       </Grid>
 
@@ -76,7 +305,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/498969/menu2.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={totalProduct}
         />
 
         <StatsBox
@@ -87,7 +316,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/489639/unavailable.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={outofstcok}
         />
       </Grid>
       <Heading textAlign={LEFT} color={BLACK} m={8}>
@@ -102,7 +331,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/506321/shirt.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={shirt}
         />
 
         <StatsBox
@@ -113,7 +342,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/395689/women-shirt-clothes-clothing-fashion-apparel.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={top}
         />
 
         <StatsBox
@@ -124,7 +353,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/108239/women-dress.svg"}
           classname={"lush"}
           bcolor={GREEN}
-          count={37}
+          count={kurtis}
         />
 
         <StatsBox
@@ -135,7 +364,7 @@ export default function Dashboard() {
           image={"https://www.svgrepo.com/show/491057/party.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={37}
+          count={pw}
         />
       </Grid>
     </Box>

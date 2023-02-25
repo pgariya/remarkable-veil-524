@@ -79,19 +79,24 @@ export default class SlideShow extends Component {
       <Box my={5} w={{ base: "95%", md: "70%" }} h="90%"  m={AUTO}>
         <Slider ref={(slider) => (this.slider = slider)} {...settings}>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg" />
+            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg"  transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_winterwear_30012018.jpg" />
+            <Image src="http://staticawsy.yepme.com/images/women_winterwear_30012018.jpg" transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/high_performance_shoes.jpg" />
+            <Image src="http://staticawsy.yepme.com/images/high_performance_shoes.jpg" transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/menwomen_ethinic_wear_9022018.jpg" />
+            <Image src="http://staticawsy.yepme.com/images/menwomen_ethinic_wear_9022018.jpg" transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg" />
+            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg" transition={"transform 2s"}
+            _hover={{ transform: "scale(1.1)" }}/>
           </Box>
         </Slider>
       </Box>

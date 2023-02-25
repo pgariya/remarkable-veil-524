@@ -3,7 +3,7 @@ import { BOLD, CENTER, FILL_PARENT, ORANGE } from "../../../constants/typography
 import {MdArrowForwardIos,MdArrowBackIosNew} from "react-icons/md"
 
 export default function Paginantion({page,setPage,totalPage,divide}){
-    console.log(totalPage,page)
+    // console.log(totalPage,page)
 
     return <HStack mt={6}  w={FILL_PARENT} justify={CENTER}>
 

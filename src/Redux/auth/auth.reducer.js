@@ -5,7 +5,7 @@ import {
   USER_LOGIN_SUCCESS,
 } from "./auth.type";
 
-console.log(localStorage.getItem("token"));
+// console.log(localStorage.getItem("token"));
 const initalState = {
   isAuth: sessionStorage.getItem("isAuth") || false,
   token: sessionStorage.getItem("token") || "",

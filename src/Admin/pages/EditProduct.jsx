@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../components/Loading";
 import { BASE_URL } from "../../constants/config";
-import { SHIRT } from "../../constants/constants";
+import { KURTIS, PARTY_WEAR, SHIRT } from "../../constants/constants";
 import { AUTO, CENTER, FILL_PARENT, RIGHT, TOP } from "../../constants/typography";
 import {
     Table,
@@ -28,6 +28,7 @@ export default function EditProduct(){
     const [loading,setLoading] = useState(false)
     const [page,setPage] = useState(0)
     const [totalPage,setTotalPage] = useState(0)
+    const [refresh,setRefresh] =useState(false)
 
 
     useEffect(()=>{
@@ -60,7 +61,7 @@ export default function EditProduct(){
 
 
 
-    },[cat,page])
+    },[cat,page,refresh])
 
     useEffect(()=>{
         setPage(0)
@@ -75,6 +76,8 @@ export default function EditProduct(){
                 <option value="">Select Category</option>
                 <option value={SHIRT}>Shirt</option>
                 <option value={TOP}>Top</option>
+                <option value={KURTIS}>Kurtis</option>
+                <option value={PARTY_WEAR}>Party Wear</option>
 
             </Select>
 
@@ -96,14 +99,14 @@ export default function EditProduct(){
     </Thead>
     <Tbody>
       
-      {product?.map((el)=><ProductItem {...el} />)}
+      {product?.map((el)=><ProductItem key={el._id} setRefresh={setRefresh} {...el} />)}
       
     </Tbody>
     
   </Table>
 </TableContainer>
 
-<Paginantion page={page} setPage={setPage} divide={5} totalPage={totalPage} />
+<Paginantion key={page} page={page} setPage={setPage} divide={5} totalPage={totalPage} />
         
        
     </Box>
