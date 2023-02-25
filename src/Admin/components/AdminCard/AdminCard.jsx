@@ -10,7 +10,7 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 import { ADMIN, DEACTIVATE, SUPER_ADMIN, USER } from "../../../constants/constants";
-import { FILL_PARENT, GREEN, LARGE, SB, SMALL, YELLOW } from "../../../constants/typography";
+import { FILL_PARENT, GREEN, LARGE, MEDIUM, SB, SMALL, YELLOW } from "../../../constants/typography";
 import {FaAngleDown} from "react-icons/fa"
 export default function AdminCard({ name, email,setRole,role }) {
   return (
@@ -23,8 +23,8 @@ export default function AdminCard({ name, email,setRole,role }) {
             <Text>{email}</Text>
           </HStack>
           <Menu>
-            <MenuButton as={Button} rightIcon={<FaAngleDown />}>
-              Change Role
+            <MenuButton fontSize={{base:SMALL,sm:MEDIUM}} as={Button} rightIcon={<FaAngleDown />}>
+              Role
             </MenuButton>
             <MenuList>
               <MenuItem display={role==USER?"none":"block"} onClick={()=>{

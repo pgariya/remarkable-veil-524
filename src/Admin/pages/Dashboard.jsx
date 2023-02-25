@@ -16,6 +16,7 @@ import {
   R2,
   R3,
   R4,
+  TOP,
   WHITE,
   X2LARGE,
   YELLOW,
@@ -23,6 +24,7 @@ import {
 } from "../../constants/typography";
 import { StatsBox } from "../components/StatsBox.jsx";
 import "./style.css";
+import { KURTIS, PARTY_WEAR, SHIRT } from "../../constants/constants";
 
 async function getData(query,endpoint,token){
 
@@ -45,13 +47,19 @@ export default function Dashboard({user}) {
   const [pendingOrders,setPendingOrders] = useState(0)
   const [totalEarning,seTotalEarnings] = useState(0)
   const [totalProduct,setTotalProduct] = useState(0)
+  const [outofstcok,setOutOfStock] = useState(0)
+  const [top,setTop] = useState(0)
+  const [shirt,setShrit] = useState(0)
+  const [kurtis,setKurtis] = useState(0)
+  const [pw,setPw] = useState(0)
+  // console.log(user)
 
   useEffect(()=>{
 
     let myData = async()=>{
 
-      let data = await getData({adminId:"admin"+user.userId,request:"totalorder"},"order",token)
-      console.log(data)
+      let data = await getData({adminId:user.admin,request:"totalorder"},"order",token)
+      
       if(data.status==1){
 
         setTotalOrder(data.count)
@@ -71,8 +79,8 @@ export default function Dashboard({user}) {
 
     let myData = async()=>{
 
-      let data = await getData({order:"admin"+user.userId,status1:"ordered",status2:"dispatched",request:"pendingorder"},"order",token)
-      console.log(data)
+      let data = await getData({adminId:user.admin,status1:"ordered",status2:"dispatched",request:"pendingorder"},"order",token)
+      
       if(data.status==1){
 
         setPendingOrders(data.count)
@@ -93,8 +101,8 @@ export default function Dashboard({user}) {
 
     let myData = async()=>{
 
-      let data = await getData({order:"admin"+user.userId,request:"totalearning"},"order",token)
-      console.log(data)
+      let data = await getData({adminId:user.admin,request:"totalearning"},"order",token)
+      
       if(data.status==1){
 
         seTotalEarnings(data.count)
@@ -116,11 +124,116 @@ export default function Dashboard({user}) {
 
     let myData = async()=>{
 
-      let data = await getData({order:"admin"+user.userId,request:"totalproduct"},"product",token)
-      console.log(data)
+      let data = await getData({adminId:user.admin,request:"totalproduct"},"product",token)
+      
       if(data.status==1){
 
         setTotalProduct(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"outofstock"},"product",token)
+      
+      if(data.status==1){
+
+        setOutOfStock(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:SHIRT},"product",token)
+      
+      if(data.status==1){
+
+        setShrit(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:TOP},"product",token)
+      
+      if(data.status==1){
+
+        setTop(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:KURTIS},"product",token)
+      
+      if(data.status==1){
+
+        setKurtis(data.count)
+
+      }else{
+        return
+      }
+
+
+    }
+
+    myData()
+
+  },[])
+  useEffect(()=>{
+
+    let myData = async()=>{
+
+      let data = await getData({adminId:user.admin,request:"categorycount",category:PARTY_WEAR},"product",token)
+      
+      if(data.status==1){
+
+        setPw(data.count)
 
       }else{
         return
@@ -203,7 +316,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/489639/unavailable.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={outofstcok}
         />
       </Grid>
       <Heading textAlign={LEFT} color={BLACK} m={8}>
@@ -218,7 +331,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/506321/shirt.svg"}
           classname={YELLOW}
           bcolor={YELLOW}
-          count={37}
+          count={shirt}
         />
 
         <StatsBox
@@ -229,7 +342,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/395689/women-shirt-clothes-clothing-fashion-apparel.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={13}
+          count={top}
         />
 
         <StatsBox
@@ -240,7 +353,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/108239/women-dress.svg"}
           classname={"lush"}
           bcolor={GREEN}
-          count={37}
+          count={kurtis}
         />
 
         <StatsBox
@@ -251,7 +364,7 @@ export default function Dashboard({user}) {
           image={"https://www.svgrepo.com/show/491057/party.svg"}
           classname={CYAN}
           bcolor={CYAN}
-          count={37}
+          count={pw}
         />
       </Grid>
     </Box>

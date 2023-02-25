@@ -47,7 +47,7 @@ export default function ManageAdmins({userRole}){
                 Authorization:token
             }
         })
-        console.log(res)
+        // console.log(res)
         if(res.data.status==1){
 
             if(newRole==DELETE){
@@ -121,7 +121,7 @@ export default function ManageAdmins({userRole}){
                     }
                 })
 
-                console.log(res)
+                // console.log(res)
 
                 if(res.data.status==1){
                 setAdmins(res.data.data)
@@ -153,9 +153,9 @@ export default function ManageAdmins({userRole}){
 
                 <Badge m={"8px"} fontSize={X2LARGE} colorScheme={"orange"}>PROMOTE USER</Badge>
                 <HStack  gap={2}>
-                    <Input placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)}></Input>
+                    <Input placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}></Input>
                     <Select value={role} onChange={(e)=>setRole(e.target.value)}>
-                        <option value={""}>Select Role</option>
+                        <option value={""}>Role</option>
                         <option value={USER}>User</option>
                         <option value={ADMIN}>Admin</option>
                         <option value={DEACTIVATE}>Deactivate</option>
@@ -207,7 +207,7 @@ export default function ManageAdmins({userRole}){
 
         </Flex>
         <VStack>
-            {admins?.map(({name,email,role})=><AdminCard email={email} name={name} role={role} setRole={ChangeRole} />)}
+            {admins?.map(({name,email,role,_id})=><AdminCard key={_id} email={email} name={name} role={role} setRole={ChangeRole} />)}
         </VStack>
 
         <Paginantion setPage={setPage} totalPage={totalPage} divide={5} page={page}></Paginantion>

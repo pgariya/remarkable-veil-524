@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AdminPage from "../Admin/pages/AdminPage";
+import CartPage from "../components/CartPage/CartPage";
+import Cartscreen from "../components/CartPage/Cartscreen";
 import Payment from "../components/CheckoutPage/Payment";
 import Login from "../components/LoginPage/LoginPage";
 import OTP from "../components/LoginPage/OTP";
@@ -26,6 +28,8 @@ export default function AllRoutes(){
         <Route path="/404" element={<Restricated404 />}></Route>
         <Route path="*" element={<Error404 />}></Route>
         <Route path="/products/:id" element={<SingleProduct/>}></Route>
+        <Route path="/cart" element={<Cartscreen/>}></Route>
+
 
     </Routes>
 }
