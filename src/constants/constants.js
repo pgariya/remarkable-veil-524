@@ -10,3 +10,9 @@ export const TOP = "top"
 export const KURTIS = "Kurtis"
 export const PARTY_WEAR = "party-wear"
 export const RUPEES_SYMBOL = "₹"
+
+//status
+export const ORDERED ="ordered"
+export const DELIVERED ="delivered"
+export const DISPATCHED ="dispatched"
+export const CANCELLED ="cancelled"
