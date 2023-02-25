@@ -16,6 +16,7 @@ import { BsFillCartCheckFill, BsFillStarFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { Loading } from "../components/Loading";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
 
@@ -31,6 +32,7 @@ const SingleProduct = () => {
   let [arraydata, setarraydata] = useState([]);
   const [presnet,setPresent]=useState(false)
   const toast = useToast()
+  const [cartLoading,setCartLoading] = useState(false)
 
   let getmydata = async (id) => {
     try {
@@ -55,7 +57,7 @@ const SingleProduct = () => {
         }
       })
 
-      console.log(res)
+      // console.log(res)/
 
 
       if(res.data.status==1){
@@ -80,8 +82,9 @@ const SingleProduct = () => {
 
 
   const handleAdd = async()=>{
-
+    setCartLoading(true)
     let cartItem = [{...prodata,quantity:1,pid:prodata._id,sizes:"M"}]
+    delete cartItem[0]["_id"] //delete previous id
     console.log(prodata._id)
     console.log(cartItem,"cart data")
     let res =await axios({
@@ -96,6 +99,8 @@ const SingleProduct = () => {
   console.log(res)
     if(res.data.status==1){
       setPresent(true)
+      setCartLoading(false)
+
       toast({
         title: 'Item added in cart',
         description: res.status.message,
@@ -105,6 +110,7 @@ const SingleProduct = () => {
       })
 
     }else{
+      setCartLoading(false)
       toast({
         title: 'Failed to add in Cart',
         description: res.status.message,
@@ -247,6 +253,8 @@ const SingleProduct = () => {
           <Button
             bg={"blue.500"}
             color="white"
+            isDisabled={cartLoading}
+            isLoading={cartLoading}
             fontSize={"20px"}
             w={{ base: "90%", md: "60%" }}
             transition={"transform 2s"}
