@@ -6,7 +6,7 @@ import { Loading } from "../../components/Loading";
 import { BASE_URL } from "../../constants/config";
 import { ADMIN, DEACTIVATE, DELETE, SUPER_ADMIN, USER } from "../../constants/constants";
 import { CENTER, FILL_PARENT, LARGE, LEFT, MEDIUM, SB, X2LARGE, YELLOW } from "../../constants/typography";
-import { AdminCard } from "../components/AdminCard";
+import  AdminCard  from "../components/AdminCard/AdminCard";
 import { CardAvatar } from "../components/Avatar";
 import {FaAngleDown} from "react-icons/fa"
 
