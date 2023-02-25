@@ -9,6 +9,7 @@ import Signup from "../components/SignupPage/signup";
 import Error404 from "../pages/Error404";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/Products";
+import Profile from "../pages/Profile";
 import Restricated404 from "../pages/Restricted404";
 import SingleProduct from "../pages/SingleProduct";
 import PrivateRoute from "./PrivateRoute";
@@ -27,9 +28,9 @@ export default function AllRoutes(){
         <Route path="/admin" element={<PrivateRoute><AdminPage /></PrivateRoute>}></Route>
         <Route path="/404" element={<Restricated404 />}></Route>
         <Route path="*" element={<Error404 />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/products/:id" element={<SingleProduct/>}></Route>
         <Route path="/cart" element={<Cartscreen/>}></Route>
-
-
+        
     </Routes>
 }
