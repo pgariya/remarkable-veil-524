@@ -30,36 +30,58 @@ const ProductPage = () => {
   const [page, setPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
 
-  let [filterdata, setfilterdata] = useState({
-    brand: "",
-    price: "",
-    occassion: "",
-    material: "",
-    color: "",
-    size: "",
+  const [filter, setFilter] = useState({
+    price: {
+      low: false,
+      medium: false,
+      high: false,
+    },
+    color: {
+      black: false,
+      grey: false,
+      red: false,
+      yellow: false,
+      orange: false,
+      teal: false,
+      pink: false,
+      purple: false,
+      blue: false,
+      green: false
+    },
+    material: {
+      cotton: false,
+      rayon: false,
+      polyester: false,
+      naylon: false
+    },
+    occasion: {
+      casual: false,
+      party: false,
+      formal: false,
+      semiformal: false
+    },
+    brand: {
+      levis: false,
+      vanheusen: false,
+      yepme: false,
+      zara: false,
+    },
   });
 
   const search = useLocation().search;
   const catg = new URLSearchParams(search).get("category");
-
-  console.log(filterdata, "dta object haaaa");
-
-  for (let x in filterdata) {
-    if (filterdata[x] == "") {
-      delete filterdata[x];
-    }
-  }
-  let myQuery = ConvertToQuery(filterdata);
-  console.log(filterdata, "dta object modified");
-  console.log(myQuery);
+  
 
   console.log(catg);
+
+
+  console.log(filter, "ya main change krnnnna haaa")
 
   let getdata = async (page) => {
     try {
       setisloading(true);
       let res = await axios.get(
-        `${BASE_URL}/product?category=${catg}&page=${page}${myQuery}`
+        `${BASE_URL}/product?category=${catg}&page=${page}`
       );
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
@@ -141,8 +163,8 @@ const ProductPage = () => {
           // border="5px solid"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         >
-          {console.log(filterdata, "filterrrr data .. ha yaaa")}
-          <SideBar filterdata={filterdata} setfilterdata={setfilterdata} />
+          {console.log(filter, "filterrrr data .. ha yaaa")}
+          <SideBar filter={filter} setFilter={setFilter} />
         </Box>
 
         <Box display={{ base: "block", lg: "none" }} pt={5}>
