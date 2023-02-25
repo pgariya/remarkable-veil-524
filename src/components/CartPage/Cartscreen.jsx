@@ -4,7 +4,7 @@ import CartPage from './CartPage'
 import { Text } from '@chakra-ui/react'
 const Cartscreen = () => {
   return (
-    <div className='cartscreen'>
+    <div style={{marginTop:"200px"}} className='cartscreen'>
       <div className="cartscreen_left">
         <Text fontSize={'3xl'} fontWeight='bold'>
             Shopping Cart
