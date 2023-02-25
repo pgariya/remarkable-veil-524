@@ -18,12 +18,20 @@ import {
   Stack,
   Radio,
   useToast,
+  VStack,
+  HStack,
 } from "@chakra-ui/react";
 // import styles from "./Checkout.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FILL_PARENT, GREEN, RED, START } from "../../constants/typography";
+import { RUPEES_SYMBOL } from "../../constants/constants";
+import getFutureDate from "../../scripts/futureDate";
+import axios from "axios";
+import { BASE_URL } from "../../constants/config";
+import { Loading } from "../Loading";
 
-const Payment = () => {
+const Payment = ({cart,cartTotal,totalSavings,token}) => {
   const [value, setValue] = React.useState("Cash on delivery");
 //   const {cart, isLoading} = useSelector((store)=>{return {
 //     cart: store.CartReducer.cart,   
@@ -36,11 +44,12 @@ const Payment = () => {
 //   const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
   const [formData, setFormData] = useState([]);
+  const [loading,setLoading] = useState(false)
   console.log(formData);
   const toast = useToast();
     const navigate= useNavigate()
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     if (
       name == "" ||
       address == "" ||
@@ -54,27 +63,66 @@ const Payment = () => {
         isClosable: true,
       });
     } else {
-      const billingData = {
-        name: name,
-        address: address,
-        pinCode: pinCode,
-        phone: phone,
-        textArea: textArea,
-      };
-      
-      setFormData(billingData);
+      setLoading(true)
+      let newCartData = cart?.map((el)=>{
+        el.address=name+","+address+","+pinCode+","+phone
+        el.totalDiscountPrice=0
+        delete el["_id"]
+        return el
+
+      })
+
+      console.log(newCartData)
+
+      let res= await axios({
+        method:"post",
+        url:BASE_URL+"/order",
+        headers:{
+          Authorization:token,
+        },
+        data:newCartData
+        
+      })
+
+      if(res.data.status==1){
+        setLoading(false)
+        
       toast({
         size: "500",
         position: "top-center",
         title: "Order Placed.",
         description: "Thank you for shopping with us.",
         status: "success",
-        duration: 9000,
+        duration: 2000,
         isClosable: true,
       });
+
      navigate('/')
+
+
+      }else{
+        setLoading(false)
+
+        toast({
+          size: "500",
+          position: "top-center",
+          title: "Order not placed",
+          description: "Please try again later",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+
+      }
+
+
+
+
+     
     }
   };
+
+  if(loading) return <Loading />
 
   return (
     <Box  width={{base:'100%', lg:'90%'}} margin={'auto'}>
@@ -209,82 +257,26 @@ const Payment = () => {
               <Heading textAlign={"start"} size={"md"}>
                 Your orders
               </Heading>
-              <Box
-                border={"1px solid"}
-                borderColor="gray.300"
-                padding="0 2rem"
-                m={"1.5rem 0"}
-                color="#e40046"
-              >
-                <Flex
-                  justifyContent={"space-between"}
-                  p="1rem 2rem"
-                  borderBottom={"1px solid"}
-                  borderColor="gray.300"
-                >
-                  <Text>Product</Text>
-                  
-                  {/* <Text>Subtotal</Text> */}
-                </Flex>
-                {/* <Box>
-                  {Data.length > 0 &&
-                    Data.map((item) => (
-                      <Box p="1rem 0" key={item.id} textAlign="start">
-                        <Flex
-                          justifyContent={"space-between"}
-                          alignItems="center"
-                          gap={"1rem"}
-                        >
-                          <Box width={"80%"}>
-                            <Box mb={".5rem"}>
-                              {item.title} x {item.quantity}
-                            </Box>
-                            <Box>Size: {item.size}</Box>
-                          </Box>
-                          <Box width={"20%"}>₹{item.price}</Box>
-                        </Flex>
-                      </Box>
-                    ))}
-                </Box> */}
+              <VStack  w={FILL_PARENT} border={"1px solid gray"} padding={2}>
+            <HStack gap={2}>
+              <p>Subtotal({cart.length}) items</p>
+              <p>:</p>
+              <p style={{ color: GREEN }}>{RUPEES_SYMBOL + " " + cartTotal}</p>
+            </HStack>
+            <HStack gap={2}>
+              <p>Total Savings</p>
+              <p>:</p>
+              <p style={{ color: RED }}>
+                {"-" + RUPEES_SYMBOL + " " + totalSavings}
+              </p>
+            </HStack>
+            <HStack gap={2}>
+              <p>Deliver on</p>
+              <p>:</p>
+              <p style={{ color: GREEN }}>{getFutureDate(Date.now(), 3)}</p>
+            </HStack>
+          </VStack>
 
-                <Flex
-                  borderBottom={"1px solid"}
-                  borderColor="gray.300"
-                  justifyContent={"space-between"}
-                  mb=".5rem"
-                  pb={".5rem"}
-                >
-                  <Box as="b" fontSize="sm">
-                  {/* <Text>Total Cart Amount:₹ {cart.length>0? cart.reduce((acc,el,index)=>{
-            return acc +el.price
-        },0)
-        : 0 }</Text> */}
-                  </Box>
-                  
-                </Flex>
-                <Flex
-                  borderBottom={"1px solid"}
-                  borderColor="gray.300"
-                  justifyContent={"space-between"}
-                  mb=".5rem"
-                  pb={".5rem"}
-                >
-                  {/* <Box as="b" fontSize="lg">
-                    DISCOUNT (10% Apply)
-                  </Box> */}
-                  {/* <Box as="b" fontSize="lg">
-                    -₹
-                  </Box> */}
-                </Flex>
-                <Flex justifyContent={"space-between"} mb="30px">
-                  {/* <Box as="b" fontSize="lg">
-                    Total
-                  </Box> */}
-                  {/* <Box as="b" fontSize="lg">
-                    ₹
-                  </Box> */}
-                </Flex>
-              </Box>
               <Box
                 border={"1px solid"}
                 borderColor="gray.300"
@@ -360,6 +352,7 @@ const Payment = () => {
                   bgColor="#ed8936"
                   color={"white"}
                   size="lg"
+                  isDisabled={loading}
                   width={"100%"}
                   borderRadius={"none"}
                   _hover="none"
