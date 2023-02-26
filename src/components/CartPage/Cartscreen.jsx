@@ -162,6 +162,12 @@ const Cartscreen = () => {
                       totalSavings={totalSavings}
                     />
                   </ModalBody>
+                  <ModalFooter>
+            <Button colorScheme={ORANGE}  onClick={onClose}>
+              Cancel
+            </Button>
+          
+          </ModalFooter>
                 </ModalContent>
               </Modal>
             </>

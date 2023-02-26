@@ -9,6 +9,7 @@ import {
   Text,
   Skeleton,
   useToast,
+  Grid,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -18,9 +19,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
+import { AUTO, CENTER, FILL_PARENT, R1, R3 } from "../constants/typography";
 
 const SingleProduct = () => {
-  const {token} = useSelector((state)=>state.authReducer)
+  const {token,isAuth} = useSelector((state)=>state.authReducer)
   let params = useParams();
   // console.log(params);
   let { id } = params;
@@ -161,7 +163,7 @@ const SingleProduct = () => {
           ))}
         </SimpleGrid>
 
-        <Stack gap={2} margin={"auto"} w={{ base: "80%", md: "45%" }}>
+        <Stack gap={2} w={FILL_PARENT}>
           <Heading textAlign={"left"} >
             {prodata.title}
           </Heading>
@@ -204,7 +206,7 @@ const SingleProduct = () => {
               </Text>
             </HStack>
 
-            <HStack textAlign={"left"}>
+            <Grid w={FILL_PARENT} gap={4} mt={4} placeItems={CENTER} gridTemplateColumns={{base:R1,sm:R1,md:R1,lg:R3}} >
               <Stack gap={1} border= "2px solid orange" p={2} transition={"transform 2s"}
             _hover={{ transform: "scale(0.8)"  }}>
                 <Text fontWeight={"bold"}>No Cost EMI</Text>
@@ -231,20 +233,20 @@ const SingleProduct = () => {
                 </Text>
                 <Text color={"teal"}>1 offer</Text>
               </Stack>
-            </HStack>
+            </Grid>
           </Box>
 
           <Stack
             textAlign={"left"}
-            w={{ base: "90%", md: "80%" }}
-            p={5}
+            w={FILL_PARENT}         
             transition={"transform 2s"}
+            padding={5}
             _hover={{ transform: "scale(1.1)"  }}
             border={"2px solid orange"}
             
           >
             <HiInformationCircle fontSize={"25px"} />
-            <Text fontWeight={"bold"}>Made In India</Text>
+            <Text  fontWeight={"bold"}>Made In India</Text>
             <Text>
               Designed by IKEA of Sweden. Bringing quality, design, and
               affordability together.
@@ -258,14 +260,19 @@ const SingleProduct = () => {
             isLoading={cartLoading}
             fontSize={"20px"}
             w={{ base: "90%", md: "60%" }}
+            margin={AUTO}
             transition={"transform 2s"}
             _hover={{ transform: "scale(0.8)"  }}
             onClick={()=>{
+             if(isAuth){
               if(!presnet){
                 handleAdd()
               }else{
                 nav("/cart")
               }
+             }else{
+              nav("/login")
+             }
             }}
           >
             {" "}

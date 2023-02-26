@@ -24,7 +24,7 @@ import {
 // import styles from "./Checkout.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { FILL_PARENT, GREEN, RED, START } from "../../constants/typography";
+import { COLUMN, FILL_PARENT, GREEN, RED, ROW, START } from "../../constants/typography";
 import { RUPEES_SYMBOL } from "../../constants/constants";
 import getFutureDate from "../../scripts/futureDate";
 import axios from "axios";
@@ -136,7 +136,7 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
       </Box>
 
       <Box padding={"3rem"}>
-        <Grid gridTemplateColumns="5fr 3fr" gap={"4rem"}>
+        <Flex direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} gap={"4rem"}>
           <Box>
             <Box>
               <Heading textAlign={"start"} size="md" mb={"1.7rem"}>
@@ -366,7 +366,7 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
               
             </Box>
           </Box>
-        </Grid>
+        </Flex>
       </Box>
     </Box>
   );
