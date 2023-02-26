@@ -151,7 +151,7 @@ console.log(productlist, "after search")
 
   useEffect(() => {
     getdata(page);
-  }, [page, filter]);
+  }, [page, filter,searchParam]);
 
   useEffect(() => {}, [griddata]);
 
