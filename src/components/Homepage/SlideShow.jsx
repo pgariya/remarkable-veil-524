@@ -7,7 +7,7 @@ import {
   IoIosArrowDroprightCircle,
   IoIosArrowDropleftCircle,
 } from "react-icons/io";
-import { AUTO } from "../../constants/typography";
+import { AUTO, FILL_80PARENT, FILL_85PARENT } from "../../constants/typography";
 
 function NextArrow(props) {
   // console.log(props)
@@ -76,7 +76,7 @@ export default class SlideShow extends Component {
     };
 
     return (
-      <Box my={5} w={{ base: "95%", md: "70%" }} h="90%"  m={AUTO}>
+      <Box w={FILL_80PARENT} h="90%"  m={AUTO}>
         <Slider ref={(slider) => (this.slider = slider)} {...settings}>
           <Box w={"100%"}>
             <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg"  transition={"transform 2s"}
