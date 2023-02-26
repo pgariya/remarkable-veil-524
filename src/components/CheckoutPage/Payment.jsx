@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import {
   Box,
   Heading,
@@ -20,42 +20,67 @@ import {
   useToast,
   VStack,
   HStack,
+  useDisclosure,
+  PinInputField,
+  PinInput,
 } from "@chakra-ui/react";
 // import styles from "./Checkout.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { COLUMN, FILL_PARENT, GREEN, RED, ROW, START } from "../../constants/typography";
+import {
+  COLUMN,
+  FILL_PARENT,
+  GREEN,
+  RED,
+  ROW,
+  START,
+} from "../../constants/typography";
 import { RUPEES_SYMBOL } from "../../constants/constants";
 import getFutureDate from "../../scripts/futureDate";
 import axios from "axios";
 import { BASE_URL } from "../../constants/config";
 import { Loading } from "../Loading";
+import { CART_UPDATE } from "../../Redux/cart/cart.types";
+import OTP from "../LoginPage/OTP";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 
-const Payment = ({cart,cartTotal,totalSavings,token}) => {
+const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const [value, setValue] = React.useState("Cash on delivery");
-//   const {cart, isLoading} = useSelector((store)=>{return {
-//     cart: store.CartReducer.cart,   
-//     isLoading :  store.CartReducer.isLoading
-//     }})
+  //   const {cart, isLoading} = useSelector((store)=>{return {
+  //     cart: store.CartReducer.cart,
+  //     isLoading :  store.CartReducer.isLoading
+  //     }})
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [pinCode, setPinCode] = useState();
+  const [otp, setOTP] = useState("");
   const [phone, setPhone] = useState();
-//   const [email, setEmail] = useState("");
+  //   const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
   const [formData, setFormData] = useState([]);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   console.log(formData);
   const toast = useToast();
-    const navigate= useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = useRef(null);
 
-  const handleSubmit = async() => {
-    if (
-      name == "" ||
-      address == "" ||
-      pinCode == "" ||
-      phone == "" 
-    ) {
+  const handleInputChange = (value) => {
+    console.log("working");
+    setOTP(value);
+    console.log(otp);
+  };
+  const handleSubmit = async () => {
+    if (name == "" || address == "" || pinCode == "" || phone == "") {
       toast({
         description: "fill all the details",
         status: "error",
@@ -63,45 +88,42 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
         isClosable: true,
       });
     } else {
-      setLoading(true)
-      let newCartData = cart?.map((el)=>{
-        el.address=name+","+address+","+pinCode+","+phone
-        el.totalDiscountPrice=0
-        delete el["_id"]
-        return el
-
-      })
-
-      console.log(newCartData)
-
-      let res= await axios({
-        method:"post",
-        url:BASE_URL+"/order",
-        headers:{
-          Authorization:token,
-        },
-        data:newCartData
-        
-      })
-
-      if(res.data.status==1){
-        setLoading(false)
-        
-      toast({
-        size: "500",
-        position: "top-center",
-        title: "Order Placed.",
-        description: "Thank you for shopping with us.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
+      setLoading(true);
+      let newCartData = cart?.map((el) => {
+        el.address = name + "," + address + "," + pinCode + "," + phone;
+        el.totalDiscountPrice = 0;
+        delete el["_id"];
+        return el;
       });
 
-     navigate('/')
+      console.log(newCartData);
 
+      let res = await axios({
+        method: "post",
+        url: BASE_URL + "/order",
+        headers: {
+          Authorization: token,
+        },
+        data: newCartData,
+      });
 
-      }else{
-        setLoading(false)
+      if (res.data.status == 1) {
+        setLoading(false);
+        dispatch({ type: CART_UPDATE });
+
+        toast({
+          size: "500",
+          position: "top-center",
+          title: "Order Placed.",
+          description: "Thank you for shopping with us.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+
+        navigate("/");
+      } else {
+        setLoading(false);
 
         toast({
           size: "500",
@@ -112,20 +134,14 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
           duration: 2000,
           isClosable: true,
         });
-
       }
-
-
-
-
-     
     }
   };
 
-  if(loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
-    <Box  width={{base:'100%', lg:'90%'}} margin={'auto'}>
+    <Box width={{ base: "100%", lg: "90%" }} margin={"auto"}>
       <Box p={"2rem"}>
         <Text textAlign={"start"}>Home » Checkout</Text>
       </Box>
@@ -136,47 +152,47 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
       </Box>
 
       <Box padding={"3rem"}>
-        <Flex direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} gap={"4rem"}>
+        <Flex
+          direction={{ base: COLUMN, sm: COLUMN, md: COLUMN, lg: ROW }}
+          gap={"4rem"}
+        >
           <Box>
             <Box>
               <Heading textAlign={"start"} size="md" mb={"1.7rem"}>
                 Shipping details
               </Heading>
               <Box>
-                  <FormControl isRequired>
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                      borderRadius={"none"}
-                    border={'1px solid black'}                     
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </FormControl>
-                
+                <FormControl isRequired>
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    borderRadius={"none"}
+                    border={"1px solid black"}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </FormControl>
               </Box>
-             
+
               <Box mb="1.3rem">
                 <FormControl isRequired>
                   <FormLabel>Street Address</FormLabel>
                   <Input
-                    
                     placeholder="House number and street name"
                     borderRadius={"none"}
-                    border={'1px solid black'}
+                    border={"1px solid black"}
                     mb="1rem"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </FormControl>
               </Box>
-             
+
               <Box mb="1.3rem">
                 <FormControl isRequired>
                   <FormLabel>PIN Code</FormLabel>
                   <Input
                     borderRadius={"none"}
-                    border={'1px solid black'}
-                    
+                    border={"1px solid black"}
                     value={pinCode}
                     onChange={(e) => setPinCode(e.target.value)}
                   />
@@ -187,14 +203,13 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
                   <FormLabel>Phone</FormLabel>
                   <Input
                     borderRadius={"none"}
-                    border={'1px solid black'}
+                    border={"1px solid black"}
                     type={"number"}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </FormControl>
               </Box>
-             
             </Box>
             <Box>
               <Heading textAlign={"start"} m="2rem 0" size={"md"}>
@@ -205,7 +220,7 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
                 <Textarea
                   placeholder="Notes about your order, e.g. special notes for delivery."
                   borderRadius={"none"}
-                  border={'1px solid black'}
+                  border={"1px solid black"}
                   height="5rem"
                   value={textArea}
                   onChange={(e) => setTextArea(e.target.value)}
@@ -214,42 +229,27 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
             </Box>
             <br />
             <Box
-                textAlign={"left"}
-                p="1.5rem 0.5rem 1.5rem 2.5rem"
-                border="1px solid black"
-                fontSize='sm'
-                fontFamily={''}
-              >
-                <Text>
-                  Guaranteed delivery with 100% original products
-                </Text>
-                <Text>
-                 COD available on some categories
-                </Text>
-                <Text>
-                  FOR ONLINE PAYMENT EXTRA ₹10% DISCOUNT ON ORDERS
-                   ABOVE ₹500
-                </Text>
-                <Text>
-                  EMI OPTION AVAILABLE
-                </Text>
-                <Text>
-                  TO AVAIL MORE BANK OPTIONS ON EMI PURCHASE ABOVE
-                   RS. 3000
-                </Text>
-                <Text>
-                  FREE DELIVERY ON ORDERS
-                   AVOVE 500 FOR COD & FOR
-                   ONLINE PAYMENT
-                </Text>
-                <Text>
-                  FREE DELIVERY AVAILABLE ON ALL ORDERS
-                </Text>
-                <Text>
-                  BELOW ₹500 CASH ON DELIVERY CHARGES
-                   ₹49
-                </Text>
-              </Box>
+              textAlign={"left"}
+              p="1.5rem 0.5rem 1.5rem 2.5rem"
+              border="1px solid black"
+              fontSize="sm"
+              fontFamily={""}
+            >
+              <Text>Guaranteed delivery with 100% original products</Text>
+              <Text>COD available on some categories</Text>
+              <Text>
+                FOR ONLINE PAYMENT EXTRA ₹10% DISCOUNT ON ORDERS ABOVE ₹500
+              </Text>
+              <Text>EMI OPTION AVAILABLE</Text>
+              <Text>
+                TO AVAIL MORE BANK OPTIONS ON EMI PURCHASE ABOVE RS. 3000
+              </Text>
+              <Text>
+                FREE DELIVERY ON ORDERS AVOVE 500 FOR COD & FOR ONLINE PAYMENT
+              </Text>
+              <Text>FREE DELIVERY AVAILABLE ON ALL ORDERS</Text>
+              <Text>BELOW ₹500 CASH ON DELIVERY CHARGES ₹49</Text>
+            </Box>
           </Box>
 
           <Box>
@@ -257,25 +257,27 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
               <Heading textAlign={"start"} size={"md"}>
                 Your orders
               </Heading>
-              <VStack  w={FILL_PARENT} border={"1px solid gray"} padding={2}>
-            <HStack gap={2}>
-              <p>Subtotal({cart.length}) items</p>
-              <p>:</p>
-              <p style={{ color: GREEN }}>{RUPEES_SYMBOL + " " + cartTotal}</p>
-            </HStack>
-            <HStack gap={2}>
-              <p>Total Savings</p>
-              <p>:</p>
-              <p style={{ color: RED }}>
-                {"-" + RUPEES_SYMBOL + " " + totalSavings}
-              </p>
-            </HStack>
-            <HStack gap={2}>
-              <p>Deliver on</p>
-              <p>:</p>
-              <p style={{ color: GREEN }}>{getFutureDate(Date.now(), 3)}</p>
-            </HStack>
-          </VStack>
+              <VStack w={FILL_PARENT} border={"1px solid gray"} padding={2}>
+                <HStack gap={2}>
+                  <p>Subtotal({cart.length}) items</p>
+                  <p>:</p>
+                  <p style={{ color: GREEN }}>
+                    {RUPEES_SYMBOL + " " + cartTotal}
+                  </p>
+                </HStack>
+                <HStack gap={2}>
+                  <p>Total Savings</p>
+                  <p>:</p>
+                  <p style={{ color: RED }}>
+                    {"-" + RUPEES_SYMBOL + " " + totalSavings}
+                  </p>
+                </HStack>
+                <HStack gap={2}>
+                  <p>Deliver on</p>
+                  <p>:</p>
+                  <p style={{ color: GREEN }}>{getFutureDate(Date.now(), 3)}</p>
+                </HStack>
+              </VStack>
 
               <Box
                 border={"1px solid"}
@@ -347,23 +349,57 @@ const Payment = ({cart,cartTotal,totalSavings,token}) => {
                 </RadioGroup>
               </Box>
               <Box m={"1.5rem 0"}>
+                <>
+                  <Button
+                    bgColor="#ed8936"
+                    color={"white"}
+                    size="lg"
+                    isDisabled={loading}
+                    width={"100%"}
+                    borderRadius={"none"}
+                    _hover="none"
+                    onClick={onOpen}
+                  >
+                    Place Order
+                  </Button>
 
-                <Button
-                  bgColor="#ed8936"
-                  color={"white"}
-                  size="lg"
-                  isDisabled={loading}
-                  width={"100%"}
-                  borderRadius={"none"}
-                  _hover="none"
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                >
-                  Place Order
-                </Button>
+                  <Modal
+                    finalFocusRef={finalRef}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Paste the OTP </ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <HStack>
+                          <PinInput value={otp} onChange={handleInputChange}>
+                            <PinInputField />
+                            <PinInputField />
+                            <PinInputField />
+                            <PinInputField />
+                          </PinInput>
+                        </HStack>
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button colorScheme="red" mr={3} onClick={onClose}>
+                          Close
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          onClick={() => {
+                            handleSubmit();
+                          }}
+                        >
+                          Pay
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </>
               </Box>
-              
             </Box>
           </Box>
         </Flex>

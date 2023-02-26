@@ -31,7 +31,7 @@ import {
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-const OTP = () => {
+const OTP = ({handle}) => {
   const toast = useToast()
   const [email, setEmail] = useState("")
   const [otp, setOTP] = useState("")
