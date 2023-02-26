@@ -16,7 +16,6 @@ import { BsFillCartCheckFill, BsFillStarFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { Loading } from "../components/Loading";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
 
@@ -253,7 +252,7 @@ const SingleProduct = () => {
           </Stack>
 
           <Button
-            bg={"blue.500"}
+            bg={presnet? "green.500" : "blue.500" }
             color="white"
             isDisabled={cartLoading}
             isLoading={cartLoading}
@@ -271,7 +270,7 @@ const SingleProduct = () => {
           >
             {" "}
             <BsFillCartCheckFill fill="white" />{" "}
-            <Text fontSize={"20px"} ml={"10px"} color="white">
+            <Text fontSize={"20px"} ml={"10px"} color="white" >
               {presnet? "Go To Cart" : "Add to cart" }
             </Text>
           </Button>
