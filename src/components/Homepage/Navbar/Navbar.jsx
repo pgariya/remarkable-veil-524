@@ -158,8 +158,8 @@ const Navbar = () => {
 </HStack>
 
       <Box className='black-nav'>
-        <Menu1 gen="MEN" />
-        <Menu1 gen="WOMEN" />
+        <Menu1 gen="MEN" types="Mens Wear" op1="Shirt" op2="Party Wear" link1="/products?category=shirt" link2='/products?category=party-wear'/>
+        <Menu1 gen="WOMEN" types="Womens Wear" op1="Tops" op2="Party-Wear Kurtis" link1="/products?category=top" link2='/products?category=kurtis'/>
       </Box>
     </Box>
   )
