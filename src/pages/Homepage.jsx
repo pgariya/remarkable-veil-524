@@ -25,7 +25,7 @@ export default function Homepage() {
         >
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/men_shoes_rhs1_16march.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401197/samples/styluxe/men_shoes_rhs1_16march_heqqon.jpg"
               alt="shoes"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -33,7 +33,7 @@ export default function Homepage() {
           </Box>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/men1_tees_rhs1_feb18.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401219/samples/styluxe/men1_tees_rhs1_feb18_qaenbd.jpg"
               alt="t-Shirt"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -57,7 +57,7 @@ export default function Homepage() {
         <Box>
           <Link to={"/products?category=shirt"}>
             <Image
-              src="http://staticawsy.yepme.com/images/square_shirts_09022018.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401309/samples/styluxe/square_shirts_09022018_xrr8jy.jpg"
               alt="shirt"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -68,7 +68,7 @@ export default function Homepage() {
         <Box>
           <Link to={"/products?category=top"}>
             <Image
-              src="http://staticawsy.yepme.com/images/square-tops_09022018.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401326/samples/styluxe/square-tops_09022018_iqjqkg.jpg"
               alt="top"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -79,7 +79,7 @@ export default function Homepage() {
         <Box>
         <Link to={"/products?category=Kurtis"}>
           <Image
-            src="http://staticawsy.yepme.com/images/square_kurtis_09022018.jpg"
+            src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401343/samples/styluxe/square_kurtis_09022018_mvttwk.jpg"
             alt="kurties"
             transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -91,7 +91,7 @@ export default function Homepage() {
         <Link to={"/products?category=party-wear"}>
 
           <Image
-            src="http://staticawsy.yepme.com/images/square_partywear_09022018.jpg"
+            src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401360/samples/styluxe/square_partywear_09022018_i7lyc1.jpg"
             alt="mens-partywear"
             transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -114,7 +114,7 @@ export default function Homepage() {
         <Stack m={"auto"} gap={4}>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/men_bottomwear_10oct17.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401377/samples/styluxe/men_bottomwear_10oct17_o0csg1.jpg"
               alt="men-bottomwear"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -123,7 +123,7 @@ export default function Homepage() {
 
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/men_watches_10oct17.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401588/samples/styluxe/men_watches_10oct17_p9kwsh.jpg"
               alt="men-watches"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -134,7 +134,7 @@ export default function Homepage() {
         <Stack gap={5} m={"auto"}>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/center3-4-17.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401611/samples/styluxe/center3-4-17_kywcqt.jpg"
               alt="yepme-logotype"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -149,7 +149,7 @@ export default function Homepage() {
 
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/center_images_winterwear_10oct17.gif"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401652/samples/styluxe/center_images_winterwear_10oct17_qavqzj.gif"
               alt="winter-wear"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -160,7 +160,7 @@ export default function Homepage() {
         <Stack m={"auto"} gap={4}>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/women_bottomwear_10oct17.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401685/samples/styluxe/women_bottomwear_10oct17_tbdxyo.jpg"
               alt="women-bottomwear"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -169,7 +169,7 @@ export default function Homepage() {
 
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/women_watches_10oct17.jpg"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401702/samples/styluxe/women_watches_10oct17_huj2lp.jpg"
               alt="women-watches"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -199,14 +199,14 @@ export default function Homepage() {
         gap={5}
       >
         <Box overflow={"hidden"}>
-          <Image src="http://staticawsy.yepme.com/images/summer_fashion_14june.jpg"  transition={"transform 2s"}
+          <Image src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401716/samples/styluxe/summer_fashion_14june_cjx5e1.jpg"  transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}/>
         </Box>
 
         <Stack direction={"row"} m="auto" gap={5}>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/women_dresses_jumpsuits_10oct17.gif"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401737/samples/styluxe/women_dresses_jumpsuits_10oct17_fibfya.gif"
               alt="women-dresses"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -214,7 +214,7 @@ export default function Homepage() {
           </Box>
           <Box>
             <Image
-              src="http://staticawsy.yepme.com/images/activewear_10oct17.gif"
+              src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401748/samples/styluxe/activewear_10oct17_eu7t2l.gif"
               alt="activewear"
               transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}
@@ -255,7 +255,7 @@ export default function Homepage() {
         </Box>
         <Box>
           <Image
-            src="http://staticawsy.yepme.com/images/STYLE-FEATURE_9FEB.jpg"
+            src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401768/samples/styluxe/STYLE-FEATURE_9FEB_zzueyi.jpg"
             alt="style"
           />
         </Box>

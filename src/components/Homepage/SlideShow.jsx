@@ -79,25 +79,22 @@ export default class SlideShow extends Component {
       <Box w={FILL_80PARENT} h="90%"  m={AUTO}>
         <Slider ref={(slider) => (this.slider = slider)} {...settings}>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg"  transition={"transform 2s"}
+            <Image src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677399356/samples/styluxe/women_footwear06022018_nvtv70.jpg"  transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_winterwear_30012018.jpg" transition={"transform 2s"}
+            <Image src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401244/samples/styluxe/women_winterwear_30012018_wrfc5f.jpg" transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/high_performance_shoes.jpg" transition={"transform 2s"}
+            <Image src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401268/samples/styluxe/high_performance_shoes_dlh5go.jpg" transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}/>
           </Box>
           <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/menwomen_ethinic_wear_9022018.jpg" transition={"transform 2s"}
+            <Image src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677401286/samples/styluxe/menwomen_ethinic_wear_9022018_bjkbfb.jpg" transition={"transform 2s"}
             _hover={{ transform: "scale(1.1)" }}/>
           </Box>
-          <Box w={"100%"}>
-            <Image src="http://staticawsy.yepme.com/images/women_footwear06022018.jpg" transition={"transform 2s"}
-            _hover={{ transform: "scale(1.1)" }}/>
-          </Box>
+          
         </Slider>
       </Box>
     );
