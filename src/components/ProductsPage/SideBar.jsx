@@ -1,6 +1,6 @@
 import { Box, Checkbox, Stack, Text } from "@chakra-ui/react";
-import QueryString from "qs";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { GREEN } from "../../constants/typography";
 
 const SideBar = ({ filter, setFilter }) => {
   
@@ -15,9 +15,10 @@ const SideBar = ({ filter, setFilter }) => {
     }));
   };
   
-console.log(filter, "filterrrr objecttttt")
 
+  useEffect(()=>{
 
+  },[])
 
 
   return (
@@ -176,116 +177,107 @@ console.log(filter, "filterrrr objecttttt")
         <Box display={"flex"} justifyContent="space-around">
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme={"blackAlpha"}
-                value="black"
-                checked={filter.color.black}
-                onChange={handleCheckboxChange}
-              />
+              <input
+            type="checkbox"
+            name="color"
+            value="black"
+            checked={filter.color.black}
+            onChange={handleCheckboxChange}
+          />
               <label for="black">Black</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme={"blackAlpha"}
-                value="grey"
-                checked={filter.color.grey}
-                onChange={handleCheckboxChange}
-              />
-              <label for="grey">Grey</label>
+            <input
+            type="checkbox"
+            name="color"
+            value="gray"
+            checked={filter.color.gray}
+            onChange={handleCheckboxChange}
+          />
+              <label for="gray">Gray</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="red"
-                value="red"
-                checked={filter.color.red}
-                onChange={handleCheckboxChange}
-              />
+            <input
+            type="checkbox"
+            name="color"
+            value="red"
+            checked={filter.color.red}
+            onChange={handleCheckboxChange}
+          />
               <label for="red">Red</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="yellow"
-                value="yellow"
-                checked={filter.color.yellow}
-                onChange={handleCheckboxChange}
-              />
+            <input
+            type="checkbox"
+            name="color"
+            value="yellow"
+            checked={filter.color.yellow}
+            onChange={handleCheckboxChange}
+          />
               <label for="yellow">Yellow</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="blue"
-                value="blue"
-                checked={filter.color.blue}
-                onChange={handleCheckboxChange}
-              />
+            <input
+            type="checkbox"
+            name="color"
+            value="blue"
+            checked={filter.color.blue}
+            onChange={handleCheckboxChange}
+          />
               <label for="blue">Blue</label>
             </Box>
           </Box>
 
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme={"green"}
-                value="green"
-                checked={filter.color.green}
-                onChange={handleCheckboxChange}
-              />
+            <input
+            type="checkbox"
+            name="color"
+            value="green"
+            checked={filter.color.green}
+            onChange={handleCheckboxChange}
+          />
               <label for="green">green</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme={"orange"}
-                checked={filter.color.orange}
-                onChange={handleCheckboxChange}
-                value="orange"
-              />
+             <input
+            type="checkbox"
+            name="color"
+            value="orange"
+            checked={filter.color.orange}
+            onChange={handleCheckboxChange}
+          />
               <label for="orange">Orange</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="teal"
-                value="teal"
-                checked={filter.color.teal}
-                onChange={handleCheckboxChange}
-              />
-              <label for="teal">Teal</label>
+            <input
+            type="checkbox"
+            name="color"
+            value="white"
+            checked={filter.color.white}
+            onChange={handleCheckboxChange}
+          />
+              <label for="white">White</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="pink"
-                value="pink"
-                checked={filter.color.pink}
-                onChange={handleCheckboxChange}
-              />
+            <input
+            type="checkbox"
+            name="color"
+            value="pink"
+            checked={filter.color.pink}
+            onChange={handleCheckboxChange}
+          />
               <label for="pink">Pink</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="color"
-                colorScheme="purple"
-                checked={filter.color.purple}
-                onChange={handleCheckboxChange}
-                value="purple"
-              />
+              
+              <input
+            type="checkbox"
+            name="color"
+            value="purple"
+            checked={filter.color.purple}
+            onChange={handleCheckboxChange}
+          />
               <label for="purple">Purple</label>
             </Box>
           </Box>
@@ -308,43 +300,47 @@ console.log(filter, "filterrrr objecttttt")
         <Box>
           <Box textAlign={"left"}>
             <Box>
-              <Checkbox
-                mr={3}
-                name="material"
-                value="cotton"
-                checked={filter.material.cotton}
-                onChange={handleCheckboxChange}
-              />
+             
+               <input
+            type="checkbox"
+            name="material"
+            value="cotton"
+            checked={filter.material.cotton}
+            onChange={handleCheckboxChange}
+          />
               <label for="cotton">Cotton</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="material"
-                value="rayon"
-                checked={filter.material.rayon}
-                onChange={handleCheckboxChange}
-              />
+              
+              <input
+            type="checkbox"
+            name="material"
+            value="rayon"
+            checked={filter.material.rayon}
+            onChange={handleCheckboxChange}
+          />
               <label for="rayon">Rayon</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="material"
-                value="polyester"
-                checked={filter.material.polyester}
-                onChange={handleCheckboxChange}
-              />
+             
+               <input
+            type="checkbox"
+            name="material"
+            value="polyester"
+            checked={filter.material.polyester}
+            onChange={handleCheckboxChange}
+          />
               <label for="polyester">Polyester</label>
             </Box>
             <Box>
-              <Checkbox
-                mr={3}
-                name="material"
-                value="naylon"
-                checked={filter.material.naylon}
-                onChange={handleCheckboxChange}
-              />
+              
+              <input
+            type="checkbox"
+            name="material"
+            value="naylon"
+            checked={filter.material.naylon}
+            onChange={handleCheckboxChange}
+          />
               <label for="naylon">Naylon</label>
             </Box>
           </Box>
