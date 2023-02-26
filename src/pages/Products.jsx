@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import Paginantion from "../Admin/components/Paginantion/Paginantion";
 import DrawerPro from "../components/ProductsPage/Drawer";
 import SideBar from "../components/ProductsPage/SideBar";
@@ -31,6 +31,12 @@ const ProductPage = () => {
   const [page, setPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
   let [query,setQuery]= useState("");
+
+let [searchParam,setSearchParam] = useSearchParams()
+
+
+
+
 
   const [filter, setFilter] = useState({
     price: {
@@ -93,7 +99,7 @@ const ProductPage = () => {
 
   
  let finalFilter= findTrueValues(filter)
-// console.log(finalFilter, "dataa dakhoooo")
+console.log(finalFilter, "dataa dakhoooo")
 
 
 const searchParams = new URLSearchParams(finalFilter);
@@ -101,6 +107,9 @@ const queryString = searchParams.toString();
 // console.log(queryString); 
 
 
+
+
+//search box.....
 const handleInputChange = (event) => {
   console.log("input box")
   const query = event.target.value.toLowerCase();
@@ -146,6 +155,8 @@ console.log(productlist, "after search")
 
   useEffect(() => {}, [griddata]);
 
+
+
   let handleHigh = () => {
     setcount(count + 1);
     let highdata = productlist.sort((a, b) => {
@@ -167,6 +178,10 @@ console.log(productlist, "after search")
   console.log(productlist);
 
   
+  useEffect(() =>{
+    setSearchParam({category: `${catg}` ,page:page+1 , ...finalFilter })
+  
+  },[page, filter])
 
 
 
