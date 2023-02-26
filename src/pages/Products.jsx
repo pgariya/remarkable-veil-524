@@ -5,6 +5,7 @@ import {
   Heading,
   HStack,
   Image,
+  Input,
   SimpleGrid,
   Skeleton,
   Stack,
@@ -22,12 +23,14 @@ import { NONE } from "../constants/typography";
 
 const ProductPage = () => {
   let [productlist, setproductlist] = useState([]);
+  let [fulldata,setfullData]= useState([]);
   let [isError, setisError] = useState(false);
   let [isloading, setisloading] = useState(false);
   let [griddata, setgriddata] = useState("");
   let [count, setcount] = useState(0);
   const [page, setPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
+  let [query,setQuery]= useState("");
 
   const [filter, setFilter] = useState({
     price: {
@@ -72,10 +75,8 @@ const ProductPage = () => {
   
   
 
-  console.log(catg);
-
-
-  console.log(filter, "ya main change krnnnna haaa")
+  // console.log(catg);
+  // console.log(filter, "ya main change krnnnna haaa")
   
   //filtered object of object
   function findTrueValues(data) {
@@ -92,16 +93,32 @@ const ProductPage = () => {
 
   
  let finalFilter= findTrueValues(filter)
-console.log(finalFilter, "dataa dakhoooo")
+// console.log(finalFilter, "dataa dakhoooo")
 
 
 const searchParams = new URLSearchParams(finalFilter);
 const queryString = searchParams.toString();
-
-console.log(queryString); 
-
+// console.log(queryString); 
 
 
+const handleInputChange = (event) => {
+  console.log("input box")
+  const query = event.target.value.toLowerCase();
+  setQuery(query);
+
+if(!query){
+  setproductlist(fulldata)
+}else{
+
+  const filteredData = productlist.filter(item => item.title.includes(query));
+  setproductlist(filteredData);
+
+}
+
+  
+}
+
+console.log(productlist, "after search")
 
 
   let getdata = async (page) => {
@@ -112,6 +129,7 @@ console.log(queryString);
       );
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
+      setfullData(res.data.data)
       setTotalPage(res.data.count);
       setisloading(false);
     } catch (err) {
@@ -147,6 +165,10 @@ console.log(queryString);
   };
 
   console.log(productlist);
+
+  
+
+
 
   if (isloading) {
     return (
@@ -186,7 +208,8 @@ console.log(queryString);
         {/* //filter part is here  */}
         <Box
           display={{ base: "none", lg: "block" }}
-          w={"40%"}
+          maxw={"50%"}
+          minW={"30%"}
           // border="5px solid"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         >
@@ -194,8 +217,8 @@ console.log(queryString);
           <SideBar filter={filter} setFilter={setFilter} />
         </Box>
 
-        <Box display={{ base: "block", lg: "none" }} pt={5}>
-          <DrawerPro />
+        <Box display={{ base: "block", lg: "none" }} pt={5}  w={"20%"} >
+          <DrawerPro filter={filter} setFilter={setFilter} />
         </Box>
 
         {/* //data is shown in SimpleGrid  */}
@@ -223,6 +246,11 @@ console.log(queryString);
               <Button onClick={() => setgriddata(4)}> 4 </Button>
             </HStack>
           </Stack>
+
+     <Stack my={5} >
+     <Input w={"90%"} m="auto" type="text" value={query} onChange={handleInputChange} placeholder="Search Items by Title. . . . . . . ." />
+     </Stack>
+
 
           <SimpleGrid
             columns={
