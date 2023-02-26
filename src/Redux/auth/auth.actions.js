@@ -22,7 +22,7 @@ export const login = (userData) => async (dispatch) => {
     const res = await axios.post(`${BASE_URL}/user/login`, userData);
     console.log(res);
     if(res.data.status==1){
-      dispatch(loginSuccessAction(res.data.token));
+      dispatch(loginSuccessAction({token:res.data.token,name:res.data.name,email:res.data.email}));
       return { "status": res.data.status, "msg": res.data.message };
     }else{
       dispatch(loginFailureAction());
