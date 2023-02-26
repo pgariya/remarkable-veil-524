@@ -29,10 +29,6 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
-  "resolutions": {
-    "react": "^18.2.0",
-    "react-lottie": "1.2.2"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
