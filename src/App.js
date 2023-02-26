@@ -8,9 +8,9 @@ import { Footer } from './components/Homepage/Footer';
 function App() {
   return (
     <Box className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       <AllRoutes />
-      {/* <Footer /> */}
+      <Footer />
 
 
     </Box>
