@@ -23,13 +23,13 @@ export default function AllRoutes(){
         <Route path="/products" element={<Products/>}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/login/otp" element={<OTP />}></Route>
         <Route path="/admin" element={<PrivateRoute><AdminPage /></PrivateRoute>}></Route>
         <Route path="/404" element={<Restricated404 />}></Route>
         <Route path="*" element={<Error404 />}></Route>
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}></Route>
         <Route path="/products/:id" element={<SingleProduct/>}></Route>
         <Route path="/cart" element={<PrivateRoute><Cartscreen/></PrivateRoute>}></Route>
+        <Route path="/otp" element={<PrivateRoute><OTP/></PrivateRoute>}></Route>
         
     </Routes>
 }

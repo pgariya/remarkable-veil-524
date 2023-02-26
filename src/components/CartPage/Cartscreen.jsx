@@ -13,7 +13,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../constants/config";
 import { Loading } from "../Loading";
 import { RUPEES_SYMBOL } from "../../constants/constants";
@@ -38,6 +38,7 @@ import {
 } from "@chakra-ui/react";
 import Payment from "../CheckoutPage/Payment";
 import { Link } from "react-router-dom";
+import { CART_UPDATE } from "../../Redux/cart/cart.types";
 const Cartscreen = () => {
   const { token } = useSelector((state) => state.authReducer);
   const [cart, setCart] = useState([]);
@@ -47,6 +48,7 @@ const Cartscreen = () => {
   const [totalSavings, setTotalSaving] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     let getCartData = async () => {
@@ -67,10 +69,15 @@ const Cartscreen = () => {
         setLoading(false);
         console.log("something went wrong");
       }
+
+      dispatch({type:CART_UPDATE})
     };
+
 
     getCartData();
   }, [refesh]);
+
+  
 
   useEffect(() => {
     let total = cart.reduce((acc, el) => {

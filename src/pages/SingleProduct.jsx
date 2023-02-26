@@ -15,11 +15,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsFillCartCheckFill, BsFillStarFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
 import { AUTO, CENTER, FILL_PARENT, R1, R3 } from "../constants/typography";
+import { CART_UPDATE } from "../Redux/cart/cart.types";
 
 const SingleProduct = () => {
   const {token,isAuth} = useSelector((state)=>state.authReducer)
@@ -34,6 +35,7 @@ const SingleProduct = () => {
   const [presnet,setPresent]=useState(false)
   const toast = useToast()
   const [cartLoading,setCartLoading] = useState(false)
+  const dispatch = useDispatch()
 
   let getmydata = async (id) => {
     try {
@@ -99,6 +101,7 @@ const SingleProduct = () => {
 
   console.log(res)
     if(res.data.status==1){
+      dispatch({type:CART_UPDATE})
       setPresent(true)
       setCartLoading(false)
 
