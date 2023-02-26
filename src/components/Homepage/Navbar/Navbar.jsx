@@ -314,7 +314,7 @@ const Navbar = () => {
           op1="Tops"
           op2="Party-Wear Kurtis"
           link1="/products?category=top"
-          link2="/products?category=kurtis"
+          link2="/products?category=Kurtis"
         />
       </Box>
     </Box>
