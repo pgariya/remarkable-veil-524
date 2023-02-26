@@ -2,12 +2,12 @@ import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import SlideShow from "../components/Homepage/SlideShow";
 import { CONTAINER } from "../constants/constants";
-import { BOLD, R1, R2, R3, R4 } from "../constants/typography";
+import { BOLD, FILL_PARENT, R1, R2, R3, R4 } from "../constants/typography";
 import "../styles/styles.css";
 
 export default function Homepage() {
   return (
-    <Box m={"auto"} mt={CONTAINER}>
+    <Box width={FILL_PARENT} m={"auto"} mt={CONTAINER}>
       {/* 1st box  */}
       <Stack
         direction={{ base: "column", md: "row" }}

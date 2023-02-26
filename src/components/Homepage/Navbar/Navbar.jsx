@@ -1,21 +1,35 @@
-import { Box, Button, Flex, Input } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Flex, HStack, IconButton, Image, Input, useDisclosure, VStack } from '@chakra-ui/react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import logo from "../../../assets/logo.png"
-import { POINTER } from '../../../constants/typography'
+import { AUTO, CENTER, FILL_55PARENT, FILL_90PARENT, FILL_PARENT, POINTER, SB, SE, START, TRANSPARENT } from '../../../constants/typography'
 import { LOGOUT } from '../../../Redux/auth/auth.type'
 import Menu1 from './Menu'
 import { FcBusinessman } from 'react-icons/fc'
-
+import { GrSearch } from 'react-icons/gr'
+import {GiHamburgerMenu} from "react-icons/gi"
+import {AiOutlineShoppingCart} from "react-icons/ai"
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
 import "./Navbar.css"
 const Navbar = () => {
   const nav = useNavigate()
   const { isAuth } = useSelector((state) => state.authReducer)
   const dispatch = useDispatch()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef()
+
   return (
-    <div className='nav-container'>
-      <Box className='topmost-nav'>
+    <Box className='nav-container'>
+      <Flex display={{base:"none",sm:"none",md:"flex",lg:"flex"}} fontSize={{base:"12px",md:"14px",lg:"16px"}} justifyContent={{base:START,sm:START,lg:"end"}}  gap={4}>
         <p>WELCOME GUEST</p>
         <p>DOWNLOAD APP</p>
         <p>CONTACT US</p>
@@ -34,26 +48,31 @@ const Navbar = () => {
           }
         }}>{isAuth ? <FcBusinessman size={'20px'} /> : "LOGIN WITH FACEBOOK"}</p>
 
-      </Box>
-      <div className="hl"></div>
-      <Box className="nav-logo">
-        <div className='logo'>
-          <img style={{ cursor: POINTER }} onClick={() => {
+      </Flex>
+      <Box className="hl"></Box>
+   
+      <Flex  padding={2}  alignItems={CENTER} gap={2} justify={SB} >
+        <Box >
+          <Image w={{base:"60px",sm:"100px",md:"120px",lg:"150px"}} style={{ cursor: POINTER }} onClick={() => {
             nav("/")
           }} src={logo} alt="styluxe" />
-        </div>
-        <Input className='input-field' w={"30rem"} mt={3} ml={40}
+        </Box>
+        <HStack display={{base:"none",sm:"none",md:"flex",lg:"flex"}} w={FILL_55PARENT} gap={2}>
+
+        <Input   
           isInvalid
           errorBorderColor='orange.400'
           focusBorderColor='black'
           placeholder='search for FRESH FASHION!'
         />
-        <Button background={'orange.400'} mt={3} ml={3} color='white'>Search</Button>
+        <Button background={'orange.400'}   color='white'>Search</Button>
+        </HStack>
+       
 
-        <Flex>
+        <Flex display={{base:"none",sm:"none",md:"flex",lg:"flex"}} alignItems={CENTER} gap={4}>
 
-          <img className='store-img' src="http://staticawsy.yepme.com/images/own-yepme-store-btn.png" alt="" />
-          <Box className='cart-gift' fontWeight={'bold'}>
+          <Image  src="http://staticawsy.yepme.com/images/own-yepme-store-btn.png" alt="" />
+          <Box  fontWeight={'bold'}>
             <p onClick={() => {
               if (isAuth) {
                 nav("/cart")
@@ -63,13 +82,86 @@ const Navbar = () => {
             <p>Loyalty Points</p>
           </Box>
         </Flex>
-      </Box>
+        <HStack  display={{base:"flex",sm:"flex",md:"none",lg:"none"}}>
+        <Button _hover={{bg:TRANSPARENT}} _active={{bg:TRANSPARENT}} bg={TRANSPARENT} leftIcon={<AiOutlineShoppingCart />} onClick={() => {
+              if (isAuth) {
+                nav("/cart")
+              }
+            }}>0</Button>
+               <>
+         <Button  _hover={{bg:TRANSPARENT}} _active={{bg:TRANSPARENT}} bg={TRANSPARENT} ref={btnRef} textAlign={CENTER} rightIcon={<GiHamburgerMenu />} onClick={onOpen}>Menu</Button>
+      
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+          <VStack padding={"0px 24px"} alignItems={START}>
+          <p>WELCOME GUEST</p>
+        <p>DOWNLOAD APP</p>
+        <p>CONTACT US</p>
+        <p onClick={() => {
+          if (!isAuth) {
+            nav("/login")
+            onClose()
+          } else {
+            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("isAuth")
+            dispatch({ type: LOGOUT })
+            onClose()
+          }
+        }}>{isAuth ? "LOGOUT" : "LOGIN"}</p>
+        <p onClick={() => {
+          if (isAuth) {
+            nav("/profile")
+            onClose()
+          }
+        }}>{isAuth ? <FcBusinessman size={'20px'} /> : "LOGIN WITH FACEBOOK"}</p>
+        <Image  src="http://staticawsy.yepme.com/images/own-yepme-store-btn.png" alt="" />
+          <Box  fontWeight={'bold'}>
+            <p onClick={() => {
+              if (isAuth) {
+                nav("/cart")
+              }
+            }}>Cart(0)</p>
+
+            <p>Loyalty Points</p>
+          </Box>
+        
+
+          </VStack>
+
+          <DrawerBody>
+
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+               </>
+        </HStack>
+     
+       
+      </Flex>
+      <HStack  w={"95%"} display={{base:"flex",sm:"flex",md:"none",lg:"none"}} margin={AUTO} mb={2} gap={2}>
+
+<Input   
+  isInvalid
+  errorBorderColor='orange.400'
+  focusBorderColor='black'
+  placeholder='search for FRESH FASHION!'
+/>
+<IconButton background={'orange.400'} icon={<GrSearch />}    color='white'></IconButton>
+</HStack>
 
       <Box className='black-nav'>
         <Menu1 gen="MEN" />
         <Menu1 gen="WOMEN" />
       </Box>
-    </div>
+    </Box>
   )
 }
 
