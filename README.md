@@ -67,7 +67,7 @@ Styluxe is an one-stop-shop for all your shopping needs. With a vast collection 
 
 
 
-# Admin Panel
+# Admin Panel : Dashboard
 <table>
   <tr>
     <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483501/samples/mobile_16_eckdri.png"/></td>
@@ -75,11 +75,37 @@ Styluxe is an one-stop-shop for all your shopping needs. With a vast collection 
   </tr>
 </table>
 
+# Admin Panel : Add Product Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483712/samples/mobile_18_kmaq03.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483711/samples/mobile_17_wyzonn.png"/></td>
+  </tr>
+</table>
 
+# Admin Panel : Edit Product Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483831/samples/mobile_20_phdm3m.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483834/samples/mobile_19_tenx3k.png"/></td>
+  </tr>
+</table>
 
+# Admin Panel : Manage Orders Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483975/samples/mobile_21_cdcvp9.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483972/samples/mobile_22_ujol9j.png"/></td>
+  </tr>
+</table>
 
-
-
+# Admin Panel : Manage Admin Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677484126/samples/mobile_24_hy21vq.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677484126/samples/mobile_23_ydfc50.png"/></td>
+  </tr>
+</table>
 
 
 
