@@ -34,9 +34,47 @@ Styluxe is an one-stop-shop for all your shopping needs. With a vast collection 
 <table>
   <tr>
     <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481874/samples/mobile_7_lnlhm1.png"/></td>
-    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677482003/samples/mobile_9_wt4ug9.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481891/samples/mobile_8_j8sue5.png"/></td>
   </tr>
 </table>
+
+
+# Cart Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483028/samples/mobile_11_jjo56z.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483004/samples/mobile_10_kpvztr.png"/></td>
+  </tr>
+</table>
+
+# Checkout Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483134/samples/mobile_12_hoixlj.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483133/samples/mobile_13_xiqvii.png"/></td>
+  </tr>
+</table>
+
+
+# Profile page
+
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483292/samples/mobile_15_nghpq1.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483296/samples/mobile_14_m1rbpb.png"/></td>
+  </tr>
+</table>
+
+
+
+# Admin Panel
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483501/samples/mobile_16_eckdri.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481068/mobile_3_eymwp5.png"/></td>
+  </tr>
+</table>
+
 
 
 
