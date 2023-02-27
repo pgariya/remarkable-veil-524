@@ -49,7 +49,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+
 import emailjs from "@emailjs/browser"
+
 
 const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const [value, setValue] = React.useState("Cash on delivery");
@@ -72,15 +74,16 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
 
-
   const handleOTP = () => {
     if (name === "" || address ==="" || pinCode === "" || phone === "" || email==="") {
+
       toast({
         description: "fill all the details",
         status: "error",
         duration: 2000,
         isClosable: true,
       });
+
     }
       else {
     const otp = Math.floor(Math.random() * 9000) + 1000;
@@ -111,7 +114,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
     if (otp == localStorage.getItem("paymentotp")) {
       console.log("Payment OTP correct");
       
-    
+
       setLoading(true);
       let newCartData = cart?.map((el) => {
         el.address = name + "," + address + "," + pinCode + "," + phone;
@@ -119,7 +122,6 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
         delete el["_id"];
         return el;
       });
-
 
       console.log(newCartData);
 
@@ -130,6 +132,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
           Authorization: token,
         },
         data: newCartData,
+
       });
 
       if (res.data.status == 1) {
@@ -173,6 +176,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
         duration: 2000,
         isClosable: true,
       });
+
     }
     
   };

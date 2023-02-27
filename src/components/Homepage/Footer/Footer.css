@@ -11,17 +11,7 @@
 .select{
     width: 100px;
 }
-.social{
-    
-    height: 40px;
-    width: 22rem;
-    margin-top: 20px;
-    margin-left: 10rem;
-}
-.social>p{
-    font-size: 25px;
-    margin-right: 2rem;
-}
+
 .social>p:nth-child(1){
     color: rgb(196, 54, 54);
 }

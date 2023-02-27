@@ -1,102 +1,120 @@
 import {
-    Box,
-    Center,
-    chakra,
-    Flex,
-    SimpleGrid,
-    Stat,
-    StatLabel,
-    StatNumber,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
-  import { ReactNode } from 'react';
-  import { BsPerson } from 'react-icons/bs';
-  import { BiPurchaseTag } from 'react-icons/bi';
-  import { GrDeliver } from 'react-icons/gr';
-  import { GoLocation } from 'react-icons/go';
-  import { MdPending } from 'react-icons/md';
-  import { FcCancel,FcApproval,FcPlus,FcPieChart,FcHome } from 'react-icons/fc';
-  import Lottie from "react-lottie";
-  
+  Badge,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Image,
+  Link,
+  Stack,
+  Text,
+  useColorModeValue,
+  VStack,
+} from '@chakra-ui/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { OrderLayout } from '../components/OrderLayout';
+import { BASE_URL } from '../constants/config';
+import { CONTAINER } from '../constants/constants';
+import { AUTO, CENTER, COLUMN, FILL_30PARENT, FILL_70PARENT, FILL_90PARENT, FILL_PARENT, LARGE, ORANGE, RELATIVE, ROW, START, STICKY, TOP, X2LARGE, YELLOW } from '../constants/typography';
+import { LOGOUT } from '../Redux/auth/auth.type';
+import {Loading}  from "../components/Loading"
 
-  function StatsCard(props) {
-    const { title, stat, icon } = props;
-    return (
-      <Stat
-        px={{ base: 2, md: 4 }}
-        py={'5'}
-        shadow={'xl'}
-        border={'1px solid'}
-        borderColor={useColorModeValue('gray.800', 'gray.500')}
-        rounded={'lg'}>
-        <Flex justifyContent={'space-between'}>
-          <Box pl={{ base: 2, md: 4 }}>
-            <StatLabel fontSize={'3xl'} fontWeight={'medium'} isTruncated>
-              {title}
-            </StatLabel>
-            <StatNumber fontSize={'3xl'} fontWeight={'medium'}>
-              {stat}
-            </StatNumber>
-          </Box>
-          <Box
-            my={'auto'}
-            color={useColorModeValue('gray.800', 'gray.200')}
-            alignContent={'center'}>
-            {icon}
-          </Box>
-        </Flex>
-      </Stat>
-    );
-  }
-  
-  export default function Profile() {
+export default function Profile() {
 
+  const {token,name,email} = useSelector((state)=>state.authReducer)
+  const dispatch = useDispatch()
+  const [order,setOrder] = useState([])
+  const [loading,setLoading]= useState(false)
 
-    return (
-      <Box maxW="7xl"  marginTop={'150px'} mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-        <chakra.h1
-          textAlign={'center'}
-          fontSize={'4xl'}
-          py={10}
-          fontWeight={'bold'} 
-          >   
-          <Center>
-            <h1
-            textAlign={'center'}
-            fontSize={'4xl'}
-            fontWeight={'bold'} >Your Account  </h1> 
-            <BsPerson size={'2em'} />
-        </Center>          
-        </chakra.h1>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(()=>{
+
+    const getData = async()=>{
+      setLoading(true)
+      let res = await axios({
+        method:"get",
+        url:BASE_URL+"/order",
+        headers:{
+          Authorization:token
+        }
+      })
+
+      if(res.data.status==1){
+
+        setOrder(res.data.data)
+
+        setLoading(false)
+
         
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
-          <StatsCard
-            title={'Total Orders'}
-            stat={'106'}
-            icon={<FcPlus size={'3em'} />}
-         />
-          <StatsCard
-            title={'Pending Orders'}
-            stat={'4'}
-            icon={<FcPieChart size={'3em'} />}
+      }else{
+
+        setLoading(false)
+      }
+    }
+
+    getData()
+
+
+
+  },[])
+
+  if(loading) return <Loading />
+
+  return (
+    <Flex width={FILL_90PARENT} direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} alignItems={"flex-start"} gap={8} m={AUTO} mt={{base:10,sm:10,md:10,lg:160}}    >
+      
+      <Stack
+       position={{base:RELATIVE,sm:RELATIVE,md:RELATIVE,lg:STICKY}} 
+       top={160}
+        borderWidth="1px"
+        borderRadius="lg"
+        w={{base:FILL_PARENT,sm:FILL_PARENT,md:FILL_PARENT,lg:FILL_30PARENT}}
+        direction={{ base: 'column', md: 'row' }}
+        padding={4}>
+        <Flex flex={1} bg="blue.200">
+          <Image
+            w="100%"
+            src={
+              "https://i.pravatar.cc/300"
+            }
           />
-          <StatsCard
-            title={'Cancelled Orders'}
-            stat={'4'}
-            icon={<FcCancel size={'3em'} />}
-          />
-          <StatsCard
-            title={'Delivered Orders'}
-            stat={'102'}
-            icon={<FcApproval size={'3em'} />}
-          />
-          <StatsCard
-            title={'Your Address'}
-            stat={'Ghaziabad, U.P'}
-            icon={<FcHome size={'3em'} />}
-          />
-        </SimpleGrid>
-      </Box>
-    );
-  }
+        </Flex>
+        <Stack
+          flex={1}
+          flexDirection="column"
+          p={1}
+          pt={2}>
+          <Heading fontSize={'2xl'} fontFamily={'body'}>
+            {name}
+          </Heading>
+          <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
+           {email}
+          </Text>
+          <Button colorScheme={ORANGE} onClick={()=>{
+             sessionStorage.removeItem("token");
+             sessionStorage.removeItem("isAuth");
+             sessionStorage.removeItem("name");
+             sessionStorage.removeItem("email");
+            dispatch({type:LOGOUT})
+          }}>{"Logout"}</Button>
+        
+        </Stack>
+      </Stack>
+
+      <VStack   borderRadius="lg"
+ alignItems={START} p={4}  borderWidth="1px"
+ w={{base:FILL_PARENT,sm:FILL_PARENT,md:FILL_PARENT,lg:FILL_70PARENT}} mt={{base:180,sm:180,md:180,lg:0}} mb={40}>
+        <Badge mb={8} fontSize={X2LARGE}  colorScheme={YELLOW}>Your Orders</Badge>
+
+        {order?.map((el)=><OrderLayout {...el} />)}
+
+      </VStack>
+    </Flex>
+   
+  );
+}

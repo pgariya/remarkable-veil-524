@@ -32,7 +32,9 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import emailjs from "@emailjs/browser"
 
-const OTP = ({ handle }) => {
+
+const OTP = ({handle}) => {
+
   const toast = useToast()
   const [email, setEmail] = useState("")
   const [checkotp, setCheckOTP] = useState("")

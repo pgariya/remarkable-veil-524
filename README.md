@@ -1,6 +1,135 @@
-<!-- All the folder structure information -->
+# About
+Styluxe is an one-stop-shop for all your shopping needs. With a vast collection of products of  fashion and clothing, we offer a seamless shopping experience. Our user-friendly interface and secure payment options ensure a hassle-free shopping experience for our customers. Shop with us today and discover the convenience of online shopping!
 
-=> Before you start:
+# Homepage
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677479901/samples/mobile_2_wnfs3h.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481572/samples/mobile_4_x9chbh.png"/></td>
+  </tr>
+</table>
+
+
+
+
+# Product Page
+
+<img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481871/samples/mobile_6_xj1exm.png"/>
+
+
+
+
+<p align="center" width="100%">
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481581/samples/mobile_5_hp6t6h.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677482003/samples/mobile_9_wt4ug9.png"/></td>
+  </tr>
+</table>
+</p>
+
+
+
+# SingleProduct Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481874/samples/mobile_7_lnlhm1.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481891/samples/mobile_8_j8sue5.png"/></td>
+  </tr>
+</table>
+
+
+# Cart Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483028/samples/mobile_11_jjo56z.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483004/samples/mobile_10_kpvztr.png"/></td>
+  </tr>
+</table>
+
+# Checkout Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483134/samples/mobile_12_hoixlj.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483133/samples/mobile_13_xiqvii.png"/></td>
+  </tr>
+</table>
+
+
+# Profile page
+
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483292/samples/mobile_15_nghpq1.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483296/samples/mobile_14_m1rbpb.png"/></td>
+  </tr>
+</table>
+
+
+
+# Admin Panel : Dashboard
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483501/samples/mobile_16_eckdri.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481068/mobile_3_eymwp5.png"/></td>
+  </tr>
+</table>
+
+# Admin Panel : Add Product Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483712/samples/mobile_18_kmaq03.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483711/samples/mobile_17_wyzonn.png"/></td>
+  </tr>
+</table>
+
+# Admin Panel : Edit Product Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483831/samples/mobile_20_phdm3m.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483834/samples/mobile_19_tenx3k.png"/></td>
+  </tr>
+</table>
+
+# Admin Panel : Manage Orders Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483975/samples/mobile_21_cdcvp9.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677483972/samples/mobile_22_ujol9j.png"/></td>
+  </tr>
+</table>
+
+# Admin Panel : Manage Admin Page
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677484126/samples/mobile_24_hy21vq.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677484126/samples/mobile_23_ydfc50.png"/></td>
+  </tr>
+</table>
+
+
+
+# Tech Stack
+ # Front-End
+- HTML
+- CSS
+- JavaScript
+- React
+
+# Back-End
+- NodeJS
+- Express
+- MongoDB
+
+
+# External CSS Library
+-Chakra UI
+
+#Front-End Deployment - vercel
+#Back-End Deployment - Cyclic 
+
+# Folder Structure and Packages
+==>Before you start:
    - I have already created all the folders which you will need during journey.
 
    - Dont use any other folder to make files if you are doing please inform the
@@ -37,7 +166,7 @@ Step-1- Navigate to proeject directory using `$cd remarkable-veil-524`
 
 Step-2- install node_modules using `$cd npm install`
 
-- It will install some common dependencies like :- <br />
+- It will install some common dependencies:- <br />
     - `$npm install react-router-dom redux react-redux redux-thunk axios`<br />
     - `$npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion`
 
@@ -56,10 +185,10 @@ Step-2- install node_modules using `$cd npm install`
 
         2- How to create branches:
             - $git branch <branch-name> (without angle brackets)
-        
+
         3- How to switch branches:
             -$git switch <branch-name>  (without angle brackets)
-        
+
         4- How to pull:
             -$git pull origin <branch-name>    (without angle brackets)
 
@@ -69,7 +198,9 @@ Step-2- install node_modules using `$cd npm install`
     - Chakra-Templets - https://chakra-templates.dev/#<br />
     - String Builder - https://codebeautify.org/string-builder<br />
     - Chat-gpt - https://chat.openai.com/chat<br />
-    - Your-Team-members- You can use Slack to communicate<br />
+    - Your-Team-members- https://chat.whatsapp.com/KR80RM0zbWi6agJVFL66Z9<br />
+
+
 # DATABASE SCHEMAS
 
 # endpoints:-

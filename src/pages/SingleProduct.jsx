@@ -8,24 +8,34 @@ import {
   Stack,
   Text,
   Skeleton,
+  useToast,
+  Grid,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsFillCartCheckFill, BsFillStarFill } from "react-icons/bs";
 import { HiInformationCircle } from "react-icons/hi";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
+import { AUTO, CENTER, FILL_PARENT, R1, R3 } from "../constants/typography";
+import { CART_UPDATE } from "../Redux/cart/cart.types";
 
 const SingleProduct = () => {
+  const {token,isAuth} = useSelector((state)=>state.authReducer)
   let params = useParams();
   // console.log(params);
   let { id } = params;
-
+  const nav = useNavigate()
   let [prodata, setprodata] = useState({});
   let [error, seterror] = useState("");
   let [isloading, setisloading] = useState(false);
   let [arraydata, setarraydata] = useState([]);
+  const [presnet,setPresent]=useState(false)
+  const toast = useToast()
+  const [cartLoading,setCartLoading] = useState(false)
+  const dispatch = useDispatch()
 
   let getmydata = async (id) => {
     try {
@@ -40,11 +50,89 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(()=>{
+    console.log(id,"my id")
+    const getStatus=async()=>{
+      let res =await axios({
+        method :"get",
+        url:BASE_URL+`/cart/${id}`,
+        headers:{
+          Authorization:token
+        }
+      })
+
+      // console.log(res)/
+
+
+      if(res.data.status==1){
+        setPresent(true)
+
+      }else{
+        console.log(res)
+      }
+    }
+    getStatus()
+
+
+
+  },[])
+
+  useEffect(() => {
     getmydata(id);
   }, [id]);
 
   console.log(prodata);
   console.log(arraydata, "araary");
+
+
+  const handleAdd = async()=>{
+    setCartLoading(true)
+    let cartItem = [{...prodata,quantity:1,pid:prodata._id,sizes:"M"}]
+    delete cartItem[0]["_id"] //delete previous id
+    console.log(prodata._id)
+    console.log(cartItem,"cart data")
+    let res =await axios({
+      method :"post",
+      url:BASE_URL+`/cart`,
+      data:cartItem,
+      headers:{
+        Authorization:token
+      }
+    })
+
+  console.log(res)
+    if(res.data.status==1){
+      dispatch({type:CART_UPDATE})
+      setPresent(true)
+      setCartLoading(false)
+
+      toast({
+        title: 'Item added in cart',
+        description: res.status.message,
+        status: 'success',
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      })
+
+    }else{
+      setCartLoading(false)
+      toast({
+        title: 'Failed to add in Cart',
+        description: res.status.message,
+        status: 'error',
+        position:"top",
+        duration: 2000,
+        isClosable: true,
+      })
+    }
+
+  }
+
+
 
   if (isloading) {
     return (
@@ -82,13 +170,13 @@ const SingleProduct = () => {
           ))}
         </SimpleGrid>
 
-        <Stack gap={2} margin={"auto"} w={{ base: "80%", md: "45%" }}>
-          <Heading textAlign={"left"} color={"blue.500"}>
-            {prodata.category}
+        <Stack gap={2} w={FILL_PARENT}>
+          <Heading textAlign={"left"} >
+            {prodata.title}
           </Heading>
           <Text textAlign={"left"}>
-            Introducing our comfortable and stylish shirt, perfect for any
-            occasion. Crafted from high-quality, breathable fabric, this shirt
+            Introducing our comfortable and stylish {prodata.category}, perfect for any
+            occasion. Crafted from high-quality, breathable fabric, this {prodata.category}
             is designed for all-day wear. The classic fit provides a flattering
             silhouette, while the soft texture ensures maximum comfort. .
           </Text>
@@ -106,7 +194,7 @@ const SingleProduct = () => {
 
           <Box w={"80%"}>
             <Text textAlign={"left"}>
-              This shirt is easy to care for and can be machine washed and
+              This {prodata.category} is easy to care for and can be machine washed and
               tumble dried, making it ideal for busy individuals who don't have
               the time for hand-washing or dry-cleaning.
             </Text>
@@ -125,9 +213,9 @@ const SingleProduct = () => {
               </Text>
             </HStack>
 
-            <HStack textAlign={"left"}>
-              <Stack gap={1} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" p={2} transition={"transform 2s"}
-            _hover={{ transform: "scale(0.8)",border: "2px dotted black"  }}>
+            <Grid w={FILL_PARENT} gap={4} mt={4} placeItems={CENTER} gridTemplateColumns={{base:R1,sm:R1,md:R1,lg:R3}} >
+              <Stack gap={1} border= "2px solid orange" p={2} transition={"transform 2s"}
+            _hover={{ transform: "scale(0.8)"  }}>
                 <Text fontWeight={"bold"}>No Cost EMI</Text>
                 <Text>
                   Avail No Cost EMI on select cards for orders above ₹3000
@@ -135,8 +223,8 @@ const SingleProduct = () => {
                 <Text color={"teal"}>1 offer</Text>
               </Stack>
 
-              <Stack gap={1} p={2} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" transition={"transform 2s"}
-            _hover={{ transform: "scale(0.8)",border: "2px dotted black"  }}>
+              <Stack gap={1} p={2} border= "2px solid orange"  transition={"transform 2s"}
+            _hover={{ transform: "scale(0.8)" }}>
                 <Text fontWeight={"bold"}>No Cost EMI</Text>
                 <Text>
                   Avail No Cost EMI on select cards for orders above ₹3000
@@ -144,28 +232,28 @@ const SingleProduct = () => {
                 <Text color={"teal"}>1 offer</Text>
               </Stack>
 
-              <Stack gap={1} p={2} boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" transition={"transform 2s"}
-            _hover={{ transform: "scale(0.8)",border: "2px dotted black"  }}>
+              <Stack gap={1} p={2} border= "2px solid orange"  transition={"transform 2s"}
+            _hover={{ transform: "scale(0.8)"  }}>
                 <Text fontWeight={"bold"}>No Cost EMI</Text>
                 <Text>
                   Avail No Cost EMI on select cards for orders above ₹3000
                 </Text>
                 <Text color={"teal"}>1 offer</Text>
               </Stack>
-            </HStack>
+            </Grid>
           </Box>
 
           <Stack
             textAlign={"left"}
-            w={{ base: "90%", md: "80%" }}
-            p={5}
+            w={FILL_PARENT}         
             transition={"transform 2s"}
+            padding={5}
             _hover={{ transform: "scale(1.1)"  }}
-            // border={"1px solid grey"}
-            boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+            border={"2px solid orange"}
+            
           >
             <HiInformationCircle fontSize={"25px"} />
-            <Text fontWeight={"bold"}>Made In India</Text>
+            <Text  fontWeight={"bold"}>Made In India</Text>
             <Text>
               Designed by IKEA of Sweden. Bringing quality, design, and
               affordability together.
@@ -173,17 +261,31 @@ const SingleProduct = () => {
           </Stack>
 
           <Button
-            bg={"blue.500"}
+            bg={presnet? "green.500" : "blue.500" }
             color="white"
+            isDisabled={cartLoading}
+            isLoading={cartLoading}
             fontSize={"20px"}
             w={{ base: "90%", md: "60%" }}
+            margin={AUTO}
             transition={"transform 2s"}
             _hover={{ transform: "scale(0.8)"  }}
+            onClick={()=>{
+             if(isAuth){
+              if(!presnet){
+                handleAdd()
+              }else{
+                nav("/cart")
+              }
+             }else{
+              nav("/login")
+             }
+            }}
           >
             {" "}
             <BsFillCartCheckFill fill="white" />{" "}
-            <Text fontSize={"20px"} ml={"10px"} color="white">
-              Add to cart
+            <Text fontSize={"20px"} ml={"10px"} color="white" >
+              {presnet? "Go To Cart" : "Add to cart" }
             </Text>
           </Button>
         </Stack>

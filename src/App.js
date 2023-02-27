@@ -11,6 +11,8 @@ function App() {
       <Navbar />
       <AllRoutes />
       <Footer />
+
+
     </Box>
   );
 }

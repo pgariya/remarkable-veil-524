@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Select } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Input, Select } from '@chakra-ui/react'
 import React from 'react'
 import social from "../../../assets/social.jpeg"
 import "./Footer.css"
@@ -7,12 +7,14 @@ import {BsFacebook} from "react-icons/bs"
 import {TfiYoutube} from "react-icons/tfi"
 import {BsPinterest} from "react-icons/bs"
 import {ImInstagram} from "react-icons/im"
+import { AUTO, CENTER, COLUMN, NONE, ROW, SB, START } from '../../../constants/typography'
 const Footer = () => {
   return (
     <div className='footer-container'>
         <p style={{textAlign:"left",fontWeight:"bold",marginLeft:"5px"}}>Sign up for our newsletter</p>
-        <Flex className='top-footer'>
-        <Input className='input-field' w={"30rem"} mt={3} ml={1}
+        <Flex gap={4} justifyContent={SB} direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} >
+        <Flex alignItems={CENTER}>
+      <Input className='input-field' w={"30rem"} mt={3} ml={1}
     isInvalid
     errorBorderColor='orange.400'
     focusBorderColor='black'
@@ -23,9 +25,9 @@ const Footer = () => {
   <option value='male'>Male</option>
   <option value='female'>Female</option>
 </Select>
-  <Button background={'orange.400'} mt={3} ml={3} color='white'>SUBMIT</Button>
-
-  <Flex className='social'>
+  <Button fontSize={{base:"10px",sm:"16px",md:"16px"}} background={'orange.400'} mt={3} ml={3} color='white'>SUBMIT</Button>
+        </Flex>
+    <Flex className='social' fontSize={"25px"} gap={2} justifyContent={CENTER} >
     <p><AiFillGooglePlusCircle/></p>
     <p><BsFacebook/></p>
     <p><TfiYoutube/></p>
@@ -35,11 +37,11 @@ const Footer = () => {
   </Flex>
       </Flex>
 
-      <Flex className='footer-2'>
+      <Flex  direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} justifyContent={SB} >
 
-        <Flex className="footer-list">
+        <Flex padding={2} gap={50} mt={4}  direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} justifyContent={SB} >
 
-        <ul style={{listStyle:"none",marginRight:"5rem"}}>
+        <ul style={{listStyle:"none"}}>
             <li style={{fontWeight:"bold"}}>Yepme #freshfashion</li>
             <li>Insolvency Proceedings</li>
             <li>In the Press</li>
@@ -48,7 +50,7 @@ const Footer = () => {
             
         </ul>
 
-        <ul style={{listStyle:"none",marginRight:"5rem"}}>
+        <ul style={{listStyle:"none"}}>
             <li style={{fontWeight:"bold"}}>Help</li>
             <li>Contact Us</li>
             <li>FAQs</li>
@@ -70,9 +72,9 @@ const Footer = () => {
         </ul>
         </Flex>
 
-        <div className="social">
+        <Box margin={{base:AUTO,sm:AUTO,md:AUTO,lg:0}}  >
             <img src={social} alt="" />
-        </div>
+        </Box>
       </Flex>
 
 
@@ -80,7 +82,8 @@ const Footer = () => {
 
 
     <Box className="bottom">
-        <p>MEN: Shirts / T-shirts / Ethnic Wear / Jeans / Winter Wear / Sports Shoes / Watches / Sherwanis / Kurtas / Pyjamas / Polos / Sandals / Tracksuits / Shorts / Party Wear</p> <br />
+      <Box m={2}>
+      <p>MEN: Shirts / T-shirts / Ethnic Wear / Jeans / Winter Wear / Sports Shoes / Watches / Sherwanis / Kurtas / Pyjamas / Polos / Sandals / Tracksuits / Shorts / Party Wear</p> <br />
         <p>WOMEN: Tops / Dresses / Footwear / Shirts / Jeans / Kurtis / Skirts / Pants / Salwar Kameez / Sarees / Salwar & Churidars / Watches / Lingerie / Lehengas / Jewellery / Jumpsuits / Party Wear</p><br />
         <p>Most Searches On Yepme: Fresh Fashion Sale / Yepme Offers</p><br />
         <p>Online Shopping - Fashion & Lifestyle Store for Men & Women</p><br />
@@ -89,6 +92,9 @@ const Footer = () => {
         <p>Filtering the latest trends, prospects never seem to end when you are shopping with Yepme. Our new graphical user interface helps customers in surfing their desired products with ease. Keep finding a new you throughout our website, round the clock. Best ever combos, reasonable price, wide product range & durable quality; a promise that Yepme as a brand has made to its customers. Yepme has engrossed itself on making online shopping much easier and enjoyable with its extensive product range starting from the western range of tops, shoes, watches, accessories to the ethnic edge of sarees and jewellery in women fashion. Also, the uber cool additions to men shirts, T-shirts, bottoms, footwear & accessories in men’s fashion has helped us in drawing a larger platform for men throughout the country. We also endeavour on providing back to back irresistible offers and reasonably priced products on Yepme.com to make online shopping rich & prolific.</p><br />
         <p>Our shopaholic mantra for customers is accompanied by our ethics of never compromising on the quality and delivering value based expectations. With a customer- friendly approach, Yepme endeavors to deliver your products within the shortest possible time, and with a surety that you will love what you choose. In case, you are interested in any alternate product from our website, a focussed team is there to render you help when you are showing your passion to exceed in online shopping. Fashion ideas are shared through our lookbooks on website just to match the expectation of yours with what we have designed it for. Our fashion blog has always tried to keep you updated with the most desirable pair ups and the latest in trends.</p><br />
         
+
+      </Box>
+      
         <Box className="black-footer">
         © 2016 www.yepme.com All rights reserved. Powered by Omni enabler.
         </Box>

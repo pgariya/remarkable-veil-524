@@ -5,6 +5,7 @@ import {
   Heading,
   HStack,
   Image,
+  Input,
   SimpleGrid,
   Skeleton,
   Stack,
@@ -12,57 +13,136 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import Paginantion from "../Admin/components/Paginantion/Paginantion";
 import DrawerPro from "../components/ProductsPage/Drawer";
 import SideBar from "../components/ProductsPage/SideBar";
 import { BASE_URL } from "../constants/config";
 import { CONTAINER } from "../constants/constants";
 import { NONE } from "../constants/typography";
-import ConvertToQuery from "../scripts/converToQuery";
 
 const ProductPage = () => {
+
   let [productlist, setproductlist] = useState([]);
+  let [fulldata,setfullData]= useState([]);
   let [isError, setisError] = useState(false);
   let [isloading, setisloading] = useState(false);
   let [griddata, setgriddata] = useState("");
   let [count, setcount] = useState(0);
   const [page, setPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
+  let [query,setQuery]= useState("");
 
-  let [filterdata, setfilterdata] = useState({
-    brand: "",
-    price: "",
-    occassion: "",
-    material: "",
-    color: "",
-    size: "",
+let [searchParam,setSearchParam] = useSearchParams()
+
+
+
+useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [page]);
+
+  const [filter, setFilter] = useState({
+    price: {
+      max: false,
+      min: false,
+    },
+    color: {
+      black: false,
+      gray: false,
+      red: false,
+      yellow: false,
+      orange: false,
+      white: false,
+      pink: false,
+      purple: false,
+      blue: false,
+      green: false
+    },
+    material: {
+      cotton: false,
+      rayon: false,
+      polyester: false,
+      naylon: false
+    },
+    occasion: {
+      casual: false,
+      party: false,
+      formal: false,
+      semiformal: false
+    },
+    brand: {
+      levis: false,
+      vanheusen: false,
+      yepme: false,
+      zara: false,
+      mufti:false
+    },
   });
 
   const search = useLocation().search;
   const catg = new URLSearchParams(search).get("category");
+  
+  
 
-  console.log(filterdata, "dta object haaaa");
-
-  for (let x in filterdata) {
-    if (filterdata[x] == "") {
-      delete filterdata[x];
+  // console.log(catg);
+  // console.log(filter, "ya main change krnnnna haaa")
+  
+  //filtered object of object
+  function findTrueValues(data) {
+    const trueValues = {};
+    for (const key in data) {
+      for (const subKey in data[key]) {
+        if (data[key][subKey]) {
+          trueValues[key] = subKey;
+        }
+      }
     }
+    return trueValues;
   }
-  let myQuery = ConvertToQuery(filterdata);
-  console.log(filterdata, "dta object modified");
-  console.log(myQuery);
 
-  console.log(catg);
+  
+ let finalFilter= findTrueValues(filter)
+console.log(finalFilter, "dataa dakhoooo")
+
+
+const searchParams = new URLSearchParams(finalFilter);
+const queryString = searchParams.toString();
+// console.log(queryString); 
+
+
+
+
+//search box.....
+const handleInputChange = (event) => {
+  console.log("input box")
+  const query = event.target.value.toLowerCase();
+  setQuery(query);
+
+if(!query){
+  setproductlist(fulldata)
+}else{
+
+  const filteredData = productlist.filter(item => item.title.includes(query));
+  setproductlist(filteredData);
+
+}
+
+  
+}
+
+console.log(productlist, "after search")
+
 
   let getdata = async (page) => {
     try {
       setisloading(true);
       let res = await axios.get(
-        `${BASE_URL}/product?category=${catg}&page=${page}${myQuery}`
+        `${BASE_URL}/product?category=${catg}&page=${page}&${queryString}`
       );
+      console.log(res,"my data")
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
+      setfullData(res.data.data)
       setTotalPage(res.data.count);
       setisloading(false);
     } catch (err) {
@@ -75,9 +155,11 @@ const ProductPage = () => {
 
   useEffect(() => {
     getdata(page);
-  }, [page]);
+  }, [page, filter,searchParam]);
 
   useEffect(() => {}, [griddata]);
+
+
 
   let handleHigh = () => {
     setcount(count + 1);
@@ -98,6 +180,14 @@ const ProductPage = () => {
   };
 
   console.log(productlist);
+
+  
+  useEffect(() =>{
+    setSearchParam({category: `${catg}` ,page:page+1 , ...finalFilter })
+  
+  },[page, filter])
+
+
 
   if (isloading) {
     return (
@@ -137,16 +227,17 @@ const ProductPage = () => {
         {/* //filter part is here  */}
         <Box
           display={{ base: "none", lg: "block" }}
-          w={"40%"}
+          maxw={"50%"}
+          minW={"30%"}
           // border="5px solid"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
         >
-          {console.log(filterdata, "filterrrr data .. ha yaaa")}
-          <SideBar filterdata={filterdata} setfilterdata={setfilterdata} />
+
+          <SideBar filter={filter} setFilter={setFilter} />
         </Box>
 
-        <Box display={{ base: "block", lg: "none" }} pt={5}>
-          <DrawerPro />
+        <Box display={{ base: "block", lg: "none" }} pt={5}  w={"20%"} >
+          <DrawerPro filter={filter} setFilter={setFilter} />
         </Box>
 
         {/* //data is shown in SimpleGrid  */}
@@ -174,6 +265,11 @@ const ProductPage = () => {
               <Button onClick={() => setgriddata(4)}> 4 </Button>
             </HStack>
           </Stack>
+
+     <Stack my={5} >
+     <Input w={"90%"} m="auto" type="text" value={query} onChange={handleInputChange} placeholder="Search Items by Title. . . . . . . ." />
+     </Stack>
+
 
           <SimpleGrid
             columns={

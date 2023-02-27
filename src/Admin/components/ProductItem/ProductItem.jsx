@@ -35,7 +35,7 @@ import {
     MenuDivider,
   } from "@chakra-ui/react";
 import { FILL_PARENT, ORANGE, R1, R2, R3 } from "../../../constants/typography";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../../constants/config";
 import { useSelector } from "react-redux";
@@ -92,6 +92,20 @@ export default function ProductItem({setRefresh,
 
         })
 
+        const [images,setImages] =useState({})
+
+        useEffect(()=>{
+
+            image.split(",").map((el,i)=>{
+                setImages((prev)=>{
+                    return {...prev,["image"+i]:el}
+                })
+            })
+
+        },[])
+        // console.log(images)
+
+
         // console.log(product)
 
         const handleInput =(e)=>{
@@ -99,6 +113,15 @@ export default function ProductItem({setRefresh,
             let text = e.target.value
     
             setProduct((prev)=>{
+                return {...prev,[e.target.name]:text}
+            })
+        }
+
+        const handleImage =(e)=>{
+
+            let text = e.target.value
+    
+            setImages((prev)=>{
                 return {...prev,[e.target.name]:text}
             })
         }
@@ -126,10 +149,10 @@ export default function ProductItem({setRefresh,
           <ModalCloseButton />
           <ModalBody>
           <Grid p={4} gap={2} gridTemplateColumns={{lg:R3,sm:R2,base:R1}}>
-            <VStack>
-                <Text>Images Links</Text>
-                <Input  value={product.image} placeholder="Image Links separated by comma (,) required" name="image" onChange={handleInput} border={"1px solid orange"} color="orange"></Input>
-            </VStack>
+            {image.split(",").map((el,i)=><VStack>
+                <Text>Images Links {i+1}</Text>
+                <Input  value={images["image"+i]} placeholder="Image Links separated by comma (,) required" name={"image"+i} onChange={handleImage} border={"1px solid orange"} color="orange"></Input>
+            </VStack>)}
 
             <VStack>
                 <Text>Product title</Text>
@@ -243,10 +266,20 @@ export default function ProductItem({setRefresh,
             </Button>
             <Button isLoading={loading} variant='outline' color={ORANGE} onClick={async()=>{
                 setLoading(true)
+                let allImages = ""
+                for(let x in images){
+                    allImages+=images[x]+","
+                }
+                // console.log(allImages)
+
+                let myproduct = {...product,image:allImages}
+
+               
+
                 let res = await axios({
                     method:"patch",
                     url:BASE_URL+`/product/${_id}`,
-                    data:product,
+                    data:myproduct,
                     headers:{
                         Authorization:token
                     }
