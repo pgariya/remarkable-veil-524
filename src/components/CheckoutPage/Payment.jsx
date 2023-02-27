@@ -24,9 +24,8 @@ import {
   PinInputField,
   PinInput,
 } from "@chakra-ui/react";
-// import styles from "./Checkout.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   COLUMN,
   FILL_PARENT,
@@ -41,7 +40,6 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/config";
 import { Loading } from "../Loading";
 import { CART_UPDATE } from "../../Redux/cart/cart.types";
-import OTP from "../LoginPage/OTP";
 import {
   Modal,
   ModalOverlay,
@@ -51,6 +49,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+
+import emailjs from "@emailjs/browser"
+
 
 const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const [value, setValue] = React.useState("Cash on delivery");
@@ -63,31 +64,57 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const [pinCode, setPinCode] = useState();
   const [otp, setOTP] = useState("");
   const [phone, setPhone] = useState();
-  //   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
-  const [formData, setFormData] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  
   const toast = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
 
-  const handleInputChange = (value) => {
-    console.log("working");
-    setOTP(value);
-    console.log(otp);
-  };
-  const handleSubmit = async () => {
-    if (name == "" || address == "" || pinCode == "" || phone == "") {
+  const handleOTP = () => {
+    if (name === "" || address ==="" || pinCode === "" || phone === "" || email==="") {
+
       toast({
         description: "fill all the details",
         status: "error",
         duration: 2000,
         isClosable: true,
       });
-    } else {
+
+    }
+      else {
+    const otp = Math.floor(Math.random() * 9000) + 1000;
+    console.log(otp)
+
+    emailjs.send('service_95mup4r', 'template_h0n101p', {
+      user_email_id: email,
+      otp: otp
+    }, 'OAAgS4baLv5nwlbcO')
+      .then(function (response) {
+        onOpen()
+        localStorage.setItem("paymentotp", otp)
+        console.log('Email sent:', response);
+      }, function (error) {
+        console.log('Email error:', error);
+      });
+    
+    }
+  }
+
+  const handleInputChange = (value) => {
+   
+    setOTP(value);
+    console.log(otp);
+  };
+  const handleSubmit = async () => {
+    
+    if (otp == localStorage.getItem("paymentotp")) {
+      console.log("Payment OTP correct");
+      
+
       setLoading(true);
       let newCartData = cart?.map((el) => {
         el.address = name + "," + address + "," + pinCode + "," + phone;
@@ -105,6 +132,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
           Authorization: token,
         },
         data: newCartData,
+
       });
 
       if (res.data.status == 1) {
@@ -136,6 +164,21 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
         });
       }
     }
+    else {
+      setLoading(false);
+
+      toast({
+        size: "500",
+        position: "top-center",
+        title: "Order not placed",
+        description: "Please try again later",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+
+    }
+    
   };
 
   if (loading) return <Loading />;
@@ -195,6 +238,21 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
                     border={"1px solid black"}
                     value={pinCode}
                     onChange={(e) => setPinCode(e.target.value)}
+                  />
+                </FormControl>
+              </Box>
+
+ <Box mb="1.3rem">
+                <FormControl isRequired>
+                  <FormLabel>Email </FormLabel>
+                  <Input
+                    // placeholder="email"
+                    borderRadius={"none"}
+                    border={"1px solid black"}
+                    mb="1rem"
+                    value={email}
+                    name="user_email_id"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </FormControl>
               </Box>
@@ -358,7 +416,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
                     width={"100%"}
                     borderRadius={"none"}
                     _hover="none"
-                    onClick={onOpen}
+                    onClick={handleOTP}
                   >
                     Place Order
                   </Button>
