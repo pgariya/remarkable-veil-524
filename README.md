@@ -1,14 +1,13 @@
 # About
 Styluxe is an one-stop-shop for all your shopping needs. With a vast collection of products of  fashion and clothing, we offer a seamless shopping experience. Our user-friendly interface and secure payment options ensure a hassle-free shopping experience for our customers. Shop with us today and discover the convenience of online shopping!
-<div display="flex">
 
-<img width="70%" src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677479901/samples/mobile_2_wnfs3h.png"></img>
+<table>
+  <tr>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677479901/samples/mobile_2_wnfs3h.png"/></td>
+    <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481068/mobile_3_eymwp5.png"/></td>
+  </tr>
+</table>
 
-<img width="30%" src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481068/mobile_3_eymwp5.png"></img>
-
-
-
-</div>
 
 
 # Tech Stack
