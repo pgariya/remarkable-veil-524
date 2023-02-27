@@ -17,16 +17,16 @@ Styluxe is an one-stop-shop for all your shopping needs. With a vast collection 
 <img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481871/samples/mobile_6_xj1exm.png"/>
 
 
-<div align="center">
+
+
+<p align="center" width="100%">
 <table>
   <tr>
     <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677481581/samples/mobile_5_hp6t6h.png"/></td>
     <td valign="top"><img src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677482003/samples/mobile_9_wt4ug9.png"/></td>
   </tr>
 </table>
-
-</div>
-
+</p>
 
 
 
