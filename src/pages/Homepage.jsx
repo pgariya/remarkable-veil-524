@@ -1,4 +1,5 @@
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SlideShow from "../components/Homepage/SlideShow";
 import { CONTAINER } from "../constants/constants";
@@ -6,6 +7,11 @@ import { BOLD, FILL_PARENT, R1, R2, R3, R4 } from "../constants/typography";
 import "../styles/styles.css";
 
 export default function Homepage() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box width={FILL_PARENT} m={"auto"} mt={CONTAINER}>
       {/* 1st box  */}

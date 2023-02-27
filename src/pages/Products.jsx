@@ -22,6 +22,7 @@ import { CONTAINER } from "../constants/constants";
 import { NONE } from "../constants/typography";
 
 const ProductPage = () => {
+
   let [productlist, setproductlist] = useState([]);
   let [fulldata,setfullData]= useState([]);
   let [isError, setisError] = useState(false);
@@ -36,7 +37,9 @@ let [searchParam,setSearchParam] = useSearchParams()
 
 
 
-
+useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [page]);
 
   const [filter, setFilter] = useState({
     price: {

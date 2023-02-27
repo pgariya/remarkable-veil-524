@@ -37,6 +37,9 @@ export default function Login() {
       navigate("/")
     }
   },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const {isAuth,isLoading,isError} = useSelector((store) => store.authReducer)
   console.log("check",isAuth)

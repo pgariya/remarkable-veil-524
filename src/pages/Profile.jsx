@@ -19,6 +19,7 @@ import { BASE_URL } from '../constants/config';
 import { CONTAINER } from '../constants/constants';
 import { AUTO, CENTER, COLUMN, FILL_30PARENT, FILL_70PARENT, FILL_90PARENT, FILL_PARENT, LARGE, ORANGE, RELATIVE, ROW, START, STICKY, TOP, X2LARGE, YELLOW } from '../constants/typography';
 import { LOGOUT } from '../Redux/auth/auth.type';
+import {Loading}  from "../components/Loading"
 
 export default function Profile() {
 
@@ -26,6 +27,10 @@ export default function Profile() {
   const dispatch = useDispatch()
   const [order,setOrder] = useState([])
   const [loading,setLoading]= useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(()=>{
 
@@ -58,6 +63,8 @@ export default function Profile() {
 
   },[])
 
+  if(loading) return <Loading />
+
   return (
     <Flex width={FILL_90PARENT} direction={{base:COLUMN,sm:COLUMN,md:COLUMN,lg:ROW}} alignItems={"flex-start"} gap={8} m={AUTO} mt={{base:10,sm:10,md:10,lg:160}}    >
       
@@ -89,6 +96,10 @@ export default function Profile() {
            {email}
           </Text>
           <Button colorScheme={ORANGE} onClick={()=>{
+             sessionStorage.removeItem("token");
+             sessionStorage.removeItem("isAuth");
+             sessionStorage.removeItem("name");
+             sessionStorage.removeItem("email");
             dispatch({type:LOGOUT})
           }}>{"Logout"}</Button>
         

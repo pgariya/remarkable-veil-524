@@ -25,7 +25,7 @@ const Footer = () => {
   <option value='male'>Male</option>
   <option value='female'>Female</option>
 </Select>
-  <Button background={'orange.400'} mt={3} ml={3} color='white'>SUBMIT</Button>
+  <Button fontSize={{base:"10px",sm:"16px",md:"16px"}} background={'orange.400'} mt={3} ml={3} color='white'>SUBMIT</Button>
         </Flex>
     <Flex className='social' fontSize={"25px"} gap={2} justifyContent={CENTER} >
     <p><AiFillGooglePlusCircle/></p>

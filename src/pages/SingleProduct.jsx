@@ -49,6 +49,10 @@ const SingleProduct = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(()=>{
     console.log(id,"my id")
     const getStatus=async()=>{

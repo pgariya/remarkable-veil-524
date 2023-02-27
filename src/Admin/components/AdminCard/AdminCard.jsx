@@ -1,4 +1,4 @@
-import { Badge, Button, Card, CardBody, Flex, HStack, Text } from "@chakra-ui/react";
+import { Badge, Button, Card, CardBody, Flex, HStack, Text, Wrap } from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
@@ -20,7 +20,7 @@ export default function AdminCard({ name, email,setRole,role }) {
           <HStack gap={2}  >
             <Badge fontSize={LARGE} colorScheme={YELLOW}>{name}</Badge>
             <Badge fontSize={SMALL} colorScheme={GREEN}>{role}</Badge>
-            <Text>{email}</Text>
+            <Wrap fontSize={{base:"8px",md:"12px",lg:"16px"}} padding={2}>{email}</Wrap>
           </HStack>
           <Menu>
             <MenuButton fontSize={{base:SMALL,sm:MEDIUM}} as={Button} rightIcon={<FaAngleDown />}>
