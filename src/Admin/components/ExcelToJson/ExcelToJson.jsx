@@ -33,7 +33,7 @@ function ExcelToJson({ getProductData ,loading}) {
         return obj;
       });
       getProductData(dataArray);
-    // console.log(dataArray)
+    console.log(dataArray)
       //   const blob = new Blob([JSON.stringify(dataArray)], { type: 'application/json' });
       //   saveAs(blob, 'data.json');
     };

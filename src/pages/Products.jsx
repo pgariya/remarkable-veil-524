@@ -136,6 +136,7 @@ console.log(productlist, "after search")
       let res = await axios.get(
         `${BASE_URL}/product?category=${catg}&page=${page}&${queryString}`
       );
+      console.log(res,"my data")
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
       setfullData(res.data.data)
