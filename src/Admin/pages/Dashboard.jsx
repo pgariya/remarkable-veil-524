@@ -40,6 +40,8 @@ async function getData(query,endpoint,token){
 
 }
 
+
+
 export default function Dashboard({user}) {
 
   let {token} = useSelector((state)=>state.authReducer)
@@ -53,6 +55,12 @@ export default function Dashboard({user}) {
   const [kurtis,setKurtis] = useState(0)
   const [pw,setPw] = useState(0)
   // console.log(user)
+
+  
+  useEffect
+  (() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(()=>{
 

@@ -29,6 +29,10 @@ export default function EditProduct(){
     const [page,setPage] = useState(0)
     const [totalPage,setTotalPage] = useState(0)
     const [refresh,setRefresh] =useState(false)
+    
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [page]);
 
 
     useEffect(()=>{

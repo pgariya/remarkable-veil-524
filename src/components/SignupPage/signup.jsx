@@ -14,7 +14,7 @@ import {
     Link,
     useToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { BASE_URL } from '../../constants/config';
 import { useNavigate } from 'react-router-dom';
@@ -84,6 +84,10 @@ export default function Signup() {
                 })
         }
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
     if(loading) return <Loading />
 

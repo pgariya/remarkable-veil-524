@@ -49,6 +49,10 @@ const Cartscreen = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch()
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     let getCartData = async () => {
@@ -60,6 +64,7 @@ const Cartscreen = () => {
           Authorization: token,
         },
       });
+
 
       console.log(res);
       if (res.data.status == 1) {

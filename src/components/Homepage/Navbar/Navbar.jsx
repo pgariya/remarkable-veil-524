@@ -46,7 +46,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../constants/config";
 const Navbar = () => {
   const nav = useNavigate();
-  const { isAuth,token } = useSelector((state) => state.authReducer);
+  const { isAuth,token ,name} = useSelector((state) => state.authReducer);
   const { cartStatus } = useSelector((state) => state.cartReducer);
   console.log(cartStatus)
   const dispatch = useDispatch();
@@ -91,19 +91,18 @@ const Navbar = () => {
         <p>WELCOME GUEST</p>
         <p>DOWNLOAD APP</p>
         <p>CONTACT US</p>
-        <p
+        <Text
+        cursor={POINTER}
           onClick={() => {
             if (!isAuth) {
               nav("/login");
             } else {
-              sessionStorage.removeItem("token");
-              sessionStorage.removeItem("isAuth");
-              dispatch({ type: LOGOUT });
+             nav("/profile")
             }
           }}
         >
-          {isAuth ? "LOGOUT" : "LOGIN"}
-        </p>
+          {isAuth ? "Hi, "+name.split(" ")[0] : "LOGIN"}
+        </Text>
         <p
           onClick={() => {
             if (isAuth) {
@@ -150,11 +149,12 @@ const Navbar = () => {
           gap={4}
         >
           <Image
-            src="http://staticawsy.yepme.com/images/own-yepme-store-btn.png"
+            src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677477714/samples/styluxe/own-yepme-store-btn_g29q2g.png"
             alt=""
           />
           <Box fontWeight={"bold"}>
-            <p
+            <Text
+            cursor={POINTER}
               onClick={() => {
                 if (isAuth) {
                   nav("/cart");
@@ -162,7 +162,7 @@ const Navbar = () => {
               }}
             >
               Cart({count})
-            </p>
+            </Text>
 
             <p>Loyalty Points</p>
           </Box>
@@ -182,18 +182,18 @@ const Navbar = () => {
             {count}
           </Button>
           <Text
+          fontSize={"8px"}
+          
             cursor={POINTER}
             onClick={() => {
               if (!isAuth) {
                 nav("/login");
               } else {
-                sessionStorage.removeItem("token");
-                sessionStorage.removeItem("isAuth");
-                dispatch({ type: LOGOUT });
+                nav("/profile")
               }
             }}
           >
-            {isAuth ? "LOGOUT" : "LOGIN"}
+            {isAuth ? "Hi, "+name.split(" ")[0] : "LOGIN"}
           </Text>{" "}
           {isAuth&&<FcBusinessman onClick={()=>{
             nav("/profile")
@@ -225,22 +225,25 @@ const Navbar = () => {
                   <p>WELCOME GUEST</p>
                   <p>DOWNLOAD APP</p>
                   <p>CONTACT US</p>
-                  <p
+                  <Text
+                    cursor={POINTER}
                     onClick={() => {
                       if (!isAuth) {
                         nav("/login");
                         onClose();
                       } else {
-                        sessionStorage.removeItem("token");
-                        sessionStorage.removeItem("isAuth");
+                sessionStorage.removeItem("token");
+                sessionStorage.removeItem("isAuth");
+                sessionStorage.removeItem("name");
+                sessionStorage.removeItem("email");
                         dispatch({ type: LOGOUT });
                         onClose();
                       }
                     }}
                   >
                     {isAuth ? "LOGOUT" : "LOGIN"}
-                  </p>
-                  <p
+                  </Text>
+                  {/* <p
                     onClick={() => {
                       if (isAuth) {
                         nav("/profile");
@@ -253,23 +256,29 @@ const Navbar = () => {
                     ) : (
                       "LOGIN WITH FACEBOOK"
                     )}
-                  </p>
-                  <Image
-                    src="http://staticawsy.yepme.com/images/own-yepme-store-btn.png"
+                  </p> */}
+                  {/* <Image
+                    src="https://res.cloudinary.com/ducgyycpy/image/upload/v1677477714/samples/styluxe/own-yepme-store-btn_g29q2g.png"
                     alt=""
-                  />
+                  /> */}
                   <Box fontWeight={"bold"}>
-                    <p
-                      onClick={() => {
-                        if (isAuth) {
-                          nav("/cart");
-                        }
-                      }}
-                    >
-                      Cart(0)
-                    </p>
+                  <Button
+                  m={0}
+                  p={0}
+            _hover={{ bg: TRANSPARENT }}
+            _active={{ bg: TRANSPARENT }}
+            bg={TRANSPARENT}
+            leftIcon={<AiOutlineShoppingCart />}
+            onClick={() => {
+              if (isAuth) {
+                nav("/cart");
+              }
+            }}
+          >
+            Cart({count})
+          </Button>
 
-                    <p>Loyalty Points</p>
+                    {/* <p>Loyalty Points</p> */}
                   </Box>
                 </VStack>
 

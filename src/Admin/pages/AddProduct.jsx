@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Grid, Input, useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../constants/config";
 import { CENTER, FILL_PARENT, ORANGE, R1, R2, R3, X2LARGE } from "../../constants/typography";
@@ -90,6 +90,11 @@ export default function AddProduct(){
 
         
     }
+
+    
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return<Box padding={"8px 0px"} w={FILL_PARENT}>
         <ExcelToJson loading={loading} getProductData={getProductData} />
         <Badge m={"8px"} fontSize={X2LARGE} colorScheme={"orange"}>Add Single Product</Badge>

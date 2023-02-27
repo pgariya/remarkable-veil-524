@@ -34,6 +34,9 @@ export default function ManageAdmins({userRole}){
     const [page,setPage]=useState(0)
     const [totalPage,setTotalPage]=useState(0) //work on this
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [page]);
 
     const ChangeRole = async(newRole,email)=>{
         setLoading(true)
