@@ -182,7 +182,7 @@ const Navbar = () => {
             {count}
           </Button>
           <Text
-          fontSize={"8px"}
+          fontSize={isAuth?"8px":"16px"}
           
             cursor={POINTER}
             onClick={() => {
