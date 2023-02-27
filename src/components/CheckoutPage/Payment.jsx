@@ -53,7 +53,7 @@ import {
 import emailjs from "@emailjs/browser"
 
 
-const Payment = ({ cart, cartTotal, totalSavings, token }) => {
+const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
   const [value, setValue] = React.useState("Cash on delivery");
   //   const {cart, isLoading} = useSelector((store)=>{return {
   //     cart: store.CartReducer.cart,
@@ -64,7 +64,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const [pinCode, setPinCode] = useState();
   const [otp, setOTP] = useState("");
   const [phone, setPhone] = useState();
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
   const [loading, setLoading] = useState(false);
   
@@ -75,7 +75,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
   const finalRef = useRef(null);
 
   const handleOTP = () => {
-    if (name === "" || address ==="" || pinCode === "" || phone === "" || email==="") {
+    if (name === "" || address ==="" || pinCode === "" || phone === "") {
 
       toast({
         description: "fill all the details",
@@ -243,18 +243,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token }) => {
               </Box>
 
  <Box mb="1.3rem">
-                <FormControl isRequired>
-                  <FormLabel>Email </FormLabel>
-                  <Input
-                    // placeholder="email"
-                    borderRadius={"none"}
-                    border={"1px solid black"}
-                    mb="1rem"
-                    value={email}
-                    name="user_email_id"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </FormControl>
+                
               </Box>
               <Box mb="1.3rem">
                 <FormControl isRequired>

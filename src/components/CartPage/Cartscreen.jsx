@@ -40,7 +40,7 @@ import Payment from "../CheckoutPage/Payment";
 import { Link } from "react-router-dom";
 import { CART_UPDATE } from "../../Redux/cart/cart.types";
 const Cartscreen = () => {
-  const { token } = useSelector((state) => state.authReducer);
+  const { token,email } = useSelector((state) => state.authReducer);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refesh, setRefresh] = useState(false);
@@ -171,6 +171,7 @@ const Cartscreen = () => {
                       cart={cart}
                       cartTotal={cartTotal}
                       token={token}
+                      email={email}
                       totalSavings={totalSavings}
                     />
                   </ModalBody>
