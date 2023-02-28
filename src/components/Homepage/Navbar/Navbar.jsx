@@ -15,16 +15,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import {
+  ABSOLUTE,
   AUTO,
   CENTER,
+  COLUMN,
   FILL_55PARENT,
   FILL_90PARENT,
   FILL_PARENT,
   POINTER,
+  RELATIVE,
   SB,
   SE,
   START,
   TRANSPARENT,
+  WHITE,
 } from "../../../constants/typography";
 import { LOGOUT } from "../../../Redux/auth/auth.type";
 import Menu1 from "./Menu";
@@ -44,41 +48,77 @@ import {
 import "./Navbar.css";
 import axios from "axios";
 import { BASE_URL } from "../../../constants/config";
+import { SearchItem } from "../../SearchItem";
 const Navbar = () => {
   const nav = useNavigate();
-  const { isAuth,token ,name} = useSelector((state) => state.authReducer);
+  const { isAuth, token, name } = useSelector((state) => state.authReducer);
   const { cartStatus } = useSelector((state) => state.cartReducer);
-  console.log(cartStatus)
+  console.log(cartStatus);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
-  const [count,setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [search, setSearch] = useState("");
+  const [searchData, setSearchData] = useState([]);
+  const [display,setDisplay] = useState(false)
+  
 
-
-  useEffect(()=>{
-
-    let getCount=async()=>{
-
+  useEffect(() => {
+    let getCount = async () => {
       let res = await axios({
-        method:"get",
-        url:BASE_URL+"/cart",
-        headers:{
-          Authorization:token
-        }
-      })
-      if(res.data.status==1){
-        setCount(res.data.count)
+        method: "get",
+        url: BASE_URL + "/cart",
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (res.data.status == 1) {
+        setCount(res.data.count);
       }
+    };
+
+    if (isAuth) {
+      getCount();
+    } else {
+      setCount(0);
     }
+  }, [cartStatus, isAuth]);
 
-   if(isAuth){
-    
-    getCount()
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      setDisplay(false)
+      setSearchData([])
+      nav(`/search?q=${search}`);
+    }
+  };
 
-   }else{
-    setCount(0)
-   }
-  },[cartStatus,isAuth])
+  useEffect(() => {
+    if(search==""){
+      setDisplay(false)
+      setSearchData([])
+    }
+    let getRecomandation = async () => {
+      let res = await axios({
+        method: "get",
+        url: BASE_URL + `/search?q=${search}&page=${0}`,
+      });
+
+      if (res.data.status == 1) {
+        setSearchData(res.data.data);
+      } else {
+      }
+    };
+    const timeoutId = setTimeout(() => {
+      if(search!=""){
+        getRecomandation();
+      }
+    }, 200);
+
+    return () => {
+      
+      clearTimeout(timeoutId);
+    };
+  }, [search]);
 
   return (
     <Box className="nav-container">
@@ -92,16 +132,16 @@ const Navbar = () => {
         <p>DOWNLOAD APP</p>
         <p>CONTACT US</p>
         <Text
-        cursor={POINTER}
+          cursor={POINTER}
           onClick={() => {
             if (!isAuth) {
               nav("/login");
             } else {
-             nav("/profile")
+              nav("/profile");
             }
           }}
         >
-          {isAuth ? "Hi, "+name.split(" ")[0] : "LOGIN"}
+          {isAuth ? "Hi, " + name.split(" ")[0] : "LOGIN"}
         </Text>
         <p
           onClick={() => {
@@ -132,13 +172,44 @@ const Navbar = () => {
           w={FILL_55PARENT}
           gap={2}
         >
-          <Input
-            isInvalid
-            errorBorderColor="orange.400"
-            focusBorderColor="black"
-            placeholder="search for FRESH FASHION!"
-          />
-          <Button background={"orange.400"} color="white">
+          <VStack position={RELATIVE} w={FILL_PARENT}>
+            <Input
+              isInvalid
+              errorBorderColor="orange.400"
+              focusBorderColor="black"
+              onKeyDown={handleKeyDown}
+              placeholder="search for FRESH FASHION!"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setDisplay(true)
+              }}
+            />
+
+            <Flex
+            overflowY={"scroll"}
+              direction={COLUMN}
+              justifyContent={CENTER}
+              bg={WHITE}
+              display={display? "block" : "none"}
+              position={ABSOLUTE}
+              top={10}
+              w={FILL_PARENT}
+              borderRadius={8}
+              maxH={500}
+            >
+              {searchData?.map((el) => (
+                <SearchItem  setDisplay={setDisplay} {...el} />
+              ))}
+            </Flex>
+          </VStack>
+          <Button
+            onClick={() => {
+              nav(`/search?q=${search}`);
+            }}
+            background={"orange.400"}
+            color="white"
+          >
             Search
           </Button>
         </HStack>
@@ -154,7 +225,7 @@ const Navbar = () => {
           />
           <Box fontWeight={"bold"}>
             <Text
-            cursor={POINTER}
+              cursor={POINTER}
               onClick={() => {
                 if (isAuth) {
                   nav("/cart");
@@ -182,22 +253,26 @@ const Navbar = () => {
             {count}
           </Button>
           <Text
-          fontSize={isAuth?"8px":"16px"}
-          
+            fontSize={isAuth ? "8px" : "16px"}
             cursor={POINTER}
             onClick={() => {
               if (!isAuth) {
                 nav("/login");
               } else {
-                nav("/profile")
+                nav("/profile");
               }
             }}
           >
-            {isAuth ? "Hi, "+name.split(" ")[0] : "LOGIN"}
+            {isAuth ? "Hi, " + name.split(" ")[0] : "LOGIN"}
           </Text>{" "}
-          {isAuth&&<FcBusinessman onClick={()=>{
-            nav("/profile")
-          }} size={'20px'} />}
+          {isAuth && (
+            <FcBusinessman
+              onClick={() => {
+                nav("/profile");
+              }}
+              size={"20px"}
+            />
+          )}
           <>
             <Button
               _hover={{ bg: TRANSPARENT }}
@@ -232,10 +307,10 @@ const Navbar = () => {
                         nav("/login");
                         onClose();
                       } else {
-                sessionStorage.removeItem("token");
-                sessionStorage.removeItem("isAuth");
-                sessionStorage.removeItem("name");
-                sessionStorage.removeItem("email");
+                        sessionStorage.removeItem("token");
+                        sessionStorage.removeItem("isAuth");
+                        sessionStorage.removeItem("name");
+                        sessionStorage.removeItem("email");
                         dispatch({ type: LOGOUT });
                         onClose();
                       }
@@ -262,21 +337,21 @@ const Navbar = () => {
                     alt=""
                   /> */}
                   <Box fontWeight={"bold"}>
-                  <Button
-                  m={0}
-                  p={0}
-            _hover={{ bg: TRANSPARENT }}
-            _active={{ bg: TRANSPARENT }}
-            bg={TRANSPARENT}
-            leftIcon={<AiOutlineShoppingCart />}
-            onClick={() => {
-              if (isAuth) {
-                nav("/cart");
-              }
-            }}
-          >
-            Cart({count})
-          </Button>
+                    <Button
+                      m={0}
+                      p={0}
+                      _hover={{ bg: TRANSPARENT }}
+                      _active={{ bg: TRANSPARENT }}
+                      bg={TRANSPARENT}
+                      leftIcon={<AiOutlineShoppingCart />}
+                      onClick={() => {
+                        if (isAuth) {
+                          nav("/cart");
+                        }
+                      }}
+                    >
+                      Cart({count})
+                    </Button>
 
                     {/* <p>Loyalty Points</p> */}
                   </Box>
@@ -295,13 +370,41 @@ const Navbar = () => {
         mb={2}
         gap={2}
       >
-        <Input
-          isInvalid
-          errorBorderColor="orange.400"
-          focusBorderColor="black"
-          placeholder="search for FRESH FASHION!"
-        />
+         <VStack position={RELATIVE} w={FILL_PARENT}>
+            <Input
+              isInvalid
+              errorBorderColor="orange.400"
+              focusBorderColor="black"
+              onKeyDown={handleKeyDown}
+              placeholder="search for FRESH FASHION!"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setDisplay(true)
+              }}
+            />
+
+            <Flex
+            overflowY={"scroll"}
+              direction={COLUMN}
+              justifyContent={CENTER}
+              bg={WHITE}
+              display={display? "block" : "none"}
+              position={ABSOLUTE}
+              top={10}
+              w={FILL_PARENT}
+              borderRadius={8}
+              maxH={500}
+            >
+              {searchData?.map((el) => (
+                <SearchItem  setDisplay={setDisplay} {...el} />
+              ))}
+            </Flex>
+          </VStack>
         <IconButton
+          onClick={() => {
+            nav(`/search?q=${search}`);
+          }}
           background={"orange.400"}
           icon={<GrSearch />}
           color="white"
