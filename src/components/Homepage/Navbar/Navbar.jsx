@@ -206,6 +206,7 @@ const Navbar = () => {
           </VStack>
           <Button
             onClick={() => {
+              setDisplay(false)
               nav(`/search?q=${search}`);
             }}
             background={"orange.400"}
@@ -405,6 +406,7 @@ const Navbar = () => {
           </VStack>
         <IconButton
           onClick={() => {
+            setDisplay(false)
             nav(`/search?q=${search}`);
           }}
           background={"orange.400"}
