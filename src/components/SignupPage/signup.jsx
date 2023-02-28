@@ -78,7 +78,7 @@ export default function Signup() {
                 // console.log(res)
                     setLoading(false)
                     toast({
-                        title: 'Somrthin went wrong.',
+                        title: 'Something Went Wrong',
                         description: res.message,
                         status: 'error',
                         duration: 3000,
@@ -92,7 +92,7 @@ export default function Signup() {
                     console.log(err)
                     setLoading(false)
                     toast({
-                        title: 'Error.',
+                        title: 'Error',
                         description: "Please try again.",
                         status: 'error',
                         duration: 3000,
