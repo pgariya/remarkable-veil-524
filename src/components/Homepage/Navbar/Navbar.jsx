@@ -191,6 +191,7 @@ const Navbar = () => {
               direction={COLUMN}
               justifyContent={CENTER}
               bg={WHITE}
+              zIndex={500}
               display={display? "block" : "none"}
               position={ABSOLUTE}
               top={10}
@@ -391,6 +392,7 @@ const Navbar = () => {
               bg={WHITE}
               display={display? "block" : "none"}
               position={ABSOLUTE}
+              zIndex={500}
               top={10}
               w={FILL_PARENT}
               borderRadius={8}
