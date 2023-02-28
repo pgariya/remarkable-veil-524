@@ -60,16 +60,33 @@ export default function Signup() {
                 }
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res)
+
+                    if(res.status==1){
+                        // console.log(res)
                     setLoading(false)
                     toast({
                         title: 'Account created.',
-                        description: "We've created your account for you.",
+                        description: res.message,
                         status: 'success',
-                        duration: 9000,
+                        duration: 3000,
                         isClosable: true,
                     })
                     navigate("/login")
+
+                    }else{
+
+                // console.log(res)
+                    setLoading(false)
+                    toast({
+                        title: 'Somrthin went wrong.',
+                        description: res.message,
+                        status: 'error',
+                        duration: 3000,
+                        isClosable: true,
+                    })
+
+                    }
+                    
                 })
                 .catch(err => {
                     console.log(err)
@@ -78,7 +95,7 @@ export default function Signup() {
                         title: 'Error.',
                         description: "Please try again.",
                         status: 'error',
-                        duration: 9000,
+                        duration: 3000,
                         isClosable: true,
                     })
                 })

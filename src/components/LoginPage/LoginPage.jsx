@@ -48,6 +48,18 @@ export default function Login() {
   // console.log("login- location:", location)
 
   const handleSubmit = () => {
+    if(email==""||password==""){
+
+      toast({
+        title: 'Please enter all details',
+        description: "Email or Password maybe empty",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+    })
+
+      return
+    }
     let userData = {
       email,
       password
