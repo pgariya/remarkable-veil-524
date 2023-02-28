@@ -422,8 +422,8 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                       <ModalCloseButton />
                       <ModalBody>
                        <VStack>
+                       <Text color={ORANGE}>Please check your email for OTP</Text>
                        <HStack>
-                        <Text color={ORANGE}>Please check your email for OTP</Text>
                           <PinInput value={otp} onChange={handleInputChange}>
                             <PinInputField />
                             <PinInputField />
