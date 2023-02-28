@@ -51,8 +51,8 @@ export default function Login() {
     if(email==""||password==""){
 
       toast({
-        title: 'Please enter all details',
-        description: "Email or Password maybe empty",
+        title: 'Please enter all the details',
+        description: "Email or Password Maybe Empty",
         status: 'error',
         duration: 3000,
         isClosable: true,
