@@ -129,18 +129,18 @@ export default function OrderItem({setRefresh,
               Status
             </MenuButton>
             <MenuList>
-            <MenuList as={Button} display={status==ORDERED?"none":"block"}  onClick={()=>{
+            <MenuItem as={Button} display={status==ORDERED?"none":"block"}  onClick={()=>{
                 handleStatus(ORDERED)
-            }}>Ordered</MenuList>
-            <MenuList as={Button} display={status==DISPATCHED?"none":"block"} onClick={()=>{
+            }}>Ordered</MenuItem>
+            <MenuItem as={Button} display={status==DISPATCHED?"none":"block"} onClick={()=>{
                 handleStatus(DISPATCHED)
-            }}>Dispatched</MenuList>
-            <MenuList as={Button} display={status==DELIVERED?"none":"block"} onClick={()=>{
+            }}>Dispatched</MenuItem>
+            <MenuItem as={Button} display={status==DELIVERED?"none":"block"} onClick={()=>{
                 handleStatus(DELIVERED)
-            }}>Delivered</MenuList>
-            <MenuList as={Button} display={status==CANCELLED?"none":"block"} onClick={()=>{
+            }}>Delivered</MenuItem>
+            <MenuItem as={Button} display={status==CANCELLED?"none":"block"} onClick={()=>{
                 handleStatus(CANCELLED)
-            }}>Cancelled</MenuList>
+            }}>Cancelled</MenuItem>
           
 
             </MenuList>

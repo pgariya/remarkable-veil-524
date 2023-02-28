@@ -19,6 +19,10 @@ export default function SearchPage() {
   const [loading,setLoading] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+  
+  useEffect(() => {
     let getSearch = async () => {
         setLoading(true)
       let res = await axios({
