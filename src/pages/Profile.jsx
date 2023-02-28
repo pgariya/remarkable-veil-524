@@ -20,17 +20,20 @@ import { CONTAINER } from '../constants/constants';
 import { AUTO, CENTER, COLUMN, FILL_30PARENT, FILL_70PARENT, FILL_90PARENT, FILL_PARENT, LARGE, ORANGE, RELATIVE, ROW, START, STICKY, TOP, X2LARGE, YELLOW } from '../constants/typography';
 import { LOGOUT } from '../Redux/auth/auth.type';
 import {Loading}  from "../components/Loading"
+import Paginantion from "../Admin/components/Paginantion/Paginantion";
 
 export default function Profile() {
 
   const {token,name,email} = useSelector((state)=>state.authReducer)
   const dispatch = useDispatch()
   const [order,setOrder] = useState([])
+  const [page,setPage] = useState(0)
+  const [totalPage,setTotalPage]=useState(0)
   const [loading,setLoading]= useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
 
   useEffect(()=>{
 
@@ -38,7 +41,7 @@ export default function Profile() {
       setLoading(true)
       let res = await axios({
         method:"get",
-        url:BASE_URL+"/order",
+        url:BASE_URL+"/order?page="+page,
         headers:{
           Authorization:token
         }
@@ -47,6 +50,7 @@ export default function Profile() {
       if(res.data.status==1){
 
         setOrder(res.data.data)
+        setTotalPage(res.data.count)
 
         setLoading(false)
 
@@ -61,7 +65,7 @@ export default function Profile() {
 
 
 
-  },[])
+  },[page])
 
   if(loading) return <Loading />
 
@@ -112,8 +116,14 @@ export default function Profile() {
         <Badge mb={8} fontSize={X2LARGE}  colorScheme={YELLOW}>Your Orders</Badge>
 
         {order?.map((el)=><OrderLayout {...el} />)}
+      
+        <Paginantion page={page} totalPage={totalPage} divide={5} setPage={setPage}/>
 
       </VStack>
+
+
+
+      
     </Flex>
    
   );
