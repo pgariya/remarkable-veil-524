@@ -30,6 +30,7 @@ import {
   COLUMN,
   FILL_PARENT,
   GREEN,
+  ORANGE,
   RED,
   ROW,
   START,
@@ -420,7 +421,9 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                       <ModalHeader>Paste the OTP </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody>
-                        <HStack>
+                       <VStack>
+                       <HStack>
+                        <Text color={ORANGE}>Please check your email for OTP</Text>
                           <PinInput value={otp} onChange={handleInputChange}>
                             <PinInputField />
                             <PinInputField />
@@ -428,6 +431,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                             <PinInputField />
                           </PinInput>
                         </HStack>
+                       </VStack>
                       </ModalBody>
 
                       <ModalFooter>
