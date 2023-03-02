@@ -33,10 +33,8 @@ const CartPage = ({image,
     const {token} = useSelector((state)=>state.authReducer)
 
     const toast = useToast()
-    console.log(qty)
     const handQuantity=async(e)=>{
     
-      console.log(qty)
       let res = await axios({
         method:"patch",
         data:{quantity:Number(e.target.value)},
@@ -48,9 +46,7 @@ const CartPage = ({image,
 
       if(res.data.status==1){
         setRefresh((prev)=>!prev)
-        console.log(res)
       }else{
-        console.log(res)
 
       }
     
@@ -71,7 +67,7 @@ const CartPage = ({image,
       <p className='cartitem-price'>
 {RUPEES_SYMBOL+" " +price}
       </p>
-      <select value={qty}   className='cartitem-select' onChange={handQuantity}>
+      <select value={qty||1}   className='cartitem-select' onChange={handQuantity}>
         <option value={1}>1</option>
         <option value={2}>2</option>
         <option value={3}>3</option>

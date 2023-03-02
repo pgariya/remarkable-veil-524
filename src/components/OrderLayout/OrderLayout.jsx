@@ -26,7 +26,6 @@ export default function OrderLayout({image,
     delivery,
     tags,stock}){
         
-console.log(orderDate)
 
     return <Flex borderBottom={"1px solid orange"} alignItems={"flex-start"} gap={4}>
 

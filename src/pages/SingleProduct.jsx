@@ -25,7 +25,6 @@ import { CART_UPDATE } from "../Redux/cart/cart.types";
 const SingleProduct = () => {
   const {token,isAuth} = useSelector((state)=>state.authReducer)
   let params = useParams();
-  // console.log(params);
   let { id } = params;
   const nav = useNavigate()
   let [prodata, setprodata] = useState({});
@@ -54,7 +53,6 @@ const SingleProduct = () => {
   }, []);
 
   useEffect(()=>{
-    console.log(id,"my id")
     const getStatus=async()=>{
       let res =await axios({
         method :"get",
@@ -64,14 +62,12 @@ const SingleProduct = () => {
         }
       })
 
-      // console.log(res)/
 
 
       if(res.data.status==1){
         setPresent(true)
 
       }else{
-        console.log(res)
       }
     }
     getStatus()
@@ -84,16 +80,12 @@ const SingleProduct = () => {
     getmydata(id);
   }, [id]);
 
-  console.log(prodata);
-  console.log(arraydata, "araary");
 
 
   const handleAdd = async()=>{
     setCartLoading(true)
     let cartItem = [{...prodata,quantity:1,pid:prodata._id,sizes:"M"}]
     delete cartItem[0]["_id"] //delete previous id
-    console.log(prodata._id)
-    console.log(cartItem,"cart data")
     let res =await axios({
       method :"post",
       url:BASE_URL+`/cart`,
@@ -103,7 +95,6 @@ const SingleProduct = () => {
       }
     })
 
-  console.log(res)
     if(res.data.status==1){
       dispatch({type:CART_UPDATE})
       setPresent(true)
@@ -163,7 +154,7 @@ const SingleProduct = () => {
           mt="20px"
         >
           {arraydata.map((el) => (
-            <Box >
+            <Box  key={el}>
               <Image src={el} alt="single items" transition={"transform 2s"}
             _hover={{ transform: "scale(0.8)",border: "2px dotted black"  }}/>
             </Box>

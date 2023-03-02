@@ -84,8 +84,6 @@ useEffect(() => {
   
   
 
-  // console.log(catg);
-  // console.log(filter, "ya main change krnnnna haaa")
   
   //filtered object of object
   function findTrueValues(data) {
@@ -102,19 +100,14 @@ useEffect(() => {
 
   
  let finalFilter= findTrueValues(filter)
-console.log(finalFilter, "dataa dakhoooo")
-
 
 const searchParams = new URLSearchParams(finalFilter);
 const queryString = searchParams.toString();
-// console.log(queryString); 
-
 
 
 
 //search box.....
 const handleInputChange = (event) => {
-  console.log("input box")
   const query = event.target.value.toLowerCase();
   setQuery(query);
 
@@ -130,8 +123,6 @@ if(!query){
   
 }
 
-console.log(productlist, "after search")
-
 
   let getdata = async (page) => {
     try {
@@ -139,7 +130,6 @@ console.log(productlist, "after search")
       let res = await axios.get(
         `${BASE_URL}/product?category=${catg}&page=${page}&${queryString}`
       );
-      console.log(res,"my data")
       //?gender=female ya kuch bhi filter krna ha too
       setproductlist(res.data.data);
       setfullData(res.data.data)
@@ -149,9 +139,6 @@ console.log(productlist, "after search")
       setisError(true);
     }
   };
-
-  console.log(page, "pages ha yaa");
-  console.log(totalPage, "total page");
 
   useEffect(() => {
     getdata(page);
@@ -178,8 +165,6 @@ console.log(productlist, "after search")
 
     setproductlist(lowdata);
   };
-
-  console.log(productlist);
 
   
   useEffect(() =>{
@@ -218,7 +203,6 @@ console.log(productlist, "after search")
     );
   }
 
-  console.log(griddata);
   return (
     <Box mt={CONTAINER}>
       {isError !== "" && <h1>{isError}</h1>}
@@ -309,6 +293,7 @@ console.log(productlist, "after search")
                   >
                     {el.sizes.split(",").map((e) => (
                       <Box
+                      key={100000 + Math.floor(Math.random() * 900000)}
                         borderRadius={"5px"}
                         border={"2px solid"}
                         px={2}

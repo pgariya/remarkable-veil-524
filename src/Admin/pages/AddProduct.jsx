@@ -39,7 +39,6 @@ export default function AddProduct(){
     const [loading,setLoading] = useState(false)
 
     const [product,setProduct] =useState(schema)
-    // console.log(product)
     const toast = useToast()
     const getProductData =async(data)=>{
         setLoading(true)

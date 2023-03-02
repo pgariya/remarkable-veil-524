@@ -42,10 +42,8 @@ export default function Login() {
   }, []);
 
   const {isAuth,isLoading,isError} = useSelector((store) => store.authReducer)
-  console.log("check",isAuth)
  
   const location = useLocation()
-  // console.log("login- location:", location)
 
   const handleSubmit = () => {
     if(email==""||password==""){
@@ -64,7 +62,6 @@ export default function Login() {
       email,
       password
     }
-    console.log(userData);
 
     dispatch(login(userData)).then(({ status, msg }) => {
 

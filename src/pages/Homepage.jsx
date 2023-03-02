@@ -253,9 +253,9 @@ export default function Homepage() {
             height="400px"
             src="https://www.youtube.com/embed/ZId7sehdFoI"
             title="Spring Summer Collection TVC - Unreasonably Fashionable TV Ad by Yepme"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
             
           ></iframe>
         </Box>

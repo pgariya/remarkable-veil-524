@@ -53,7 +53,6 @@ const Navbar = () => {
   const nav = useNavigate();
   const { isAuth, token, name } = useSelector((state) => state.authReducer);
   const { cartStatus } = useSelector((state) => state.cartReducer);
-  console.log(cartStatus);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
@@ -200,7 +199,7 @@ const Navbar = () => {
               maxH={500}
             >
               {searchData?.map((el) => (
-                <SearchItem  setDisplay={setDisplay} {...el} />
+                <SearchItem  key={el._id}  setDisplay={setDisplay} {...el} />
               ))}
             </Flex>
           </VStack>
@@ -400,7 +399,7 @@ const Navbar = () => {
               maxH={500}
             >
               {searchData?.map((el) => (
-                <SearchItem  setDisplay={setDisplay} {...el} />
+                <SearchItem key={el._id}  setDisplay={setDisplay} {...el} />
               ))}
             </Flex>
           </VStack>

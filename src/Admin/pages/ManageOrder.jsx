@@ -50,7 +50,6 @@ export default function ManageOrder() {
         },
       });
 
-      // console.log(res)
 
       if (res.data.status == 1) {
         setProduct(res.data.data);

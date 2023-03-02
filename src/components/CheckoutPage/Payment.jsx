@@ -62,9 +62,9 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
   //     }})
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [pinCode, setPinCode] = useState();
+  const [pinCode, setPinCode] = useState("");
   const [otp, setOTP] = useState("");
-  const [phone, setPhone] = useState();
+  const [phone, setPhone] = useState("");
   // const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,6 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
     }
       else {
     const otp = Math.floor(Math.random() * 9000) + 1000;
-    console.log(otp)
 
     emailjs.send('service_95mup4r', 'template_h0n101p', {
       user_email_id: email,
@@ -97,9 +96,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
       .then(function (response) {
         onOpen()
         localStorage.setItem("paymentotp", otp)
-        console.log('Email sent:', response);
       }, function (error) {
-        console.log('Email error:', error);
       });
     
     }
@@ -108,12 +105,10 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
   const handleInputChange = (value) => {
    
     setOTP(value);
-    console.log(otp);
   };
   const handleSubmit = async () => {
     
     if (otp == localStorage.getItem("paymentotp")) {
-      console.log("Payment OTP correct");
       
 
       setLoading(true);
@@ -124,7 +119,6 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
         return el;
       });
 
-      console.log(newCartData);
 
       let res = await axios({
         method: "post",
@@ -405,7 +399,6 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                     isDisabled={loading}
                     width={"100%"}
                     borderRadius={"none"}
-                    _hover="none"
                     onClick={handleOTP}
                   >
                     Place Order

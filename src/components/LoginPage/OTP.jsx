@@ -46,22 +46,18 @@ const OTP = ({handle}) => {
 
   const handleOTP = () => {
     // const payload = { email :email}
-    // console.log("E",email);
     // onOpen()
     // axios.post(`http://localhost:4500/user/generateOTP`, payload)
     //   .then((res) => {
-    //     console.log("res", res.data)
     //     //session save
     //     sessionStorage.setItem("otp", res.data.otp)
     //    alert("Check your mailbox")
     //   })
     //   .catch((err) =>{
-    //    console.log(err)
     //     alert("Something went wrong, Please try again")
     //   })
 
     const otp = Math.floor(Math.random() * 9000) + 1000;
-    console.log(otp)
 
     emailjs.send('service_95mup4r', 'template_h0n101p', {
       user_email_id: email,
@@ -70,27 +66,21 @@ const OTP = ({handle}) => {
       .then(function (response) {
         onOpen()
         localStorage.setItem("otp", otp)
-        console.log('Email sent:', response);
       }, function (error) {
-        console.log('Email error:', error);
       });
   }
   const handleInputChange = (value) => {
 
     setCheckOTP(value)
-    console.log(checkotp);
   }
   const handleSubmit = () => {
     //compare the OTP to original
 
-    console.log(`entered OTP`, checkotp);
     if (checkotp == localStorage.getItem("otp")) {
-      console.log("Verified");
       alert("User Verified")
       navigate("/")
     }
     else
-      console.log("not verify");
       alert("Not verified")
   }
 
