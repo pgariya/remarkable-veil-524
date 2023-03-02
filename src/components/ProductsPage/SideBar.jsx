@@ -44,54 +44,54 @@ const SideBar = ({ filter, setFilter }) => {
           <Box textAlign={"left"}>
             <Box>
               <Checkbox mr={3} name="sizes" value="36" onChange={handleSize} />
-              <label for="36">36</label>
+              <label htmlFor="36">36</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="38" onChange={handleSize} />
-              <label for="38">38</label>
+              <label htmlFor="38">38</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="40" onChange={handleSize} />
-              <label for="40">40</label>
+              <label htmlFor="40">40</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="42" onChange={handleSize} />
-              <label for="42">42</label>
+              <label htmlFor="42">42</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="44" onChange={handleSize} />
-              <label for="44">44</label>
+              <label htmlFor="44">44</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="46" onChange={handleSize} />
-              <label for="46">46</label>
+              <label htmlFor="46">46</label>
             </Box>
           </Box>
 
           <Box textAlign={"left"}>
             <Box>
               <Checkbox mr={3} name="sizes" value="XS" onChange={handleSize} />
-              <label for="XS">XS</label>
+              <label htmlFor="XS">XS</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="S" onChange={handleSize} />
-              <label for="S">S</label>
+              <label htmlFor="S">S</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="M" onChange={handleSize} />
-              <label for="M">M</label>
+              <label htmlFor="M">M</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="L" onChange={handleSize} />
-              <label for="L">L</label>
+              <label htmlFor="L">L</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="XL" onChange={handleSize} />
-              <label for="XL">XL</label>
+              <label htmlFor="XL">XL</label>
             </Box>
             <Box>
               <Checkbox mr={3} name="sizes" value="XXL" onChange={handleSize} />
-              <label for="XXL">XXL</label>
+              <label htmlFor="XXL">XXL</label>
             </Box>
           </Box>
         </Box>
@@ -119,7 +119,7 @@ const SideBar = ({ filter, setFilter }) => {
                 value="Below Rs 500"
                 onChange={handlePrice}
               />
-              <label for="Below Rs 500">Below Rs 500</label>
+              <label htmlFor="Below Rs 500">Below Rs 500</label>
             </Box>
             <Box>
               <Checkbox
@@ -128,7 +128,7 @@ const SideBar = ({ filter, setFilter }) => {
                 value="Rs 500-Rs 1000"
                 onChange={handlePrice}
               />
-              <label for="Rs 500-Rs 1000">Rs 500-Rs 1000</label>
+              <label htmlFor="Rs 500-Rs 1000">Rs 500-Rs 1000</label>
             </Box>
             <Box>
               <Checkbox
@@ -137,7 +137,7 @@ const SideBar = ({ filter, setFilter }) => {
                 value="Rs 1000-Rs 1500"
                 onChange={handlePrice}
               />
-              <label for="Rs 1000-Rs 1500">Rs 1000-Rs 1500</label>
+              <label htmlFor="Rs 1000-Rs 1500">Rs 1000-Rs 1500</label>
             </Box>
             <Box>
               <Checkbox
@@ -146,7 +146,7 @@ const SideBar = ({ filter, setFilter }) => {
                 value="Rs 1500-Rs 2000"
                 onChange={handlePrice}
               />
-              <label for="Rs 1500-Rs 2000">Rs 1500-Rs 2000</label>
+              <label htmlFor="Rs 1500-Rs 2000">Rs 1500-Rs 2000</label>
             </Box>
             <Box>
               <Checkbox
@@ -155,7 +155,7 @@ const SideBar = ({ filter, setFilter }) => {
                 value="Above Rs 2000"
                 onChange={handlePrice}
               />
-              <label for="Above Rs 2000">Above Rs 2000</label>
+              <label htmlFor="Above Rs 2000">Above Rs 2000</label>
             </Box>
           </Box>
         </Box>
@@ -184,7 +184,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.black}
             onChange={handleCheckboxChange}
           />
-              <label for="black">Black</label>
+              <label htmlFor="black">Black</label>
             </Box>
             <Box>
             <input
@@ -194,7 +194,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.gray}
             onChange={handleCheckboxChange}
           />
-              <label for="gray">Gray</label>
+              <label htmlFor="gray">Gray</label>
             </Box>
             <Box>
             <input
@@ -204,7 +204,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.red}
             onChange={handleCheckboxChange}
           />
-              <label for="red">Red</label>
+              <label htmlFor="red">Red</label>
             </Box>
             <Box>
             <input
@@ -214,7 +214,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.yellow}
             onChange={handleCheckboxChange}
           />
-              <label for="yellow">Yellow</label>
+              <label htmlFor="yellow">Yellow</label>
             </Box>
             <Box>
             <input
@@ -224,7 +224,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.blue}
             onChange={handleCheckboxChange}
           />
-              <label for="blue">Blue</label>
+              <label htmlFor="blue">Blue</label>
             </Box>
           </Box>
 
@@ -237,7 +237,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.green}
             onChange={handleCheckboxChange}
           />
-              <label for="green">green</label>
+              <label htmlFor="green">green</label>
             </Box>
             <Box>
              <input
@@ -247,7 +247,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.orange}
             onChange={handleCheckboxChange}
           />
-              <label for="orange">Orange</label>
+              <label htmlFor="orange">Orange</label>
             </Box>
             <Box>
             <input
@@ -257,7 +257,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.white}
             onChange={handleCheckboxChange}
           />
-              <label for="white">White</label>
+              <label htmlFor="white">White</label>
             </Box>
             <Box>
             <input
@@ -267,7 +267,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.pink}
             onChange={handleCheckboxChange}
           />
-              <label for="pink">Pink</label>
+              <label htmlFor="pink">Pink</label>
             </Box>
             <Box>
               
@@ -278,7 +278,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.color.purple}
             onChange={handleCheckboxChange}
           />
-              <label for="purple">Purple</label>
+              <label htmlFor="purple">Purple</label>
             </Box>
           </Box>
         </Box>
@@ -308,7 +308,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.material.cotton}
             onChange={handleCheckboxChange}
           />
-              <label for="cotton">Cotton</label>
+              <label htmlFor="cotton">Cotton</label>
             </Box>
             <Box>
               
@@ -319,7 +319,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.material.rayon}
             onChange={handleCheckboxChange}
           />
-              <label for="rayon">Rayon</label>
+              <label htmlFor="rayon">Rayon</label>
             </Box>
             <Box>
              
@@ -330,7 +330,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.material.polyester}
             onChange={handleCheckboxChange}
           />
-              <label for="polyester">Polyester</label>
+              <label htmlFor="polyester">Polyester</label>
             </Box>
             <Box>
               
@@ -341,7 +341,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.material.naylon}
             onChange={handleCheckboxChange}
           />
-              <label for="naylon">Naylon</label>
+              <label htmlFor="naylon">Naylon</label>
             </Box>
           </Box>
         </Box>
@@ -370,7 +370,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.occasion.casual}
             onChange={handleCheckboxChange}
           />
-              <label for="casual">Casual</label>
+              <label htmlFor="casual">Casual</label>
             </Box>
             <Box>
             <input
@@ -380,7 +380,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.occasion.party}
             onChange={handleCheckboxChange}
           />
-              <label for="party">Party</label>
+              <label htmlFor="party">Party</label>
             </Box>
             <Box>
             <input
@@ -390,7 +390,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.occasion.formal}
             onChange={handleCheckboxChange}
           />
-              <label for="formal">Formal</label>
+              <label htmlFor="formal">Formal</label>
             </Box>
             <Box>
             <input
@@ -400,7 +400,7 @@ const SideBar = ({ filter, setFilter }) => {
             checked={filter.occasion.semiformal}
             onChange={handleCheckboxChange}
           />
-              <label for="semiformal">Semi Formal</label>
+              <label htmlFor="semiformal">Semi Formal</label>
             </Box>
           </Box>
         </Box>
@@ -430,7 +430,7 @@ const SideBar = ({ filter, setFilter }) => {
                 checked={filter.brand.vanheusen}
                 onChange={handleCheckboxChange}
               />
-              <label for="van-heusen">van-heusen</label>
+              <label htmlFor="van-heusen">van-heusen</label>
             </Box>
             <Box>
               <input
@@ -440,7 +440,7 @@ const SideBar = ({ filter, setFilter }) => {
                 checked={filter.brand.levis}
                 onChange={handleCheckboxChange}
               />
-              <label for="levis">levis</label>
+              <label htmlFor="levis">levis</label>
             </Box>
             <Box>
               <input
@@ -450,7 +450,7 @@ const SideBar = ({ filter, setFilter }) => {
                 checked={filter.brand.yepme}
                 onChange={handleCheckboxChange}
               />
-              <label for="yepme">yepme</label>
+              <label htmlFor="yepme">yepme</label>
             </Box>
             <Box>
               <input
@@ -460,7 +460,7 @@ const SideBar = ({ filter, setFilter }) => {
                 checked={filter.brand.mufti}
                 onChange={handleCheckboxChange}
               />
-              <label for="mufti">mufti</label>
+              <label htmlFor="mufti">mufti</label>
             </Box>
             <Box>
               <input
@@ -470,7 +470,7 @@ const SideBar = ({ filter, setFilter }) => {
                 checked={filter.brand.zara}
                 onChange={handleCheckboxChange}
               />
-              <label for="zara">zara</label>
+              <label htmlFor="zara">zara</label>
             </Box>
           </Box>
         </Box>

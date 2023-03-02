@@ -50,7 +50,6 @@ export default function ManageAdmins({userRole}){
                 Authorization:token
             }
         })
-        // console.log(res)
         if(res.data.status==1){
 
             if(newRole==DELETE){
@@ -124,7 +123,6 @@ export default function ManageAdmins({userRole}){
                     }
                 })
 
-                // console.log(res)
 
                 if(res.data.status==1){
                 setAdmins(res.data.data)

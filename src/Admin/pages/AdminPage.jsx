@@ -63,7 +63,6 @@ export default function AdminPage(){
                 })
 
                 if(res.data.status==1){
-                    console.log(res.data.message)
                     setUser({
                         admin:"admin"+res.data.userId,
                         role:res.data.role,

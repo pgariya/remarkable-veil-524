@@ -50,7 +50,6 @@ export default function Signup() {
                 password,
                 phone
             }
-            console.log(payload);
             setLoading(true)
             fetch(`${BASE_URL}/user/register`, {
                 method: "POST",
@@ -62,7 +61,6 @@ export default function Signup() {
                 .then(res => {
 
                     if(res.status==1){
-                        // console.log(res)
                     setLoading(false)
                     toast({
                         title: 'Account created.',
@@ -75,7 +73,6 @@ export default function Signup() {
 
                     }else{
 
-                // console.log(res)
                     setLoading(false)
                     toast({
                         title: 'Something Went Wrong',
@@ -89,7 +86,6 @@ export default function Signup() {
                     
                 })
                 .catch(err => {
-                    console.log(err)
                     setLoading(false)
                     toast({
                         title: 'Error',

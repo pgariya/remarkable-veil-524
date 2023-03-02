@@ -54,7 +54,6 @@ export default function Dashboard({user}) {
   const [shirt,setShrit] = useState(0)
   const [kurtis,setKurtis] = useState(0)
   const [pw,setPw] = useState(0)
-  // console.log(user)
 
   
   useEffect

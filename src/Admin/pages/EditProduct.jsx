@@ -47,7 +47,6 @@ export default function EditProduct(){
                 }
             })
 
-            // console.log(res)
 
             if(res.data.status==1){
 

@@ -115,7 +115,7 @@ export default function Profile() {
  w={{base:FILL_PARENT,sm:FILL_PARENT,md:FILL_PARENT,lg:FILL_70PARENT}} mt={{base:180,sm:180,md:180,lg:0}} mb={40}>
         <Badge mb={8} fontSize={X2LARGE}  colorScheme={YELLOW}>Your Orders</Badge>
 
-        {order?.map((el)=><OrderLayout {...el} />)}
+        {order?.map((el)=><OrderLayout key={el._id} {...el} />)}
       
         <Paginantion page={page} totalPage={totalPage} divide={5} setPage={setPage}/>
 

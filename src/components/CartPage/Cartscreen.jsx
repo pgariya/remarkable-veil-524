@@ -66,13 +66,11 @@ const Cartscreen = () => {
       });
 
 
-      console.log(res);
       if (res.data.status == 1) {
         setCart(res.data.data);
         setLoading(false);
       } else {
         setLoading(false);
-        console.log("something went wrong");
       }
 
       dispatch({type:CART_UPDATE})
@@ -111,7 +109,7 @@ const Cartscreen = () => {
           Shopping Cart
         </Text>
           {cart.length > 0 ? (
-            cart?.map((el) => <CartPage setRefresh={setRefresh} {...el} />)
+            cart?.map((el) => <CartPage key={el._id} setRefresh={setRefresh} {...el} />)
           ) : (
             <VStack>
               <Image

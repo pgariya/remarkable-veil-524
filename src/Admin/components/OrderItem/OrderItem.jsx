@@ -75,7 +75,6 @@ export default function OrderItem({setRefresh,
         const { isOpen, onOpen, onClose } = useDisclosure()
         
 
-        // console.log(product)
         
         const handleStatus = async(status)=>{
             let res = await axios({

@@ -103,10 +103,8 @@ export default function ProductItem({setRefresh,
             })
 
         },[])
-        // console.log(images)
 
 
-        // console.log(product)
 
         const handleInput =(e)=>{
 
@@ -149,7 +147,7 @@ export default function ProductItem({setRefresh,
           <ModalCloseButton />
           <ModalBody>
           <Grid p={4} gap={2} gridTemplateColumns={{lg:R3,sm:R2,base:R1}}>
-            {image.split(",").map((el,i)=><VStack>
+            {image.split(",").map((el,i)=><VStack key={i}>
                 <Text>Images Links {i+1}</Text>
                 <Input  value={images["image"+i]} placeholder="Image Links separated by comma (,) required" name={"image"+i} onChange={handleImage} border={"1px solid orange"} color="orange"></Input>
             </VStack>)}
@@ -270,7 +268,6 @@ export default function ProductItem({setRefresh,
                 for(let x in images){
                     allImages+=images[x]+","
                 }
-                // console.log(allImages)
 
                 let myproduct = {...product,image:allImages}
 

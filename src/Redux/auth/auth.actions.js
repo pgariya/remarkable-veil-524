@@ -6,7 +6,7 @@ const loginRequestAction = () => {
 };
 
 const loginSuccessAction = (payload) => {
-  console.log(payload)
+  // console.log(payload)
   return { type: USER_LOGIN_SUCCESS, payload };
 };
 
@@ -20,7 +20,7 @@ export const login = (userData) => async (dispatch) => {
 
   try {
     const res = await axios.post(`${BASE_URL}/user/login`, userData);
-    console.log(res);
+    // console.log(res);
     if(res.data.status==1){
       dispatch(loginSuccessAction({token:res.data.token,name:res.data.name,email:res.data.email}));
       return { "status": res.data.status, "msg": res.data.message };
