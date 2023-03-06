@@ -50,33 +50,31 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-
 import emailjs from "@emailjs/browser"
 
+const Payment = ({ cart, cartTotal, totalSavings, token, email }) => {
 
-const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
-  const [value, setValue] = React.useState("Cash on delivery");
-  //   const {cart, isLoading} = useSelector((store)=>{return {
-  //     cart: store.CartReducer.cart,
-  //     isLoading :  store.CartReducer.isLoading
-  //     }})
+  const [value, setValue] = React.useState("Cash on delivery"); 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [otp, setOTP] = useState("");
   const [phone, setPhone] = useState("");
-  // const [email, setEmail] = useState("");
   const [textArea, setTextArea] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const toast = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = useRef(null);
-
+  const pub= process.env.REACT_APP_publicKey
+  const ser= process.env.REACT_APP_serviceID
+  const tem= process.env.REACT_APP_templateID
+ 
   const handleOTP = () => {
-    if (name === "" || address ==="" || pinCode === "" || phone === "") {
+    if (name === "" || address === "" || pinCode === "" || phone === "") {
 
       toast({
         description: "fill all the details",
@@ -86,30 +84,30 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
       });
 
     }
-      else {
-    const otp = Math.floor(Math.random() * 9000) + 1000;
+    else {
+      const otp = Math.floor(Math.random() * 9000) + 1000;
 
-    emailjs.send('service_95mup4r', 'template_h0n101p', {
-      user_email_id: email,
-      otp: otp
-    }, 'OAAgS4baLv5nwlbcO')
-      .then(function (response) {
-        onOpen()
-        localStorage.setItem("paymentotp", otp)
-      }, function (error) {
-      });
-    
+      emailjs.send(ser, tem, {
+        user_email_id: email,
+        otp: otp
+      }, pub)
+        .then(function (response) {
+          onOpen()
+          localStorage.setItem("paymentotp", otp)
+        }, function (error) {
+        });
+
     }
   }
 
   const handleInputChange = (value) => {
-   
+
     setOTP(value);
   };
   const handleSubmit = async () => {
-    
+
     if (otp == localStorage.getItem("paymentotp")) {
-      
+
 
       setLoading(true);
       let newCartData = cart?.map((el) => {
@@ -173,7 +171,7 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
       });
 
     }
-    
+
   };
 
   if (loading) return <Loading />;
@@ -237,8 +235,8 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                 </FormControl>
               </Box>
 
- <Box mb="1.3rem">
-                
+              <Box mb="1.3rem">
+
               </Box>
               <Box mb="1.3rem">
                 <FormControl isRequired>
@@ -414,17 +412,17 @@ const Payment = ({ cart, cartTotal, totalSavings, token,email }) => {
                       <ModalHeader>Paste the OTP </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody>
-                       <VStack>
-                       <Text color={ORANGE}>Please check your email for OTP</Text>
-                       <HStack>
-                          <PinInput value={otp} onChange={handleInputChange}>
-                            <PinInputField />
-                            <PinInputField />
-                            <PinInputField />
-                            <PinInputField />
-                          </PinInput>
-                        </HStack>
-                       </VStack>
+                        <VStack>
+                          <Text color={ORANGE}>Please check your email for OTP</Text>
+                          <HStack>
+                            <PinInput value={otp} onChange={handleInputChange}>
+                              <PinInputField />
+                              <PinInputField />
+                              <PinInputField />
+                              <PinInputField />
+                            </PinInput>
+                          </HStack>
+                        </VStack>
                       </ModalBody>
 
                       <ModalFooter>

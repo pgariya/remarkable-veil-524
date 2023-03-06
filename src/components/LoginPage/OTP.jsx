@@ -59,10 +59,10 @@ const OTP = ({handle}) => {
 
     const otp = Math.floor(Math.random() * 9000) + 1000;
 
-    emailjs.send('service_95mup4r', 'template_h0n101p', {
+    emailjs.send(process.env.serviceID , process.env.templateID, {
       user_email_id: email,
       otp: otp
-    }, 'OAAgS4baLv5nwlbcO')
+    }, process.env.publicKey)
       .then(function (response) {
         onOpen()
         localStorage.setItem("otp", otp)
